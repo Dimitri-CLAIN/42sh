@@ -1,5 +1,7 @@
-script:
-    compile:
+image: epitechcontent/epitest-docker
+
+compile:
+    script:
             - make
             - make clean
             - make re
