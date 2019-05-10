@@ -65,7 +65,7 @@ $(NAME):	$(OBJ)
 
 tests_run:
 			make -sC lib/my
-			gcc -o $(BIN_TEST) $(SRC) $(TEST) $(C_FLAG) $(CFLAGS_TEST) $(LIB)
+			gcc -o $(BIN_TEST) $(SRC) $(TEST) $(CFLAGS) $(CFLAGS_TEST) $(LIB)
 			./$(BIN_TEST)
 
 clean:
