@@ -1,0 +1,6 @@
+script:
+    compile:
+            - make
+            - make clean
+            - make re
+            - make fclean
