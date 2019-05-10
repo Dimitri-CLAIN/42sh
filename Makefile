@@ -57,7 +57,7 @@ MAIN		=	src/main.c
 
 C_FLAG_TEST	=	-lcriterion --coverage
 
-BIN		=	mysh
+BIN		=	42sh
 
 OBJ_MAIN	=	$(SRC:.c=.o) $(MAIN:.c=.o) $(SRC_SRC:.c=.o)
 
