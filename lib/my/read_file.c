@@ -9,7 +9,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "my.h"
+
+char *my_strdup(char *);
+char *my_epurstr(char *);
 
 char **cond_read(char **tab, FILE *fd)
 {

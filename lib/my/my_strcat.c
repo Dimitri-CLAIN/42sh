@@ -6,7 +6,8 @@
 */
 
 #include <stdlib.h>
-#include "my.h"
+
+char *my_strdup(char *);
 
 int    my_len_function(char *dest)
 {

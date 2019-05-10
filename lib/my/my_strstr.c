@@ -7,7 +7,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "my.h"
+
+char *my_strcat(char *, char *);
 
 int    my_cpt_char(char const *str)
 {
