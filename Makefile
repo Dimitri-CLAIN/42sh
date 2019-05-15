@@ -61,25 +61,33 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ)
 			make -sC lib/my
+			@echo -e "\e[0;33mCompiling $(NAME)\e[0;m"
 			gcc -o $(NAME) $(OBJ) $(LIB)
+			@echo -e "\e[0;32m[OK] $(NAME) compiled\e[0;m"
 
 tests_run:
 			make -sC lib/my
+			@echo -e "\e[0;33mCompiling tests\e[0;m"
 			gcc -o $(BIN_TEST) $(SRC) $(TEST) $(CFLAGS) $(CFLAGS_TEST) $(LIB)
+			@echo -e "\e[0;32m[OK] tests compiled\e[0;m"
 			./$(BIN_TEST)
 
 clean:
 			make -sC lib/my clean
+			@echo -e "\e[0;33mCleaning $(NAME)\e[0;m"
 			rm -f *~
 			rm -f *#
 			rm -f *.gcno
 			rm -f *.gcda
 			rm -f $(OBJ)
+			@echo -e "\e[0;32m[OK] $(NAME) cleaned\e[0;m"
 
 fclean:		clean
 			make -sC lib/my fclean
+			@echo -e "\e[0;33mRemoving $(NAME)\e[0;m"
 			rm -f $(NAME)
 			rm -f $(BIN_TEST)
+			@echo -e "\e[0;32m[OK] $(NAME) removed\e[0;m"
 
 re:			fclean all
 
