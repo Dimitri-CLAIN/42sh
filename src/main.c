@@ -7,7 +7,6 @@
 
 #include "link.h"
 #include "my.h"
-#include <math.h>
 
 int main(int ac, char **av, char **env)
 {
