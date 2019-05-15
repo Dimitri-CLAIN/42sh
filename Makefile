@@ -45,7 +45,7 @@ TEST		=	$(addprefix $(TEST_FOLDER), $(TEST_FILES))
 
 TEST_FILES	=
 
-CFLAGS		=	-W -Wall -pedantic -Wextra -Iinclude -g
+CFLAGS		=	-W -Wall -Wextra -Werror -pedantic -Iinclude -g
 
 LIB			=	-L./lib -lmy
 
