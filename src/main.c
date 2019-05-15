@@ -15,7 +15,6 @@ int main(int ac, char **av, char **env)
     char **my_env = NULL;
     char **path = NULL;
 
-
     (void)ac;
     (void)av;
     if (env != NULL) {
