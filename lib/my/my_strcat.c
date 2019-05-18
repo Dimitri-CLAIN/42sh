@@ -5,47 +5,36 @@
 ** str
 */
 
-#include <stdlib.h>
 #include "my.h"
 
-int    my_len_function(char *dest)
-{
-    int    x = 0;
-
-    while (dest[x] != '\0')
-        x++;
-    return (x);
-}
-
-char    *my_cpy_str(char *dest, char *src, char *str)
+char    *my_cpy_str(char *str, char *src, int *tmp, int fre)
 {
     int    i = 0;
-    int    x = 0;
+    int    x = (*tmp);
 
-    for (i = 0; dest[i] != '\0'; i++) {
-        str[x] = dest[i];
-        x++;
-    }
     for (i = 0; src[i] != '\0'; i++) {
         str[x] = src[i];
         x++;
     }
-    str[x] = '\0';
+    if (fre == FREE)
+        free(src);
+    (*tmp) = x;
     return (str);
 }
 
-char    *my_strcat(char *dest, char *src)
+char    *my_strcat(char *dest, char *src, int d, int s)
 {
-    int    x;
+    int    x = 0;
     char    *str = NULL;
 
     if (dest == NULL)
-        return (my_strdup(src));
-    x = my_len_function(dest);
-    x += my_len_function(src);
+        return (my_strdup(src, s));
+    x = my_strlen(dest);
+    x += my_strlen(src);
     str = malloc(sizeof(char) * (x + 1));
-    if (dest == NULL || src == NULL)
-        return (NULL);
-    else
-        return (my_cpy_str(dest, src, str));
+    x = 0;
+    str = my_cpy_str(str, dest, &x, d);
+    str = my_cpy_str(str, src, &x, s);
+    str[x] = '\0';
+    return (str);
 }

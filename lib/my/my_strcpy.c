@@ -2,18 +2,19 @@
 ** EPITECH PROJECT, 2018
 ** my_strcpy
 ** File description:
-** cpy
+** cpy_str
 */
 
 #include <stdlib.h>
 
-char    *my_strcpy(char *dest, char const *src)
-{
-    int    i = 0;
+int my_strlen(char *);
 
-    if (dest == NULL || src == NULL)
-        return (NULL);
-    while (src[i] != '\0') {
+char *my_strcpy(char *src)
+{
+    int i = 0;
+    char *dest = malloc(sizeof(char) * (my_strlen(src) + 1));
+
+    while (src[i] != '\0' ) {
         dest[i] = src[i];
         i++;
     }

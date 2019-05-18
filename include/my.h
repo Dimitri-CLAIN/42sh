@@ -1,77 +1,103 @@
 /*
-** EPITECH PROJECT, 2018
+** EPITECH PROJECT, 2019
 ** my.h
 ** File description:
 ** my.h
 */
 
-#ifndef MY_H_
-#define MY_H_
+#ifndef _MY_H_
+#define _MY_H_
 
-#include <stdlib.h>
 #include "link.h"
-#include "pt_fct.h"
+#include "enum.h"
+#include "lib.h"
+#include "struct.h"
+#include "ptr.h"
 #include "btree.h"
 
-typedef struct mysh_s {
-    link_t *env_list;
-    char **env;
-    cmd_t *comd;
-    char **path;
-    int state;
-}mysh_t;
 
-char *delete_char(char *cmd, char c);
-char **read_input(void);
-char **reset_tab_input(char *str);
-int my_check_sep(char *cmd);
-int check_line_cmd(link_t **env_list, char ***env, mysh_t *mysh, char *cmd);
-void    double_redirec_in(mysh_t *mysh, char ***path, char *cmd);
-int    cmd_bin(link_t *, char **, char **, char *);
-int is_a_builtin(char **tmp, mysh_t *mysh);
-int    exec_betree(mysh_t *mysh, char ***path, btree_t *node);
-int my_cond(mysh_t *mysh, char ***path, btree_t *node);
-void    my_segv(pid_t pid);
-void     my_exec(char *path, char **tab, char **envt, mysh_t *mysh);
-char **read_file(char *path);
-int check_op(char *cmd);
-int check_pip(char *cmd);
-void    my_redirect(mysh_t *mysh, char ***path, char *cmd);
-int    exec_cmd_or_built(mysh_t *mysh, char ***path, char *cmd);
-char    *my_str_str(char *str, char const *to_find);
-void    double_out(mysh_t *mysh, char ***path, char *cmd);
-void    redirec_in(mysh_t *mysh, char ***path, char *cmd);
-void    redirec_out(mysh_t *mysh, char ***path, char *cmd);
-void    main_loop(char **tab, mysh_t *mysh);
-char **clean_str(char **tab);
-void    my_sigint(void);
-int path_stat(char *path);
-int my_stat(char *path, char **tab);
-char    *my_access(char **tab, char *str);
-int     my_execve(char *path, char **tab, char **envt);
-char **env_copy(char **env);
-void    my_free(char **tab);
-void    my_putchar(char c);
-int    my_put_nbr(int nb);
-void    my_putstr(char const *str);
-int    my_strlen(char const *str);
-int    my_getnbr(char const *str);
-int    my_cat(char **av);
-char    *my_epurstr(char *);
-int    my_strcmp(char *s1, char *s2);
-char    *my_strcat(char *, char *);
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/stat.h>
+
+#define SETENV_ER1 "setenv: Variable name must begin with a letter.\n"
+#define SETENV_ER2 "setenv: Variable name must contain alphanumeric \
+characters.\n"
+#define UNSETENV_ER1 "unsetenv: Too few arguments.\n"
+#define FILE_ER ": No such file or directory.\n"
+
+int *initialize_tab(int *tab, char **src);
+int *get_parents_nb(char **tab);
+int *put_in_tab(int *tab, int elem, int max_len);
+int check(mysh_t *info, char *cmd);
 char    *my_strstr(char *str, char *to_find, char **save);
-void    my_check_tab(char *str, char *ptr);
-char    *my_strncpy(char *dest, char const *src, int n);
-char    *my_strdup(char *src);
-char    **my_str_to_word_array(char *str, char c);
-char *get_next_line(int);
-int exec_one_simpl(char **tp, mysh_t *mysh);
-int exec_one(int *piper, int *s, char **tp, mysh_t *mysh);
-char **clean_str(char **tab);
-void    error_not(char **tab, int i);
-int my_builtin(char *cmd);
+int my_check_sep(char *);
+int my_cond(mysh_t *info, btree_t *node);
+char    *my_str_str(char *str, char const *to_find);
+int    exec_btree(mysh_t *info, btree_t *node);
+int all_cmd(mysh_t *info, char *cmd);
+env_t *cpy_env(char **);
+int my_strncmp(char *str1, char *str2, int n);
+void     my_destroy_tree(btree_t *btree);
+void put_in_env(env_t **, char *);
+void free_env(env_t *);
+void free_cmd(cmd_t *);
+void mysh(mysh_t *);
+char **separate_env_line(char *);
+void put_in_cmd(cmd_t **, char *);
+void check_input(char *, mysh_t *);
+void init_info(mysh_t *, char **);
+int check_parsing(char *);
+void parsing(char *, mysh_t *);
+int check_exit(char **, mysh_t *);
+int check_buldin(mysh_t *, char *);
+void fct_env(char *, mysh_t *);
+void display_env(env_t *);
+void fct_setenv(char *, mysh_t *);
+void remove_str_env(char *, env_t *);
+int find_str_env(char *, env_t *);
+void fct_unsetenv(char *, mysh_t *);
+int check_error_setenv(char *);
+void check_replace_setenv(char *, mysh_t *);
+void do_the_fct_setenv(char *, mysh_t *);
+void fct_cd(char *, mysh_t *);
+char *cpy_str_env(char *, env_t *);
+char *get_path_home(char *, env_t *);
+void change_path_env(mysh_t *);
+void cd_home(mysh_t *);
+void do_the_fct_cd(char **, mysh_t *);
+void check_error_cd(struct stat, char *);
+void check_cd(char *, mysh_t *);
+int check_exec(mysh_t *, char *);
+int env_len(env_t *);
+char **get_env(env_t *);
+int check_normal_exec(char *);
+char *check_access(char **, char *);
+char *check_syntaxe(char *, mysh_t *);
+char **check_home(char **, mysh_t *);
+int exec_pipe(mysh_t *, char *);
+int check_exec_pipe(char *);
+int check_redirect(char *);
+void simple_redirect_right(char *, mysh_t *);
+void redirect(mysh_t *, char *);
+void simple_redirect_left(char *, mysh_t *);
+void double_redirect_right(char *, mysh_t *);
+void double_redirect_left(char *, mysh_t *);
+int check_error_redirect(char **);
+int get_file_or_create_it(char *, int);
+void display_seg(int);
+int exec(mysh_t *, char *);
+void first_pipe(char *, char **, mysh_t *);
+void multi_pipe(char *, char **, mysh_t *);
+void end_pipe(char *, char **, mysh_t *);
+int check_exec_pipe(char *);
+int is_buldin(char *);
+int check_dir(char *);
+void display_error_arch(void);
+int check_first_access(char *);
+int check_error_syntaxe_redirect(char *);
+int check_end(char *, char *);
+char *search_key_word(char *, char **);
 
-void    my_shell(link_t **env_list, char ***env, char ***path, cmd_t *comd);
-
-#endif /* MY_H_ */
+#endif

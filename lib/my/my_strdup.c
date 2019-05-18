@@ -5,12 +5,9 @@
 ** malloc_new_array
 */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "../../include/my.h"
+#include "my.h"
 
-char    *my_strdup(char *src)
+char    *my_strdup(char *src, int fre)
 {
     int    size;
     char    *ptr;
@@ -18,14 +15,14 @@ char    *my_strdup(char *src)
 
     if (src == NULL)
         return (NULL);
-    else {
-        size = my_strlen(src);
-        ptr = malloc(sizeof(char) * (size + 1));
-        while (src[i] != '\0') {
-            ptr[i] = src[i];
-            i++;
-        }
-        ptr[i] = '\0';
-        return (ptr);
+    size = my_strlen(src);
+    ptr = malloc(sizeof(char) * (size + 1));
+    while (src[i] != '\0') {
+        ptr[i] = src[i];
+        i++;
     }
+    ptr[i] = '\0';
+    if (fre == FREE)
+        free(src);
+    return (ptr);
 }

@@ -1,32 +1,39 @@
 /*
 ** EPITECH PROJECT, 2019
-** main function
+** main
 ** File description:
-** main function
+** main
 */
 
-#include "link.h"
 #include "my.h"
-#include <math.h>
+
+void usage(void)
+{
+    my_putstr("USAGE\n\
+\t./mysh\n\
+DESCRIPTION\n\
+\tShell.\n");
+}
+
+void init_info(mysh_t *info, char **env)
+{
+    info->env = cpy_env(env);
+    info->return_value = 0;
+    info->cmd = NULL;
+    info->pipe.pipefd = NULL;
+    info->pipe.save = 0;
+}
 
 int main(int ac, char **av, char **env)
 {
-    link_t *list_env = NULL;
-    char **my_env = NULL;
-    char **path = NULL;
+    mysh_t info;
 
-    (void)ac;
-    (void)av;
-    if (env != NULL) {
-        list_env = my_copy_env(env);
-        my_env = env_copy(env);
-        path = set_tab_path(list_env);
-        main_shell(list_env, my_env, path);
-    } else {
-        list_env = my_copy_env(env);
-        my_env = env_copy(env);
-        path = set_tab_path(list_env);
-        main_shell(list_env, my_env, path);
+    if (ac == 2 && my_strcmp(av[1], "-h") == TRUE) {
+        usage();
+        return (0);
     }
-    return (0);
+    init_info(&info, env);
+    mysh(&info);
+    free_env(info.env);
+    return (info.return_value);
 }
