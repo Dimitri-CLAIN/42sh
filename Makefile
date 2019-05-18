@@ -5,31 +5,31 @@
 ## Makefile
 ##
 
-SRC		=			src/cpy_env.c		\
-					src/manage_list.c	\
-					src/free_list.c		\
-					src/mysh.c			\
-					src/check_input.c	\
-					src/check_buldin.c	\
-					src/fct_env.c		\
-					src/fct_setenv.c	\
-					src/find_str.c		\
-					src/fct_unsetenv.c	\
-					src/fct_cd.c		\
-					src/path.c			\
-					src/check_exec.c	\
-					src/exec_pipe.c		\
-					src/pipe.c			\
-					src/check_redirect.c\
-					src/simple_redirect.c	\
-					src/double_redirect.c	\
-					src/signals.c		\
-					src/check_syntaxe.c	\
+SRC		=			src/cpy_env.c				\
+					src/manage_list.c			\
+					src/free_list.c				\
+					src/mysh.c					\
+					src/check_input.c			\
+					src/check_buldin.c			\
+					src/fct_env.c				\
+					src/fct_setenv.c			\
+					src/find_str.c				\
+					src/fct_unsetenv.c			\
+					src/fct_cd.c				\
+					src/path.c					\
+					src/check_exec.c			\
+					src/exec_pipe.c				\
+					src/pipe.c					\
+					src/check_redirect.c		\
+					src/simple_redirect.c		\
+					src/double_redirect.c		\
+					src/signals.c				\
+					src/check_syntaxe.c			\
 					src/check_error_redirect.c	\
 					src/search_key_word.c		\
 					src/btree.c					\
 					src/my_create_btree.c		\
-					src/tab_pid.c		\
+					src/tab_pid.c				\
 					src/destroy_tree.c
 
 MAIN		=		src/main.c
