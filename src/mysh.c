@@ -43,7 +43,7 @@ int get_input(char **input, mysh_t *info)
 int all_cmd(mysh_t *info, char *cmd)
 {
     char **exit_tmp = NULL;
-    
+
     exit_tmp = my_str_to_word_array(cmd, ' ', KEEP);
     if (check_exit(exit_tmp, info) == -1) {
         my_putstr("exit\n");
@@ -71,6 +71,7 @@ void mysh(mysh_t *info)
 {
     char *input = NULL;
 
+    my_sigint();
     while (42) {
         if (isatty(0) == 1)
             my_putstr("[42sh_siisii] $ ");
@@ -80,7 +81,6 @@ void mysh(mysh_t *info)
             continue;
         if (check(info, input) == -1)
             return;
-        //free(input);
         info->cmd = NULL;
     }
 }

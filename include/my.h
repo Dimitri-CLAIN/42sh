@@ -27,6 +27,7 @@ characters.\n"
 #define UNSETENV_ER1 "unsetenv: Too few arguments.\n"
 #define FILE_ER ": No such file or directory.\n"
 
+void my_sigint(void);
 int *initialize_tab(int *tab, char **src);
 int *get_parents_nb(char **tab);
 int *put_in_tab(int *tab, int elem, int max_len);
