@@ -24,16 +24,17 @@ int wait_process(int *tab, int max_len)
 {
     int i = max_len - 1;
     int status = 0;
+    int state = 0;
 
     while (i != -1) {
-        wait(&tab[i]);
-        if (WEXITSTATUS(tab[i]) == 84)
-            return (-1);
+        waitpid(tab[i], &status, WCONTINUED);
+        if (WEXITSTATUS(status) == 84)
+            state = -1;
         display_seg(tab[i]);
         i--;
     }
     free(tab);
-    return (0);
+    return (state);
 }
 
 int check_error_pipe(char *cmd)
