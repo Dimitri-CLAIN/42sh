@@ -69,7 +69,7 @@ int which_redirect(char *cmd)
     return (-1);
 }
 
-void redirect(mysh_t *info, char *cmd)
+int redirect(mysh_t *info, char *cmd)
 {
     redirect_t redi[] = {{0, &simple_redirect_right},
                         {1, &simple_redirect_left},
@@ -78,16 +78,18 @@ void redirect(mysh_t *info, char *cmd)
                         {-1, NULL}};
     int got_redi = 0;
     int i = 0;
+    int state = 0;
 
     if (check_syntaxe_redirect(cmd) == TRUE ||
         check_error_syntaxe_redirect(cmd) == TRUE)
-        return;
+        return (-1);
     got_redi = which_redirect(cmd);
     while (redi[i].nb != -1) {
         if (got_redi == redi[i].nb) {
-            redi[i].ptr(cmd, info);
-            return;
+            state = redi[i].ptr(cmd, info);
+            return (state);
         }
         i++;
     }
+    return (state);
 }

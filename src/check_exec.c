@@ -92,7 +92,7 @@ int check_exec(mysh_t *info, char *cmd)
     if (check_exec_pipe(cmd) == TRUE)
         state = exec_pipe(info, cmd);
     else if (check_redirect(cmd) == TRUE)
-        redirect(info, cmd);
+        state = redirect(info, cmd);
     else
         state = exec(info, cmd);
     state = (state == 84) ? -1 : state;

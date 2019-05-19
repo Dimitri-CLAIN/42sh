@@ -17,7 +17,7 @@ typedef struct buldin_s {
 
 typedef struct redirect_s {
     int nb;
-    void (*ptr)(char *, mysh_t *);
+    int (*ptr)(char *, mysh_t *);
 }redirect_t;
 
 #endif

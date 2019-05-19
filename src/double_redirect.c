@@ -9,23 +9,26 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 
-void double_redirect_right(char *cmd, mysh_t *info)
+int double_redirect_right(char *cmd, mysh_t *info)
 {
     char **tmp = word_array(cmd, '>');
     int fd = 0;
     int pid = 0;
 
     if (check_error_redirect(tmp) == TRUE)
-        return;
+        return (-1);
     fd = get_file_or_create_it(clean_str(tmp[1], KEEP), O_APPEND);
+    if (fd == -1)
+        return (-1);
     if ((pid = fork()) == 0) {
         dup2(fd, 1);
         close(fd);
         exec(info, clean_str(tmp[0], KEEP));
-        exit(1);
+        exit(84);
     }
     wait(&pid);
     free_array(tmp);
+    return (WEXITSTATUS(pid));
 }
 
 int check_end(char *line, char *tmp)
@@ -50,7 +53,7 @@ char *get_input_double_redirect_left(char *tmp)
     }
 }
 
-void exec_double_redirect_left(char *input, mysh_t *info, char *cmd)
+int exec_double_redirect_left(char *input, mysh_t *info, char *cmd)
 {
     int pid = 0;
     int tmp[2];
@@ -61,26 +64,30 @@ void exec_double_redirect_left(char *input, mysh_t *info, char *cmd)
         dup2(tmp[0], 0);
         close(tmp[1]);
         exec(info, cmd);
-        exit(1);
+        exit(84);
     } else {
         close(tmp[0]);
         close(tmp[1]);
         wait(&pid);
     }
+    return (WEXITSTATUS(pid));
 }
 
-void double_redirect_left(char *cmd, mysh_t *info)
+int double_redirect_left(char *cmd, mysh_t *info)
 {
     char **tmp = word_array(cmd, '<');
     char *input = NULL;
+    int state = 0;
 
     if (check_error_redirect(tmp) == TRUE)
-        return;
+        return (-1);
     input = get_input_double_redirect_left(clean_str(tmp[1], KEEP));
     input = search_key_word(input, word_array(clean_str(tmp[0], KEEP), ' '));
     if (input != NULL) {
-        exec_double_redirect_left(input, info, clean_str(tmp[0], KEEP));
+        state = exec_double_redirect_left(input, info, clean_str(tmp[0], KEEP));
         free(input);
-    }
+    } else
+        state = -1;
     free_array(tmp);
+    return (state);
 }
