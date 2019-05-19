@@ -52,7 +52,7 @@ SRC_TEST	=		tests/test_cpy_env.c		\
 
 OBJ		=		$(SRC:.c=.o) $(MAIN:.c=.o)
 
-NAME		=		mysh
+NAME		=		42sh
 
 BIN		=		unit_tests
 
