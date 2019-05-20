@@ -35,20 +35,7 @@ SRC		=			src/cpy_env.c				\
 
 MAIN		=		src/main.c
 
-SRC_TEST	=		tests/test_cpy_env.c		\
-					tests/test_manage_list.c	\
-					tests/test_check_input.c	\
-					tests/test_free_list.c		\
-					tests/test_mysh.c			\
-					tests/test_fct_env.c		\
-					tests/test_fct_setenv.c		\
-					tests/test_fct_unsetenv.c	\
-					tests/test_find_str.c		\
-					tests/test_fct_cd.c			\
-					tests/test_check_exec.c		\
-					tests/test_redirect.c		\
-					tests/test_pipe.c			\
-					tests/test_signals.c
+SRC_TEST	=
 
 OBJ		=		$(SRC:.c=.o) $(MAIN:.c=.o)
 
