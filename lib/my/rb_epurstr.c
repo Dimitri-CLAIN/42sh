@@ -19,7 +19,7 @@ int my_format(char c, char *format)
     return (SKIP);
 }
 
-char *clean_str(char *str, char *format)
+char *cleanstr(char *str, char *format)
 {
     int i = 0;
 
@@ -41,11 +41,11 @@ int jump_space(char *str, int i)
 char    *my_epurstr(char *str, char *format, int fre)
 {
     char *clean = NULL;
-    char tmp[2];
+    char tmp[] = {'\0', '\0'};
     int i = 0;
 
-    tmp[1] = '\0';
-    str = clean_str(str, format);
+    str = cleanstr(str, format);
+    i = jump_space(str, i);
     while (str[i] != '\0') {
         if (str[i] == ' ') {
             clean = my_strcat(clean, " ", FREE, KEEP);

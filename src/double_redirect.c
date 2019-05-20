@@ -23,8 +23,9 @@ int double_redirect_right(char *cmd, mysh_t *info)
     if ((pid = fork()) == 0) {
         dup2(fd, 1);
         close(fd);
-        exec(info, clean_str(tmp[0], KEEP));
-        exit(84);
+        if (check_exec(info, clean_str(tmp[0], KEEP)) == -1)
+            exit(84);
+        exit(0);
     }
     wait(&pid);
     free_array(tmp);
@@ -63,8 +64,9 @@ int exec_double_redirect_left(char *input, mysh_t *info, char *cmd)
     if ((pid = fork()) == 0) {
         dup2(tmp[0], 0);
         close(tmp[1]);
-        exec(info, cmd);
-        exit(84);
+        if (check_exec(info, cmd) == -1)
+            exit(84);
+        exit(0);
     } else {
         close(tmp[0]);
         close(tmp[1]);

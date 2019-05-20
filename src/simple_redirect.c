@@ -37,13 +37,11 @@ int simple_redirect_right(char *cmd, mysh_t *info)
     if (check_error_redirect(tmp) == TRUE)
         return (-1);
     if ((pid = fork()) == 0) {
-        fd = get_file_or_create_it(clean_str(tmp[1], KEEP), O_TRUNC);
-        if (fd == -1)
-            exit(84);
-        dup2(fd, 1);
+        dup2(fd = get_file_or_create_it(clean_str(tmp[1], KEEP), O_TRUNC), 1);
         close(fd);
-        exec(info, clean_str(tmp[0], KEEP));
-        exit(84);
+        if (check_exec(info, clean_str(tmp[0], KEEP)) == -1)
+            exit(84);
+        exit(0);
     }
     wait(&pid);
     free_array(tmp);
@@ -57,8 +55,9 @@ int exec_simple_redirect_left(int fd, char **tmp, mysh_t *info)
     if ((pid = fork()) == 0) {
         dup2(fd, 0);
         close(fd);
-        exec(info, clean_str(tmp[0], KEEP));
-        exit(84);
+        if (check_exec(info, clean_str(tmp[0], KEEP)) == -1)
+            exit(84);
+        exit(0);
     }
     wait(&pid);
     return (WEXITSTATUS(pid));

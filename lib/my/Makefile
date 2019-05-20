@@ -23,7 +23,8 @@ SRC		=		my_putchar.c			\
 				word_array.c			\
 				my_strncmp.c			\
 				my_str_str.c			\
-				my_strstr.c
+				my_strstr.c			\
+				rb_epurstr.c
 
 OBJ		=		$(SRC:.c=.o)
 

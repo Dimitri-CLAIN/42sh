@@ -89,12 +89,13 @@ int check_exec(mysh_t *info, char *cmd)
 {
     int state = 0;
 
-    if (check_exec_pipe(cmd) == TRUE)
-        state = exec_pipe(info, cmd);
-    else if (check_redirect(cmd) == TRUE)
+    if (check_redirect(cmd) == TRUE)
         state = redirect(info, cmd);
-    else
+    else if (check_exec_pipe(cmd) == TRUE)
+        state = exec_pipe(info, cmd);
+    else {
         state = exec(info, cmd);
+    }
     state = (state == 84) ? -1 : state;
     return (state);
 }
