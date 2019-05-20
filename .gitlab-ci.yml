@@ -1,0 +1,9 @@
+image: epitechcontent/epitest-docker
+
+compile:
+    script:
+            - make
+            - make clean
+            - make re
+            - make tests_run
+            - make fclean

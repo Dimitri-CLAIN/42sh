@@ -1,18 +1,18 @@
 /*
 ** EPITECH PROJECT, 2018
-** my_putstr
+** my_putstr.c
 ** File description:
-** display string
+** display_str
 */
 
-void    my_putchar(char c);
+void my_putchar(char c);
 
-void    my_putstr(char const *str)
+int my_putstr(char const *str)
 {
-    int    i = 0;
+    int i = 0;
 
     while (str[i] != '\0') {
         my_putchar(str[i]);
-        i++;
+        i += 1;
     }
 }

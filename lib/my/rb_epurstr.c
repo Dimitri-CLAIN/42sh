@@ -5,61 +5,60 @@
 ** rb_epurstr
 */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include "../../include/my.h"
+#include "my.h"
 
-char    *check_str(char *str)
+int my_format(char c, char *format)
 {
-    int    i = 0;
-    int    x = 0;
-    char    *ptr;
+    int i = 0;
 
-    ptr = malloc(sizeof(char) * (my_strlen(str) + 1));
-    while (str[i] != '\0') {
-        if (str[i] == ' ' && str[i + 1] == '\0')
-            i++;
-        else {
-            ptr[x] = str[i];
-            x++;
-            i++;
-        }
+    while (format[i] != '\0') {
+        if (format[i] == c)
+            return (REPLACE);
+        i++;
     }
-    ptr[x] = '\0';
-    free(str);
-    return (ptr);
+    return (SKIP);
 }
 
-int    space(char *str, int i)
+char *cleanstr(char *str, char *format)
 {
-    if (str[i] >= 1 && str[i] <= 32) {
-        while (str[i] >= 1 && str[i] <= 32)
-            i++;
+    int i = 0;
+
+    while (str[i] != '\0') {
+        if (my_format(str[i], format) == REPLACE)
+            str[i] = ' ';
+        i++;
     }
+    return (str);
+}
+
+int jump_space(char *str, int i)
+{
+    while (str[i] != '\0' && str[i] == ' ')
+        i++;
     return (i);
 }
 
-char    *my_epurstr(char *str)
+char    *my_epurstr(char *str, char *format, int fre)
 {
-    int    x = 0;
-    char    *ptr = malloc(sizeof(char) * (my_strlen(str) + 1));
-    int    i = 0;
+    char *clean = NULL;
+    char tmp[] = {'\0', '\0'};
+    int i = 0;
 
-    if (str == NULL)
-        return (NULL);
-    i = space(str, i);
+    str = cleanstr(str, format);
+    i = jump_space(str, i);
     while (str[i] != '\0') {
-        if (str[i] >= 1 && str[i] <= 32) {
-            ptr[x] = ' ';
-            x++;
-            i = space(str, i);
+        if (str[i] == ' ') {
+            clean = my_strcat(clean, " ", FREE, KEEP);
+            i = jump_space(str, i);
         } else {
-            ptr[x] = str[i];
+            tmp[0] = str[i];
+            clean = my_strcat(clean, tmp, FREE, KEEP);
             i++;
-            x++;
         }
     }
-    ptr[x] = '\0';
-    ptr = check_str(ptr);
-    return (ptr);
+    for (i = 0; clean[i + 1] != 0; i++);
+    (clean[i] == ' ') ? clean[i] = '\0' : 0;
+    if (fre == FREE)
+        free(str);
+    return (clean);
 }

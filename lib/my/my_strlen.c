@@ -1,21 +1,16 @@
 /*
 ** EPITECH PROJECT, 2018
-** my_strlen
+** my_strlen.c
 ** File description:
-** counter
+** do_the_strlen
 */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-
-int    my_strlen(char const *str)
+int my_strlen(char const *str)
 {
-    int    i = 0;
+    int i = 0;
 
-    if (str == NULL)
-        return (i);
-    while (str[i] != '\0')
-        i++;
+    while (str[i] != '\0') {
+        i += 1;
+    }
     return (i);
 }

@@ -5,9 +5,7 @@
 ** array_to_double_array
 */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include "../../include/my.h"
+#include "my.h"
 
 char    **my_array_array(char **array, char *str, char c)
 {
@@ -74,22 +72,16 @@ char    **my_insert_array(char **array, char *str, char c)
     return (array);
 }
 
-char    **my_str_to_word_array(char *str, char c)
+char    **my_str_to_word_array(char *str, char c, int fre)
 {
     char    **array = NULL;
-    int i = 0;
 
     if (str == NULL)
         return (NULL);
-    for (i = 0; str[i] != '\0' && str[i] != c; i++);
-    if (str[i] == '\0') {
-        array = malloc(sizeof(char *) * 2);
-        array[0] = my_strdup(str);
-        array[1] = NULL;
-        return (array);
-    }
     array = my_first_array(array, str, c);
     array = my_array_array(array, str, c);
     array = my_insert_array(array, str, c);
+    if (fre == FREE)
+        free(str);
     return (array);
 }
