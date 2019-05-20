@@ -34,7 +34,7 @@ int get_input(char **input, mysh_t *info)
         return (-1);
     }
     line[my_strlen(line) - 1] = '\0';
-    *input = my_epurstr(my_strdup(line, FREE), " \n \"", FREE);
+    *input = my_epurstr(my_strdup(line, FREE), " \n \"\t", FREE);
     if (*input[0] == '\0')
         *input = NULL;
     return (0);
@@ -57,14 +57,15 @@ int all_cmd(mysh_t *info, char *cmd)
 int check(mysh_t *info, char *cmd)
 {
     btree_t *node = NULL;
+    int status = 0;
 
     if (my_check_sep(cmd) == 1) {
         my_btree_create_new_node(&node, cmd);
         exec_btree(info, node);
         my_destroy_tree(node);
     } else
-        all_cmd(info, cmd);
-    return (0);
+        status = all_cmd(info, cmd);
+    return (status);
 }
 
 void mysh(mysh_t *info)
