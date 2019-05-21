@@ -5,6 +5,7 @@
 ## Makefile
 ##
 
+
 SRC		=			src/cpy_env.c				\
 					src/manage_list.c			\
 					src/free_list.c				\
