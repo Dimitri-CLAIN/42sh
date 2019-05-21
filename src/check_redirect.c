@@ -7,16 +7,6 @@
 
 #include "my.h"
 
-int check_error_redirect(char **tmp)
-{
-    if (array_len(tmp) > 2) {
-        free_array(tmp);
-        my_putstr_error("Ambiguous output redirect.\n");
-        return (TRUE);
-    }
-    return (FALSE);
-}
-
 int check_redirect(char *cmd)
 {
     int i = 0;

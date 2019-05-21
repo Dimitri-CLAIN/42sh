@@ -15,8 +15,6 @@ int double_redirect_right(char *cmd, mysh_t *info)
     int fd = 0;
     int pid = 0;
 
-    if (check_error_redirect(tmp) == TRUE)
-        return (-1);
     fd = get_file_or_create_it(clean_str(tmp[1], KEEP), O_APPEND);
     if (fd == -1)
         return (-1);
@@ -81,8 +79,6 @@ int double_redirect_left(char *cmd, mysh_t *info)
     char *input = NULL;
     int state = 0;
 
-    if (check_error_redirect(tmp) == TRUE)
-        return (-1);
     input = get_input_double_redirect_left(clean_str(tmp[1], KEEP));
     input = search_key_word(input, word_array(clean_str(tmp[0], KEEP), ' '));
     if (input != NULL) {
