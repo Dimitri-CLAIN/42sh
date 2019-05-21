@@ -64,7 +64,7 @@ char *check_syntaxe(char *cmd, mysh_t *info)
 
 int exec(mysh_t *info, char *cmd)
 {
-    char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
+    char **tmp = check_alias_or_not(my_str_to_word_array(cmd, ' ', KEEP), info);
     pid_t pid = 0;
 
     if ((tmp[0] = check_syntaxe(tmp[0], info)) == NULL) {

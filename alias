@@ -1,4 +1,4 @@
-alias ls='mkdir toto'
+alias ls='yes lol'
 alias mkdir='cd ..'
 mkdir toto hahalol
 zsrdftgyhuij

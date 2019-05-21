@@ -32,8 +32,10 @@ char *add_char(char *, char);
 char **read_file(char *);
 env_t *init_my_alias(void);
 void put_in_alias(env_t **, char *);
+char **check_alias_or_not(char **, mysh_t *);
 
 void my_sigint(void);
+char **my_array_cat(char **, char **);
 int *initialize_tab(int *tab, char **src);
 int *get_parents_nb(char **tab);
 int *put_in_tab(int *tab, int elem, int max_len);

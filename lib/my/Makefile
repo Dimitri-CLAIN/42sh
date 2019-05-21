@@ -26,7 +26,8 @@ SRC		=		my_putchar.c			\
 				my_strstr.c			\
 				rb_epurstr.c			\
 				add_char.c			\
-				read_file.c
+				read_file.c			\
+				my_array_cat.c
 
 OBJ		=		$(SRC:.c=.o)
 

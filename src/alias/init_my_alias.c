@@ -36,3 +36,15 @@ env_t *init_my_alias(void)
     }
     return (alias);
 }
+
+char **check_alias_or_not(char **cmd, mysh_t *info)
+{
+    int n = 0;
+    char **new_cmd = malloc(sizeof(char *) * (array_len(cmd) + 1));
+
+    while (cmd[n] != NULL) {
+        new_cmd = my_array_cat(cmd, my_str_to_word_array(read_my_alias(cmd[n], info->alias), ' ', KEEP));
+        n++;
+    }
+    return (new_cmd);
+}

@@ -83,12 +83,10 @@ char *read_my_alias(char *cmd, env_t *alias)
     while (tab_cmd[n] != NULL) {
             if ((new_cmd = init_new_cmd(tab_cmd[n], cmd)) != NULL) {
                 free_array(tab_cmd);
-                close(fd);
                 return (new_cmd);
             }
         n++;
     }
-    close(fd);
     free_array(tab_cmd);
     return (NULL);
 }//il pas donner les args /* char *alias = read_my_alias(my_strdup("ls", KEEP)); */
