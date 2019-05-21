@@ -24,7 +24,7 @@ char **my_cut(char *str, char *sep)
         return (NULL);
     if (sep[0] == '&' || sep[0] == '|')
         rest += 2;
-    else
+    else if (rest[0] == ';')
         rest++;
     save = clean_str(save, FREE);
     rest = clean_str(rest, FREE);
