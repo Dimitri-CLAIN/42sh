@@ -50,7 +50,7 @@ char *get_input_double_redirect_left(char *tmp)
         my_putstr("? ");
         if (getline(&line, &size, stdin) == -1 || check_end(line, tmp) == TRUE)
             return (dest);
-        dest = my_strcat(my_strcat(dest, line, FREE, FREE), "\n", FREE, KEEP);
+        dest = my_strcat(my_strcat(dest, line, KEEP, FREE), "\n", KEEP, KEEP);
     }
 }
 
@@ -65,7 +65,7 @@ int exec_double_redirect_left(char *input, mysh_t *info, char *cmd)
         dup2(tmp[0], 0);
         close(tmp[1]);
         if (check_exec(info, cmd) == -1)
-            exit(84);
+            exit(-1);
         exit(0);
     } else {
         close(tmp[0]);
@@ -79,70 +79,17 @@ int double_redirect_left(char *cmd, mysh_t *info)
 {
     char **tmp = word_array(cmd, '<');
     char *input = NULL;
-    int state = 0;
+    int status = 0;
 
     if (check_error_redirect(tmp) == TRUE)
         return (-1);
     input = get_input_double_redirect_left(clean_str(tmp[1], KEEP));
     input = search_key_word(input, word_array(clean_str(tmp[0], KEEP), ' '));
     if (input != NULL) {
-        state = exec_double_redirect_left(input, info, clean_str(tmp[0], KEEP));
+        status = exec_double_redirect_left(input, info,
+        clean_str(tmp[0], KEEP));
         free(input);
-    } else
-        state = -1;
+    }
     free_array(tmp);
-    return (state);
+    return (status);
 }
-
-/* char *get_input_double_redirect_left(char *tmp) */
-/* { */
-/*     char *line = NULL; */
-/*     size_t size = 0; */
-/*     char *dest = my_strdup(""); */
- 
-/*     while (42) { */
-/*         my_putstr("? "); */
-/*         if (getline(&line, &size, stdin) == -1 || check_end(line, tmp) == TRUE) */
-/*             return (dest); */
-/*         dest = my_strcat(my_strcat(dest, line), "\n"); */
-/*     } */
-/* } */
- 
-/* void exec_double_redirect_left(char *input, mysh_t *info, char *cmd) */
-/* { */
-/*     int pid = 0; */
-/*     int tmp[2]; */
- 
-/*     pipe(tmp); */
-/*     write(tmp[1], input, my_strlen(input)); */
-/*     if ((pid = fork()) == 0) { */
-/*         dup2(tmp[0], 0); */
-/*         close(tmp[1]); */
-/*         if (check_exec(info, cmd) == -1) */
-/*             exit(-1); */
-/*         exit(0); */
-/*     } else { */
-/*         close(tmp[0]); */
-/*         close(tmp[1]); */
-/*         wait(&pid); */
-/*     } */
-/*     return (WEXITSTATUS(pid)); */
-/* } */
- 
-/* int double_redirect_left(char *cmd, mysh_t *info) */
-/* { */
-/*     char **tmp = word_array(cmd, '<'); */
-/*     char *input = NULL; */
-/*     int status = 0; */
-    
-/*     if (check_error_redirect(tmp) == TRUE) */
-/*         return (-1); */
-/*     input = get_input_double_redirect_left(clean_str(tmp[1])); */
-/*     input = search_key_word(input, word_array(clean_str(tmp[0]), ' ')); */
-/*     if (input != NULL) { */
-/*         status = exec_double_redirect_left(input, info, clean_str(tmp[0])); */
-/*         free(input); */
-/*     } */
-/*     free_array(tmp); */
-/*     return (status); */
-/* } */

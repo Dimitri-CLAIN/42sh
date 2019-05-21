@@ -7,21 +7,18 @@
 
 #include "my.h"
 
-int check_exit(char **tmp, mysh_t *info)
+void check_exit(char *cmd, mysh_t *info)
 {
+    char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
+
     if (my_strcmp(tmp[0], "exit") == TRUE) {
-        if (array_len(tmp) == 1) {
+        if (array_len(tmp) == 1)
             info->return_value = 0;
-            return (-1);
-        } else if (array_len(tmp) == 2 && isnum(tmp[1]) == FALSE) {
+        else if (array_len(tmp) == 2 && isnum(tmp[1]) == FALSE)
             info->return_value = my_getnbr(tmp[1]);
-            return (-1);
-        } else {
+        else
             my_putstr_error("exit: Expression Syntax.\n");
-            return (0);
-        }
     }
-    return (0);
 }
 
 int get_input(char **input, mysh_t *info)
@@ -35,22 +32,13 @@ int get_input(char **input, mysh_t *info)
     }
     line[my_strlen(line) - 1] = '\0';
     *input = my_epurstr(my_strdup(line, FREE), " \n \"\t", FREE);
-    if (*input[0] == '\0')
+    if (*input == NULL || *input[0] == '\0')
         *input = NULL;
     return (0);
 }
 
 int all_cmd(mysh_t *info, char *cmd)
 {
-    char **exit_tmp = NULL;
-
-    exit_tmp = my_str_to_word_array(cmd, ' ', KEEP);
-    if (check_exit(exit_tmp, info) == -1) {
-        my_putstr("exit\n");
-        free_array(exit_tmp);
-        return (-1);
-    }
-    free_array(exit_tmp);
     return (check_exec(info, cmd));
 }
 
@@ -80,8 +68,7 @@ void mysh(mysh_t *info)
             return;
         if (input == NULL)
             continue;
-        if (check(info, input) == -1)
-            return;
+        check(info, input);
         info->cmd = NULL;
     }
 }
