@@ -29,6 +29,7 @@ characters.\n"
 #define UNSETENV_ER1 "unsetenv: Too few arguments.\n"
 #define FILE_ER ": No such file or directory.\n"
 
+int check_error_redirect(char **tmp);
 int arch(char *cmd);
 void check_exit(char *cmd, mysh_t *info);
 void my_sigint(void);

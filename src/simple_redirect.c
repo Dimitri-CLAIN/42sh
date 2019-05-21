@@ -5,9 +5,9 @@
 ** simple redirect
 */
 
-#include "my.h"
 #include <fcntl.h>
 #include <sys/wait.h>
+#include "my.h"
 
 int get_file_or_create_it(char *file, int flag)
 {
@@ -34,8 +34,6 @@ int simple_redirect_right(char *cmd, mysh_t *info)
     int fd = 0;
     int pid = 0;
 
-    if (check_error_redirect(tmp) == TRUE)
-        return (-1);
     if ((pid = fork()) == 0) {
         dup2(fd = get_file_or_create_it(clean_str(tmp[1], KEEP), O_TRUNC), 1);
         close(fd);
