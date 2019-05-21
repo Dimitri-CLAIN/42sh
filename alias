@@ -1,0 +1,4 @@
+alias ls='mkdir toto'
+alias mkdir='cd ..'
+mkdir toto hahalol
+zsrdftgyhuij

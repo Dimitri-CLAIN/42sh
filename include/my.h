@@ -27,6 +27,12 @@ characters.\n"
 #define UNSETENV_ER1 "unsetenv: Too few arguments.\n"
 #define FILE_ER ": No such file or directory.\n"
 
+char *read_my_alias(char *, env_t *);
+char *add_char(char *, char);
+char **read_file(char *);
+env_t *init_my_alias(void);
+void put_in_alias(env_t **, char *);
+
 void my_sigint(void);
 int *initialize_tab(int *tab, char **src);
 int *get_parents_nb(char **tab);

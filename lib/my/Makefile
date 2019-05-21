@@ -24,7 +24,9 @@ SRC		=		my_putchar.c			\
 				my_strncmp.c			\
 				my_str_str.c			\
 				my_strstr.c			\
-				rb_epurstr.c
+				rb_epurstr.c			\
+				add_char.c			\
+				read_file.c
 
 OBJ		=		$(SRC:.c=.o)
 

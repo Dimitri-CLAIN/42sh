@@ -24,7 +24,14 @@ void init_info(mysh_t *info, char **env)
     info->pipe.save = 0;
 }
 
-int main(int ac, char **av, char **env)
+int main(void)
+{
+    env_t *alias = init_my_alias();
+
+    printf("->[%s]\n", read_my_alias("ls", alias));
+}
+
+/* int main(int ac, char **av, char **env)
 {
     mysh_t info;
 
@@ -37,3 +44,4 @@ int main(int ac, char **av, char **env)
     free_env(info.env);
     return (info.return_value);
 }
+ */

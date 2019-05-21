@@ -30,8 +30,10 @@ SRC		=			src/cpy_env.c				\
 					src/btree.c					\
 					src/my_create_btree.c		\
 					src/tab_pid.c				\
-					src/destroy_tree.c		\
-					src/my_singint.c
+					src/destroy_tree.c			\
+					src/my_singint.c			\
+					src/alias/read_my_alias.c	\
+					src/alias/init_my_alias.c	\
 
 MAIN		=		src/main.c
 
