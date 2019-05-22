@@ -45,7 +45,7 @@ BIN		=		unit_tests
 
 CC		=		gcc
 
-CFLAGS		=		-I./include -g
+CFLAGS		=		-I./include -g -W -Wall -Wextra
 
 LIB		=		-L./lib -lmy
 
@@ -66,6 +66,9 @@ clean:
 			make -sC lib/my clean
 			rm -f $(OBJ)
 			rm -f *.gc*
+			rm -f *~
+			rm -f *#
+			rm -f vgcore.*
 
 fclean:			clean
 			make -sC lib/my fclean

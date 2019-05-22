@@ -83,7 +83,7 @@ int double_redirect_left(char *cmd, mysh_t *info)
     input = search_key_word(input, word_array(clean_str(tmp[0], KEEP), ' '));
     if (input != NULL) {
         status = exec_double_redirect_left(input, info,
-        clean_str(tmp[0], KEEP));
+                clean_str(tmp[0], KEEP));
         free(input);
     }
     free_array(tmp);
