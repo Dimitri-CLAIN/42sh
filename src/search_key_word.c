@@ -42,7 +42,7 @@ char *search_key_word(char *input, char **cmd)
     while (tmp[i] != NULL) {
         if (find_key_word(tmp[i], key_word) == TRUE)
             dest = my_strcat(my_strcat(dest, tmp[i],
-            FREE, KEEP), "\n", FREE, KEEP);
+            KEEP, KEEP), "\n", KEEP, KEEP);
         i++;
     }
     free_array(tmp);

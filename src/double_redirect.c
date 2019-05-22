@@ -48,7 +48,7 @@ char *get_input_double_redirect_left(char *tmp)
         my_putstr("? ");
         if (getline(&line, &size, stdin) == -1 || check_end(line, tmp) == TRUE)
             return (dest);
-        dest = my_strcat(my_strcat(dest, line, KEEP, FREE), "\n", KEEP, KEEP);
+        dest = my_strcat(my_strcat(dest, line, KEEP, KEEP), "\n", KEEP, KEEP);
     }
 }
 
@@ -83,7 +83,7 @@ int double_redirect_left(char *cmd, mysh_t *info)
     input = search_key_word(input, word_array(clean_str(tmp[0], KEEP), ' '));
     if (input != NULL) {
         status = exec_double_redirect_left(input, info,
-        clean_str(tmp[0], KEEP));
+                clean_str(tmp[0], KEEP));
         free(input);
     }
     free_array(tmp);
