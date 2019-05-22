@@ -8,13 +8,6 @@
 #ifndef _MY_H_
 #define _MY_H_
 
-#include "link.h"
-#include "enum.h"
-#include "lib.h"
-#include "struct.h"
-#include "ptr.h"
-#include "btree.h"
-
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -22,6 +15,14 @@
 #include <sys/stat.h>
 #include <sysexits.h>
 #include <errno.h>
+
+#include "link.h"
+#include "enum.h"
+#include "lib.h"
+#include "struct.h"
+#include "ptr.h"
+#include "btree.h"
+#include "key.h"
 
 #define SETENV_ER1 "setenv: Variable name must begin with a letter.\n"
 #define SETENV_ER2 "setenv: Variable name must contain alphanumeric \
@@ -33,9 +34,9 @@ int check_error_redirect(char **tmp);
 int arch(char *cmd);
 void check_exit(char *cmd, mysh_t *info);
 void my_sigint(void);
-int *initialize_tab(int *tab, char **src);
-int *get_parents_nb(char **tab);
-int *put_in_tab(int *tab, int elem, int max_len);
+int *initialize_tab(int *, char **src);
+int *get_parents_nb(char **);
+int *put_in_tab(int *, int elem, int max_len);
 int check(mysh_t *info, char *cmd);
 char    *my_strstr(char *str, char *to_find, char **save);
 int my_check_sep(char *);
