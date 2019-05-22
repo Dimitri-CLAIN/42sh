@@ -34,8 +34,6 @@ int simple_redirect_right(char *cmd, mysh_t *info)
     int fd = 0;
     int pid = 0;
 
-    if (check_error_redirect(tmp) == TRUE)
-        return (-1);
     if ((pid = fork()) == 0) {
         dup2(fd = get_file_or_create_it(clean_str(tmp[1], KEEP), O_TRUNC), 1);
         close(fd);
@@ -69,8 +67,6 @@ int simple_redirect_left(char *cmd, mysh_t *info)
     int fd = 0;
     int state = 0;
 
-    if (check_error_redirect(tmp) == TRUE)
-        return (-1);
     if ((fd = get_file(clean_str(tmp[1], KEEP))) == -1) {
         my_putstr_error(tmp[1]);
         my_putstr_error(FILE_ER);
