@@ -33,7 +33,8 @@ int main(int ac, char **av, char **env)
         return (0);
     }
     init_info(&info, env);
-    mysh(&info);
-    free_env(info.env);
+    magic_maker("`ls`", &info);
+    // mysh(&info);
+    // free_env(info.env);
     return (info.return_value);
 }

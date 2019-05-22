@@ -8,7 +8,7 @@
 #include "my.h"
 
 char *tab_to_str(char **tab)
-{   
+{
     int i = 0;
     int x = 0;
     int i_b = 0;
@@ -16,7 +16,7 @@ char *tab_to_str(char **tab)
 
     while (tab[i] != NULL) {
         for (x = 0; tab[i][x] != 0; x++)
-            res[i_b++] =
+            res[i_b++] = tab[i][x];
         res[i_b++] = ' ';
         i++;
     }

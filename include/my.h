@@ -101,4 +101,8 @@ int check_error_syntaxe_redirect(char *);
 int check_end(char *, char *);
 char *search_key_word(char *, char **);
 
+FILE *get_pipe_fd(int);
+char *magic_maker(char *, mysh_t *);
+char *tab_to_str(char **);
+
 #endif
