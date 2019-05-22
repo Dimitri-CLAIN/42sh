@@ -70,7 +70,7 @@ int simple_redirect_left(char *cmd, mysh_t *info)
 
     if (check_error_redirect(tmp) == TRUE)
         return (-1);
-    tab = my_str_to_word_array(tmp[1], '|', KEEP);
+    tab = word_array(tmp[1], '|');
     if ((fd = get_file(clean_str(tab[0], KEEP))) == -1) {
         my_putstr_error(tmp[1]);
         my_putstr_error(FILE_ER);
