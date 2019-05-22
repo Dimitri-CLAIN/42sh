@@ -99,6 +99,5 @@ int check_exec(mysh_t *info, char *cmd)
     state = (state == 84) ? -1 : state;
     if (info->return_value != -1)
         exit(info->return_value);
-    puts("le exit après\n");
     return (state);
 }
