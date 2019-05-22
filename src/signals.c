@@ -13,7 +13,7 @@ int arch(char *cmd)
     if (errno == ENOEXEC) {
         my_putstr_error(cmd);
         my_putstr_error(": Exec format error. Wrong Architecture.\n");
-        return (1);
+        exit(-1);
     }
     return (0);
 }

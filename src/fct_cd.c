@@ -32,6 +32,7 @@ void do_the_fct_cd(char **tmp, mysh_t *info)
 {
     struct stat sb;
 
+    (void)info;
     stat(tmp[1], &sb);
     if (S_ISDIR(sb.st_mode) == 1)
         chdir(tmp[1]);

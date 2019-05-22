@@ -26,6 +26,7 @@ int get_input(char **input, mysh_t *info)
     char *line = NULL;
     size_t size = 0;
 
+    (void)info;
     if (getline(&line, &size, stdin) == -1) {
         my_putstr("exit\n");
         return (-1);
