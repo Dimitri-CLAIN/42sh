@@ -29,6 +29,8 @@ characters.\n"
 #define UNSETENV_ER1 "unsetenv: Too few arguments.\n"
 #define FILE_ER ": No such file or directory.\n"
 
+#define ER_SET ": Variable name must begin with a letter.\n"
+
 int check_error_redirect(char **tmp);
 int arch(char *cmd);
 void check_exit(char *cmd, mysh_t *info);
@@ -104,5 +106,13 @@ int check_first_access(char *);
 int check_error_syntaxe_redirect(char *);
 int check_end(char *, char *);
 char *search_key_word(char *, char **);
+void put_in_variables_list(variables_t **, char *);
+void free_variables_list(variables_t *);
+char *replace_var(variables_t *, char *);
+void fct_set(char *, mysh_t *);
+int check_cmd_var(char *);
+int check_syntaxe_var(char *, char *);
+char *change_cmd(char *, mysh_t *);
+char *change_variables(char *, variables_t *);
 
 #endif

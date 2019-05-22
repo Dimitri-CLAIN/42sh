@@ -31,7 +31,12 @@ SRC		=			src/cpy_env.c				\
 					src/my_create_btree.c		\
 					src/tab_pid.c				\
 					src/destroy_tree.c			\
-					src/my_singint.c
+					src/my_singint.c			\
+					src/variables/manage_var_list.c	\
+					src/variables/check_variables.c	\
+					src/variables/set_variables.c	\
+					src/change_cmd.c				\
+					src/variables/change_variables.c
 
 MAIN		=		src/main.c
 
