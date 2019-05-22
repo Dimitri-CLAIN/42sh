@@ -20,6 +20,8 @@ void set_variables(char **setup, mysh_t *info)
 
 void display_var_list(variables_t *var_list)
 {
+    if (my_strcmp(var_list->var, "first") == 0)
+        var_list = var_list->next;
     while (var_list != NULL) {
         my_putstr(var_list->var);
         my_putchar('\t');

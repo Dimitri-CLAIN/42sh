@@ -36,7 +36,8 @@ SRC		=			src/cpy_env.c				\
 					src/variables/check_variables.c	\
 					src/variables/set_variables.c	\
 					src/change_cmd.c				\
-					src/variables/change_variables.c
+					src/variables/change_variables.c\
+					src/variables/unset.c
 
 MAIN		=		src/main.c
 
