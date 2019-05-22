@@ -45,9 +45,8 @@ int main(int ac, char **av, char **env)
         return (0);
     }
     init_info(&info, env);
-    //printf("->[%s]\n", read_my_alias("ls", info.alias)); FABIEN LOOK ÇA
     mysh(&info);
     free_env(info.env);
-    free_env(info.alias);
+    //free_env(info.alias);
     return (info.return_value);
 }

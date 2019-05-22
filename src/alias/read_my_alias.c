@@ -36,12 +36,12 @@ char **good_cmd(char **cmd)
         i++;
     }
     clean_cmd = malloc(sizeof(char *) * (size + 1));
-    clean_cmd[size] = NULL;
     while (cmd[n] != NULL) {
         if (my_strncmp("alias ", cmd[n], 5) == 1)
             clean_cmd[n] = good_str(cmd[n], 5);
         n++;
     }
+    clean_cmd[size] = NULL;
     return (clean_cmd);
 }
 
@@ -82,11 +82,11 @@ char *read_my_alias(char *cmd, env_t *alias)
     tab_cmd = good_cmd(get_env(alias));
     while (tab_cmd[n] != NULL) {
             if ((new_cmd = init_new_cmd(tab_cmd[n], cmd)) != NULL) {
-                //free_array(tab_cmd);
+                free_array(tab_cmd);
                 return (new_cmd);
             }
         n++;
     }
-    //free_array(tab_cmd);
+    free_array(tab_cmd);
     return (NULL);
-}//il pas donner les args /* char *alias = read_my_alias(my_strdup("ls", KEEP)); */
+}
