@@ -32,10 +32,13 @@ char *is_variables(char *cmd, int i, variables_t *var_list)
 
     for (int j = 0; tmp[0] != '\0' && j != i; tmp++, j++);
     while (var_list != NULL) {
-        if (my_strncmp(tmp + 1, var_list->var, my_strlen(var_list->var)) == 0)
+        if (my_strncmp(tmp + 1, var_list->var, my_strlen(var_list->var)) == 0) {
+            free(tmp);
             return (modify_cmd(cmd, i, var_list->var, var_list->def));
+        }
         var_list = var_list->next;
     }
+    free(tmp);
     return (cmd);
 }
 
@@ -46,8 +49,10 @@ char *change_variables(char *cmd, variables_t *var_list)
     if (var_list == NULL)
         return (cmd);
     while (cmd[i] != '\0') {
-        if (cmd[i] == '$')
+        if (cmd[i] == '$') {
             cmd = is_variables(cmd, i, var_list);
+            i = 0;
+        }
         i++;
     }
     return (cmd);

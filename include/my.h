@@ -30,6 +30,9 @@ characters.\n"
 #define FILE_ER ": No such file or directory.\n"
 
 #define ER_SET ": Variable name must begin with a letter.\n"
+#define ER_SET_2 "Illegal variable name.\n"
+#define ER_SET_3 ": Variable name must begin with a letter.\n"
+#define ER_SET_4 ": Variable name must contain alphanumeric characters.\n"
 
 int check_error_redirect(char **tmp);
 int arch(char *cmd);
