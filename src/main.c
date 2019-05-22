@@ -18,7 +18,7 @@ DESCRIPTION\n\
 void init_info(mysh_t *info, char **env)
 {
     info->env = cpy_env(env);
-    info->return_value = 0;
+    info->return_value = -1;
     info->cmd = NULL;
     info->pipe.pipefd = NULL;
     info->pipe.save = 0;
@@ -33,8 +33,7 @@ int main(int ac, char **av, char **env)
         return (0);
     }
     init_info(&info, env);
-    magic_maker("`ls`", &info);
-    // mysh(&info);
-    // free_env(info.env);
-    return (info.return_value);
+    mysh(&info);
+    free_env(info.env);
+    return (0);
 }

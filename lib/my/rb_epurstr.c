@@ -38,6 +38,18 @@ int jump_space(char *str, int i)
     return (i);
 }
 
+char *specific_case(char *clean, char *str, int fre)
+{
+    int i = 0;
+
+    for (i = 0; clean != NULL  && clean[i + 1] != 0; i++);
+    if (clean != NULL)
+        (clean[i] == ' ') ? clean[i] = '\0' : 0;
+    if (fre == FREE)
+        free(str);
+    return (clean);
+}
+
 char    *my_epurstr(char *str, char *format, int fre)
 {
     char *clean = NULL;
@@ -56,9 +68,6 @@ char    *my_epurstr(char *str, char *format, int fre)
             i++;
         }
     }
-    for (i = 0; clean[i + 1] != 0; i++);
-    (clean[i] == ' ') ? clean[i] = '\0' : 0;
-    if (fre == FREE)
-        free(str);
+    clean = specific_case(clean, str, fre);
     return (clean);
 }

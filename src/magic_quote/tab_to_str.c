@@ -15,11 +15,11 @@ char *tab_to_str(char **tab)
     char *res = NULL;
 
     while (tab[i] != NULL) {
-        for (x = 0; tab[i][x] != 0; x++)
-            res[i_b++] = tab[i][x];
-        res[i_b++] = ' ';
+        if (tab[i][0] != 0) {
+            res = my_strcat(res, tab[i], FREE, KEEP);
+            res = my_strcat(res, " ", FREE, KEEP);
+        }
         i++;
     }
-    res[i_b] = 0;
     return (clean_str(res, FREE));
 }

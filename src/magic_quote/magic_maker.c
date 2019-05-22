@@ -10,56 +10,26 @@
 #include <sys/wait.h>
 #include "my.h"
 
-char *get_str(int fd)
-{
-    char *buffer = NULL;
-    size_t size = 0;
-    char *res = my_strdup("", KEEP);
-    FILE *pipfd = get_pipe_fd(fd);
-
-    printf("get_str ?\n");
-
-//    write(fd, "coucou\n", 7);
-
-    while (getline(&buffer, &size, pipfd) != -1) {
-        res = my_strcat(res, buffer, KEEP, KEEP);
-        printf("res -> [%s]\n", buffer);
-    }
-    return (res);
-}
-
 char *do_magic(char *cmd, mysh_t *info)
 {
     char *res = NULL;
     int pid = 0;
     int tmp[2];
+    int n = 0;
 
     pipe(tmp);
     if ((pid = fork()) == 0) {
         dup2(tmp[1], 1);
         close(tmp[0]);
-        if (check_exec(info, cmd) == -1)
+        if ((n = check_exec(info, cmd)) == -1)
             exit(84);
         exit(0);
     } else {
-        res = get_str(tmp[0]);
-        close(tmp[0]);
-        close(tmp[1]);
         wait(&pid);
+        close(tmp[1]);
+        res = get_str(tmp[0], n);
+        close(tmp[0]);
     }
-    return (res);
-}
-
-char *get_command(char *cmd)
-{
-    int x = 0;
-    int i = 1;
-    char *res = malloc(sizeof(char) * (my_strlen(cmd) - 1));
-
-    while (cmd[i] != '`')
-        res[x++] = cmd[i++];
-    res[x] = 0;
-    //free(cmd);
     return (res);
 }
 
@@ -70,10 +40,12 @@ char *magic_exec(char *cmd, mysh_t *info)
     cmd = get_command(cmd);
     ret = do_magic(cmd, info);
     free(cmd);
-    if (ret == NULL)
+    if (ret == NULL) {
+        free(ret);
         return ("\0");
+    }
     else
-        return (ret);
+        return (clean_str(ret, FREE));
 }
 
 int magic_checker(char *cmd)
@@ -91,7 +63,7 @@ int magic_checker(char *cmd)
     else if (i == 0)
         return (1);
     else
-        return (0);
+        return (TRUE);
 }
 
 char *magic_maker(char *cmd, mysh_t *info)
@@ -99,25 +71,17 @@ char *magic_maker(char *cmd, mysh_t *info)
     char *ret = NULL;
     int i = 0;
     char **command_tab = my_str_to_word_array(cmd, ' ', KEEP);
-    printf("1");
 
     if (magic_checker(cmd) == 84) {
         my_putstr_error("Unmatched '`'.\n");
         return (NULL);
     }
-    printf("2");
     while (command_tab[i] != NULL) {
-        printf("arg = ->%s\n", command_tab[i]);
-        if (magic_checker(command_tab[i]) == 0) {
+        if (magic_checker(command_tab[i]) == TRUE)
             command_tab[i] = magic_exec(command_tab[i], info);
-        }
-        printf("3\n");
         i++;
     }
-    printf("4\n");
-    for (int x = 0; command_tab[x] != NULL; x++)
-        printf("%s\n", command_tab[x]);
-    //ret = tab_to_str(command_tab);
-    //free_array(command_tab);
+    ret = tab_to_str(command_tab);
+    free_array(command_tab);
     return (ret);
 }

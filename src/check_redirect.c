@@ -56,15 +56,15 @@ int which_redirect(char *cmd)
     int i = 0;
 
     while (cmd[i] != '\0') {
-        switch (cmd[i]) {
-        case '>':
+        if (cmd[i] == '>')
             return (cmd[i + 1] != '>' ? 0 : 2);
-        case '<':
+        i++;
+    }
+    i = 0;
+    while (cmd[i] != '\0') {
+        if (cmd[i] == '<')
             return (cmd[i + 1] != '<' ? 1 : 3);
-        default:
-            i++;
-            break;
-        }
+        i++;
     }
     return (-1);
 }

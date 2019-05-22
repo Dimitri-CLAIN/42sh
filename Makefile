@@ -6,6 +6,8 @@
 ##
 
 SRC		=			src/magic_quote/magic_maker.c	\
+					src/magic_quote/get_str.c		\
+					src/magic_quote/get_command.c	\
 					src/magic_quote/get_pipe_fd.c	\
 					src/magic_quote/tab_to_str.c	\
 					src/cpy_env.c					\
