@@ -48,7 +48,7 @@ char *get_input_double_redirect_left(char *tmp)
         my_putstr("? ");
         if (getline(&line, &size, stdin) == -1 || check_end(line, tmp) == TRUE)
             return (dest);
-        dest = my_strcat(my_strcat(dest, line, KEEP, FREE), "\n", KEEP, KEEP);
+        dest = my_strcat(my_strcat(dest, line, KEEP, KEEP), "\n", KEEP, KEEP);
     }
 }
 

@@ -30,12 +30,12 @@ SRC		=			src/cpy_env.c				\
 					src/btree.c					\
 					src/my_create_btree.c		\
 					src/tab_pid.c				\
-					src/destroy_tree.c		\
+					src/destroy_tree.c			\
 					src/my_singint.c
 
 MAIN		=		src/main.c
 
-SRC_TEST	=
+SRC_TEST	=		tests/test_tab_pid.c
 
 OBJ		=		$(SRC:.c=.o) $(MAIN:.c=.o)
 
