@@ -25,18 +25,18 @@ int check_dir(char *cmd)
     struct stat sb;
 
     if (stat(cmd, &sb) == -1)
-        return (FALSE);
+        return (FALS);
     if (cmd[0] == '/')
         if (S_ISDIR(sb.st_mode) == 1) {
             display_permission_denied(cmd);
-            return (TRUE);
+            return (TRU);
         }
-    else if (cmd[0] == '.' && access(cmd, R_OK) == TRUE ||
+    else if (cmd[0] == '.' && access(cmd, R_OK) == TRU ||
         S_ISDIR(sb.st_mode) == 1) {
         display_permission_denied(cmd);
-        return (TRUE);
+        return (TRU);
     }
-    return (FALSE);
+    return (FALS);
 }
 
 int check_first_access(char *cmd)
@@ -44,8 +44,8 @@ int check_first_access(char *cmd)
     struct stat sb;
 
     stat(cmd, &sb);
-    if (is_buldin(cmd) == TRUE || (access(cmd, X_OK) == TRUE &&
+    if (is_buldin(cmd) == TRU || (access(cmd, X_OK) == TRU &&
         S_ISDIR(sb.st_mode) != 1))
-        return (TRUE);
-    return (FALSE);
+        return (TRU);
+    return (FALS);
 }

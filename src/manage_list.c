@@ -17,7 +17,7 @@ void put_in_env(env_t **env, char *all)
     elem->name = my_strdup(dest[0], KEEP);
     all += my_strlen(dest[0]) + 1;
     free_array(dest);
-    elem->def = (my_strcmp(all, " ") == TRUE) ? NULL : my_strdup(all, KEEP);
+    elem->def = (my_strcmp(all, " ") == TRU) ? NULL : my_strdup(all, KEEP);
     elem->next = NULL;
     elem->prev = NULL;
     if (tmp == NULL)

@@ -50,7 +50,7 @@ void end_pipe(char *cmd, char **env, mysh_t *info)
 {
     pid_t pid = 0;
 
-    if (check_buldin(info, cmd) == TRUE)
+    if (check_buldin(info, cmd) == TRU)
         return;
     if ((pid = fork()) == 0) {
         dup2(info->pipe.pipefd[0], 0);

@@ -28,7 +28,7 @@ int main(int ac, char **av, char **env)
 {
     mysh_t info;
 
-    if (ac == 2 && my_strcmp(av[1], "-h") == TRUE) {
+    if (ac == 2 && my_strcmp(av[1], "-h") == TRU) {
         usage();
         return (0);
     }
