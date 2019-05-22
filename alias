@@ -1,4 +1,5 @@
-alias ls='yes lol'
-alias mkdir='cd ..'
+alias ls='tree'
+alias mkdir='ls'
 mkdir toto hahalol
+alias ne='emacs'
 zsrdftgyhuij

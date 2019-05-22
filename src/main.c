@@ -25,28 +25,29 @@ void init_info(mysh_t *info, char **env)
     info->pipe.save = 0;
 }
 
-int main(void)
-{
-    char **in = my_str_to_word_array("lol je suis\nPAS PD\n", '\n', KEEP);
-    char **out = my_str_to_word_array("Fait rie mon\ndents jaune !\n", '\n', KEEP);
-    char **lol = my_array_cat(in, out);
-
-    for (int i = 0; lol[i] != NULL; i++)
-        printf("[%s]\n", lol[i]);
-}
-
-// int main(int ac, char **av, char **env)
+// int main(void)
 // {
-//     mysh_t info;
+//     char **in = my_str_to_word_array("lol je suis\nPAS PD", '\n', KEEP);
+//     char **out = my_str_to_word_array("Fait rie mon\ndents jaune !", '\n', KEEP);
+//     char **lol = my_array_cat(in, NULL, FREE, FREE);
 
-//     if (ac == 2 && my_strcmp(av[1], "-h") == TRUE) {
-//         usage();
-//         return (0);
-//     }
-//     init_info(&info, env);
-//     //printf("->[%s]\n", read_my_alias("ls", info.alias)); FABIEN LOOK ÇA
-//     mysh(&info);
-//     free_env(info.env);
-//     free_env(info.alias);
-//     return (info.return_value);
+//     for (int i = 0; lol[i] != NULL; i++)
+//         printf("->[%s]\n", lol[i]);
+//     free_array(lol);
 // }
+
+int main(int ac, char **av, char **env)
+{
+    mysh_t info;
+
+    if (ac == 2 && my_strcmp(av[1], "-h") == TRUE) {
+        usage();
+        return (0);
+    }
+    init_info(&info, env);
+    //printf("->[%s]\n", read_my_alias("ls", info.alias)); FABIEN LOOK ÇA
+    mysh(&info);
+    free_env(info.env);
+    free_env(info.alias);
+    return (info.return_value);
+}
