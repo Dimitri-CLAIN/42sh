@@ -40,12 +40,10 @@ env_t *init_my_alias(void)
 char **check_alias_or_not(char **cmd, mysh_t *info)
 {
     int n = 0;
-    char **new_cmd = malloc(sizeof(char *) * (array_len(cmd) + 1));
+    char **tab = my_str_to_word_array(read_my_alias(cmd[0], info->alias), ' ', KEEP);
 
-    while (cmd[n] != NULL) {
-        new_cmd = my_array_cat(cmd, my_str_to_word_array
-        (read_my_alias(cmd[n], info->alias), ' ', KEEP), KEEP, KEEP);
-        n++;
-    }
-    return (new_cmd);
+    tab = my_array_cat(tab, cmd + 1, KEEP, KEEP);
+    if (tab[0] == NULL)
+        return (cmd);
+    return (tab);
 }

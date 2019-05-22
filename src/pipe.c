@@ -15,7 +15,7 @@ void first_pipe(char *cmd, char **env, mysh_t *info)
     if ((pid = fork()) == 0) {
         dup2(info->pipe.pipefd[1], 1);
         close(info->pipe.pipefd[0]);
-        if (exec(info, cmd) == 84)
+        if (all_cmd(info, cmd) == 84)
             exit(84);
         exit(1);
     } else {
@@ -34,7 +34,7 @@ void multi_pipe(char *cmd, char **env, mysh_t *info)
         dup2(info->pipe.save, 0);
         dup2(info->pipe.pipefd[1], 1);
         close(info->pipe.pipefd[0]);
-        if (exec(info, cmd) == 84)
+        if (all_cmd(info, cmd) == 84)
             exit(84);
         exit(1);
     } else {
@@ -56,7 +56,7 @@ void end_pipe(char *cmd, char **env, mysh_t *info)
         dup2(info->pipe.pipefd[0], 0);
         close(info->pipe.save);
         close(info->pipe.pipefd[1]);
-        if (exec(info, cmd) == 84)
+        if (all_cmd(info, cmd) == 84)
             exit(84);
         exit(1);
     } else {

@@ -77,8 +77,9 @@ int exec(mysh_t *info, char *cmd)
         return (0);
     }
     if ((pid = fork()) == 0)
-        if (execve(tmp[0], tmp, get_env(info->env)) == -1)
-            display_error_arch();
+        execve(tmp[0], tmp, get_env(info->env));
+    if (arch(cmd) == 1)
+        return (-1);
     wait(&pid);
     display_seg(pid);
     free_array(tmp);
@@ -89,13 +90,15 @@ int check_exec(mysh_t *info, char *cmd)
 {
     int state = 0;
 
-    if (check_redirect(cmd) == TRUE)
-        state = redirect(info, cmd);
-    else if (check_exec_pipe(cmd) == TRUE)
+    if (check_exec_pipe(cmd) == TRUE)
         state = exec_pipe(info, cmd);
-    else {
+    else if (check_redirect(cmd) == TRUE)
+        state = redirect(info, cmd);
+    else
         state = exec(info, cmd);
-    }
     state = (state == 84) ? -1 : state;
+    if (info->return_value != -1)
+        exit(info->return_value);
+    puts("le exit après\n");
     return (state);
 }

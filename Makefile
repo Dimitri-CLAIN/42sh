@@ -33,11 +33,11 @@ SRC		=			src/cpy_env.c				\
 					src/destroy_tree.c			\
 					src/my_singint.c			\
 					src/alias/read_my_alias.c	\
-					src/alias/init_my_alias.c	\
+					src/alias/init_my_alias.c
 
 MAIN		=		src/main.c
 
-SRC_TEST	=
+SRC_TEST	=		tests/test_tab_pid.c
 
 OBJ		=		$(SRC:.c=.o) $(MAIN:.c=.o)
 
@@ -47,7 +47,7 @@ BIN		=		unit_tests
 
 CC		=		gcc
 
-CFLAGS		=		-I./include -g
+CFLAGS		=		-I./include -g -W -Wall -Wextra
 
 LIB		=		-L./lib -lmy
 
@@ -68,6 +68,9 @@ clean:
 			make -sC lib/my clean
 			rm -f $(OBJ)
 			rm -f *.gc*
+			rm -f *~
+			rm -f *#
+			rm -f vgcore.*
 
 fclean:			clean
 			make -sC lib/my fclean
