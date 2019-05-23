@@ -83,10 +83,10 @@ int exec(mysh_t *info, char *cmd)
     }
     if ((pid = fork()) == 0)
         execve(tmp[0], tmp, get_env(info->env));
-    wait(&pid);
-    display_seg(pid);
     if (arch(cmd) == 1)
         return (-1);
+    wait(&pid);
+    display_seg(pid);
     free_array(tmp);
     return (WEXITSTATUS(pid));
 }
