@@ -23,15 +23,15 @@ void display_error_arch(void)
 int check_dir(char *cmd)
 {
     struct stat sb;
-    
+
     if (stat(cmd, &sb) == -1)
         return (FALS);
-    if (cmd[0] == '/')
+    if (cmd[0] == '/') {
         if (S_ISDIR(sb.st_mode) == 1) {
             display_permission_denied(cmd);
             return (TRU);
         }
-    else if (cmd[0] == '.' && access(cmd, R_OK) == TRU ||
+    } else if ((cmd[0] == '.' && access(cmd, R_OK) == TRU) ||
         S_ISDIR(sb.st_mode) == 1) {
         display_permission_denied(cmd);
         return (TRU);
