@@ -12,6 +12,7 @@ void first_pipe(char *cmd, char **env, mysh_t *info)
 {
     pid_t pid = 0;
 
+    (void)env;
     if ((pid = fork()) == 0) {
         dup2(info->pipe.pipefd[1], 1);
         close(info->pipe.pipefd[0]);
@@ -30,6 +31,7 @@ void multi_pipe(char *cmd, char **env, mysh_t *info)
 {
     pid_t pid = 0;
 
+    (void)env;
     if ((pid = fork()) == 0) {
         dup2(info->pipe.save, 0);
         dup2(info->pipe.pipefd[1], 1);

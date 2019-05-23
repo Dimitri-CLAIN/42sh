@@ -27,14 +27,8 @@ int get_input(char **input, mysh_t *info)
     size_t size = 0;
     
     if (*input == NULL ) {
-        if (getline(&line, &size, stdin) == -1) {
             my_putstr("exit\n");
             return (-1);
-        }
-        line[my_strlen(line) - 1] = '\0';
-        *input = my_epurstr(my_strdup(line, FREE), " \n \"\t", FREE);
-        if (*input == NULL || *input[0] == '\0')
-            *input = NULL;
     }
     *input = my_epurstr(my_strdup(*input, FREE), " \n \"\t", FREE);
     if (*input == NULL || *input[0] == '\0')

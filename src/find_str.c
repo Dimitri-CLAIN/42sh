@@ -9,7 +9,7 @@
 
 void remove_str_env(char *str, env_t *env)
 {
-    env_t *tmp = NULL;
+    env_t *tmp = env;
 
     if (env == NULL)
         return;
@@ -17,6 +17,7 @@ void remove_str_env(char *str, env_t *env)
         env = env->next;
     tmp = env->next;
     env->next = env->next->next;
+    (void)tmp;
 }
 
 int find_str_env(char *str, env_t *env)

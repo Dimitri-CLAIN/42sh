@@ -23,7 +23,7 @@ void display_error_arch(void)
 int check_dir(char *cmd)
 {
     struct stat sb;
-
+    
     if (stat(cmd, &sb) == -1)
         return (FALS);
     if (cmd[0] == '/')

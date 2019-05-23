@@ -16,7 +16,7 @@ typedef struct  s_cursor
 }   cursor_t;
 
 char	*get_term(env_t *env);
-void	action(char *cmd);
+void	exec_term(char *cmd);
 int	reset_term(env_t *env);
 int	init_term(env_t *env);
 cursor_t    get_cursor(void);
@@ -28,4 +28,5 @@ int	is_arrow(char c, cursor_t *cursor, int *i);
 void	delete_char(cursor_t *cursor, int *i);
 void	write_it(cursor_t *cursor, int *i, int c, char *tmp);
 void	getch_write(cursor_t *cursor, int *i, int c);
+void clean_term(int c, cursor_t *cursor, int *i);
 #endif /* !key */

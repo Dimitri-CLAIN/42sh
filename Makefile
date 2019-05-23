@@ -31,7 +31,13 @@ SRC		=			src/cpy_env.c				\
 					src/my_create_btree.c		\
 					src/tab_pid.c				\
 					src/destroy_tree.c			\
-					src/my_singint.c
+					src/my_singint.c			\
+					src/term_caps/arrow.c 		\
+					src/term_caps/get_sterm.c 	\
+					src/term_caps/init_my_term.c\
+					src/term_caps/cmd_caps.c 	\
+					src/term_caps/write_it.c 	\
+
 
 MAIN		=		src/main.c
 
@@ -45,9 +51,9 @@ BIN		=		unit_tests
 
 CC		=		gcc
 
-CFLAGS		=		-I./include -g -W -Wall -Wextra
+CFLAGS		=		-I./include -g
 
-LIB		=		-L./lib -lmy
+LIB		=		-L./lib -lmy -lcurses
 
 LDFLAGS		=		-lcriterion --coverage
 
