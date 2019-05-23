@@ -20,6 +20,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/stat.h>
+#include <sysexits.h>
+#include <errno.h>
 
 #define SETENV_ER1 "setenv: Variable name must begin with a letter.\n"
 #define SETENV_ER2 "setenv: Variable name must contain alphanumeric \
@@ -27,6 +29,11 @@ characters.\n"
 #define UNSETENV_ER1 "unsetenv: Too few arguments.\n"
 #define FILE_ER ": No such file or directory.\n"
 
+char    **parser_echo(char *str, char c, char s, int fre);
+void fct_echo(char *cmd, mysh_t *info);
+int check_error_redirect(char **tmp);
+int arch(char *cmd);
+void check_exit(char *cmd, mysh_t *info);
 void my_sigint(void);
 int *initialize_tab(int *tab, char **src);
 int *get_parents_nb(char **tab);
@@ -51,7 +58,6 @@ void check_input(char *, mysh_t *);
 void init_info(mysh_t *, char **);
 int check_parsing(char *);
 void parsing(char *, mysh_t *);
-int check_exit(char **, mysh_t *);
 int check_buldin(mysh_t *, char *);
 void fct_env(char *, mysh_t *);
 void display_env(env_t *);

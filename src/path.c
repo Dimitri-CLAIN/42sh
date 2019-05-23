@@ -42,7 +42,7 @@ void change_path_env(mysh_t *info)
         if (find_str_env("PWD", info->env) == TRUE &&
             cpy_str_env("PWD", info->env) != NULL) {
             oldpwd = my_strcat(oldpwd, cpy_str_env("PWD",
-            info->env), FREE, FREE);
+            info->env), FREE, KEEP);
             do_the_fct_setenv(clean_str(oldpwd, FREE), info);
         }
         pwd = my_strcat(pwd, getcwd(buffer, size), FREE, FREE);

@@ -30,7 +30,7 @@ int wait_process(int *tab, int max_len)
         waitpid(tab[i], &status, WCONTINUED);
         if (WEXITSTATUS(status) == 84)
             state = -1;
-        display_seg(tab[i]);
+        display_seg(status);
         i--;
     }
     free(tab);
