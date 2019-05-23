@@ -20,7 +20,7 @@ void display_alias(env_t *alias)
             size += 5;
             name = my_strdup(alias->name, KEEP);
             name += size;
-            my_putstr(alias->name);
+            my_putstr(name);
             my_putchar('=');
             my_putstr(alias->def);
             my_putchar('\n');

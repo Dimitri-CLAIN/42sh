@@ -14,14 +14,17 @@ int check_my_alias(char *cmd, env_t *alias)
 {
     char *def = NULL;
     char *str = NULL;
+    env_t *tmp_alias = alias;
     char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
 
     if (array_len(tmp) != 2)
         return (FALSE);
     tmp[0] = add_char(tmp[0], ' ');
     str = my_strcat(tmp[0], tmp[1], KEEP, KEEP);
-    if (find_str_env(str, alias) == TRUE) {
-        def = my_epurstr(alias->def, "'", KEEP);
+    while (tmp_alias != NULL && my_strcmp(str, tmp_alias->name) != TRUE)
+        tmp_alias = tmp_alias->next;
+    if (tmp != NULL) {
+        def = my_epurstr(tmp_alias->def, "'", KEEP);
         my_putstr(def);
         my_putchar('\n');
         free(str);
