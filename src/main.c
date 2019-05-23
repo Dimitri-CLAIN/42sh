@@ -22,6 +22,8 @@ void init_info(mysh_t *info, char **env)
     info->cmd = NULL;
     info->pipe.pipefd = NULL;
     info->pipe.save = 0;
+    info->var_list = NULL;
+    put_in_variables_list(&info->var_list, "first=first");
 }
 
 int main(int ac, char **av, char **env)
@@ -35,5 +37,6 @@ int main(int ac, char **av, char **env)
     init_info(&info, env);
     mysh(&info);
     free_env(info.env);
+    free_variables_list(info.var_list);
     return (0);
 }

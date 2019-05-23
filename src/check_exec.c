@@ -26,6 +26,8 @@ char *check_access(char **tmp, char *cmd)
 {
     int i = 0;
 
+    if (tmp == NULL)
+        return (NULL);
     while (tmp[i] != NULL) {
         if (access(my_strcat(my_strcat(tmp[i], "/", KEEP, KEEP),
             cmd, FREE, KEEP), X_OK) == TRUE) {
@@ -64,9 +66,12 @@ char *check_syntaxe(char *cmd, mysh_t *info)
 
 int exec(mysh_t *info, char *cmd)
 {
-    char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
+    char **tmp = NULL;
     pid_t pid = 0;
 
+    cmd = change_cmd(cmd, info);
+    if ((tmp = my_str_to_word_array(cmd, ' ', KEEP)) == NULL)
+        return (84);
     if ((tmp[0] = check_syntaxe(tmp[0], info)) == NULL) {
         free_array(tmp);
         return (84);

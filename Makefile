@@ -31,11 +31,21 @@ SRC		=			src/cpy_env.c				\
 					src/my_create_btree.c		\
 					src/tab_pid.c				\
 					src/destroy_tree.c			\
-					src/my_singint.c
+					src/my_singint.c			\
+					src/variables/manage_var_list.c	\
+					src/variables/check_variables.c	\
+					src/variables/set_variables.c	\
+					src/change_cmd.c				\
+					src/variables/change_variables.c\
+					src/variables/unset.c
 
 MAIN		=		src/main.c
 
-SRC_TEST	=		tests/test_tab_pid.c
+SRC_TEST	=		tests/test_tab_pid.c			\
+					tests/test_check_variables.c	\
+					tests/test_set_variables.c		\
+					tests/test_change_variables.c	\
+					tests/test_fct_unset.c
 
 OBJ		=		$(SRC:.c=.o) $(MAIN:.c=.o)
 
