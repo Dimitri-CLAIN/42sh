@@ -38,7 +38,7 @@ void put_in_alias(env_t **env, char *all)
 
     elem->all = clean_str(all, KEEP);
     elem->name = my_strdup(dest[0], KEEP);
-    elem->def = (dest[1] == NULL) ? NULL : my_strdup(all, KEEP);
+    elem->def = (dest[1] == NULL) ? NULL : my_strdup(dest[1], KEEP);
     free_array(dest);
     elem->next = NULL;
     elem->prev = NULL;

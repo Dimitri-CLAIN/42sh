@@ -1,6 +1,6 @@
 alias ls='tree'
+zsrdftgyhuij
 alias mkdir='ls'
 alias ne='emacs'
-alias ll='ls -l'
 mkdir toto hahalol
-zsrdftgyhuij
+alias ll='ls -l'

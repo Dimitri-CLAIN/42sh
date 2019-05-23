@@ -25,17 +25,6 @@ void init_info(mysh_t *info, char **env)
     info->pipe.save = 0;
 }
 
-// int main(void)
-// {
-//     char **in = my_str_to_word_array("lol je suis\nPAS PD", '\n', KEEP);
-//     char **out = my_str_to_word_array("Fait rie mon\ndents jaune !", '\n', KEEP);
-//     char **lol = my_array_cat(in, NULL, FREE, FREE);
-
-//     for (int i = 0; lol[i] != NULL; i++)
-//         printf("->[%s]\n", lol[i]);
-//     free_array(lol);
-// }
-
 int main(int ac, char **av, char **env)
 {
     mysh_t info;
@@ -47,6 +36,6 @@ int main(int ac, char **av, char **env)
     init_info(&info, env);
     mysh(&info);
     free_env(info.env);
-    //free_env(info.alias);
+    free_env(info.alias);
     return (info.return_value);
 }

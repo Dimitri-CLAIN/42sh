@@ -19,29 +19,31 @@ char *good_str(char *cmd, int n)
         n++;
     }
     str = my_epurstr(str, " ", FREE);
-    free(cmd);
     return (str);
 }
 
 char **good_cmd(char **cmd)
 {
+    int x = 0;
     int i = 0;
     int size = 0;
     int n = 0;
     char **clean_cmd = NULL;
 
     while (cmd[i] != NULL) {
-        if (my_strncmp("alias ", cmd[i], 5) == 1)
+        if (my_strncmp("alias ", cmd[i], 6) == 1)
             size++;
         i++;
     }
     clean_cmd = malloc(sizeof(char *) * (size + 1));
     while (cmd[n] != NULL) {
-        if (my_strncmp("alias ", cmd[n], 5) == 1)
-            clean_cmd[n] = good_str(cmd[n], 5);
+        if (my_strncmp("alias ", cmd[n], 6) == 1) {
+            clean_cmd[x] = good_str(cmd[n], 6);
+            x++;
+        }
         n++;
     }
-    clean_cmd[size] = NULL;
+    clean_cmd[x] = NULL;
     return (clean_cmd);
 }
 
@@ -87,6 +89,7 @@ char *read_my_alias(char *cmd, env_t *alias)
             }
         n++;
     }
-    free_array(tab_cmd);
+    if (tab_cmd != NULL)
+        free_array(tab_cmd);
     return (NULL);
 }
