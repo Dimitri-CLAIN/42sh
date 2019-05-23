@@ -15,11 +15,11 @@ int is_buldin(char *cmd)
     int i = 0;
 
     while (tab[i] != NULL) {
-        if (my_strcmp(cmd, tab[i]) == TRUE)
-            return (TRUE);
+        if (my_strcmp(cmd, tab[i]) == TRU)
+            return (TRU);
         i++;
     }
-    return (FALSE);
+    return (FALS);
 }
 
 int do_the_fct(buldin_t *tab, char *cmd, mysh_t *info)
@@ -28,15 +28,15 @@ int do_the_fct(buldin_t *tab, char *cmd, mysh_t *info)
     int i = 0;
 
     while (tab[i].name != NULL) {
-        if (my_strcmp(tab[i].name, tmp[0]) == TRUE) {
+        if (my_strcmp(tab[i].name, tmp[0]) == TRU) {
             tab[i].ptr(cmd, info);
             free_array(tmp);
-            return (TRUE);
+            return (TRU);
         }
         i++;
     }
     free_array(tmp);
-    return (FALSE);
+    return (FALS);
 }
 
 int check_buldin(mysh_t *info, char *cmd)

@@ -9,7 +9,7 @@
 
 void display_env(env_t *env)
 {
-    if (my_strcmp(env->all, "first=first") == TRUE)
+    if (my_strcmp(env->all, "first=first") == TRU)
         env = env->next;
     while (env != NULL) {
         my_putstr(env->all);

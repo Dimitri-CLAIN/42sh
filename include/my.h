@@ -8,13 +8,6 @@
 #ifndef _MY_H_
 #define _MY_H_
 
-#include "link.h"
-#include "enum.h"
-#include "lib.h"
-#include "struct.h"
-#include "ptr.h"
-#include "btree.h"
-
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -22,6 +15,14 @@
 #include <sys/stat.h>
 #include <sysexits.h>
 #include <errno.h>
+
+#include "link.h"
+#include "enum.h"
+#include "lib.h"
+#include "struct.h"
+#include "ptr.h"
+#include "btree.h"
+#include "key.h"
 
 #define SETENV_ER1 "setenv: Variable name must begin with a letter.\n"
 #define SETENV_ER2 "setenv: Variable name must contain alphanumeric \

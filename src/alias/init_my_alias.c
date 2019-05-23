@@ -29,7 +29,7 @@ env_t *init_my_alias(void)
     char *first = "first='first'";
     char **file = NULL;
     
-    file = my_str_to_word_array(read_my_file("./alias"), '\n', KEEP);
+    file = my_str_to_word_array(read_my_file(".42shrc"), '\n', KEEP);
     put_in_alias(&alias, first);
     while (file[n] != NULL) {
         put_in_alias(&alias, file[n]);

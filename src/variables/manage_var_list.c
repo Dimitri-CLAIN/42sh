@@ -49,15 +49,15 @@ int is_var_exist(variables_t *var_list, char *cmd)
     char **tmp = NULL;
 
     if (var_list == NULL)
-        return (FALSE);
+        return (FALS);
     tmp = word_array(cmd, '=');
     while (var_list != NULL) {
         if (my_strcmp(var_list->var, tmp[0]) == 0) {
             free_array(tmp);
-            return (TRUE);
+            return (TRU);
         }
         var_list = var_list->next;
     }
     free_array(tmp);
-    return (FALSE);
+    return (FALS);
 }
