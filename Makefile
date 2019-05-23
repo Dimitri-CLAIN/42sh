@@ -41,7 +41,13 @@ SRC		=			src/cpy_env.c				\
 					src/variables/set_variables.c	\
 					src/change_cmd.c				\
 					src/variables/change_variables.c\
-					src/variables/unset.c
+					src/variables/unset.c		\
+					src/term_caps/arrow.c 		\
+					src/term_caps/get_sterm.c 	\
+					src/term_caps/init_my_term.c\
+					src/term_caps/cmd_caps.c 	\
+					src/term_caps/write_it.c 	\
+
 
 MAIN		=		src/main.c
 
@@ -61,7 +67,7 @@ CC		=		gcc
 
 CFLAGS		=		-I./include -g -W -Wall -Wextra -Werror
 
-LIB		=		-L./lib -lmy
+LIB		=		-L./lib -lmy -lcurses
 
 LDFLAGS		=		-lcriterion --coverage
 

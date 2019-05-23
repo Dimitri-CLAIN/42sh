@@ -16,10 +16,10 @@ int check_normal_exec(char *cmd)
 
     while (cmd[i] != '\0') {
         if (cmd[i] == '|' || cmd[i] == '<' || cmd[i] == '>')
-            return (FALSE);
+            return (FALS);
         i++;
     }
-    return (TRUE);
+    return (TRU);
 }
 
 char *check_access(char **tmp, char *cmd)
@@ -30,7 +30,7 @@ char *check_access(char **tmp, char *cmd)
         return (NULL);
     while (tmp[i] != NULL) {
         if (access(my_strcat(my_strcat(tmp[i], "/", KEEP, KEEP),
-            cmd, FREE, KEEP), X_OK) == TRUE) {
+            cmd, FREE, KEEP), X_OK) == TRU) {
             cmd = my_strcat(my_strcat(tmp[i], "/", KEEP, KEEP),
             cmd, FREE, KEEP);
             free_array(tmp);
@@ -46,18 +46,18 @@ char *check_syntaxe(char *cmd, mysh_t *info)
     char **tmp = NULL;
     char *new_cmd = NULL;
 
-    if (check_first_access(cmd) == TRUE)
+    if (check_first_access(cmd) == TRU)
         return (cmd);
-    if (find_str_env("PATH", info->env) == TRUE) {
+    if (find_str_env("PATH", info->env) == TRU) {
         tmp = my_str_to_word_array(cpy_str_env("PATH", info->env), ':', KEEP);
         new_cmd = check_access(tmp, cmd);
-        if (my_strcmp(cmd, new_cmd) == FALSE)
+        if (my_strcmp(cmd, new_cmd) == FALS)
             return (new_cmd);
         else if (new_cmd == NULL)
             return (NULL);
         free_array(tmp);
     }
-    if (check_dir(cmd) == TRUE)
+    if (check_dir(cmd) == TRU)
         return (NULL);
     my_putstr_error(cmd);
     my_putstr_error(": Command not found.\n");
@@ -77,7 +77,7 @@ int exec(mysh_t *info, char *cmd)
         return (84);
     }
     tmp = check_home(tmp, info);
-    if (check_buldin(info, cmd) == TRUE) {
+    if (check_buldin(info, cmd) == TRU) {
         free_array(tmp);
         return (0);
     }
@@ -95,9 +95,9 @@ int check_exec(mysh_t *info, char *cmd)
 {
     int state = 0;
 
-    if (check_exec_pipe(cmd) == TRUE)
+    if (check_exec_pipe(cmd) == TRU)
         state = exec_pipe(info, cmd);
-    else if (check_redirect(cmd) == TRUE)
+    else if (check_redirect(cmd) == TRU)
         state = redirect(info, cmd);
     else
         state = exec(info, cmd);

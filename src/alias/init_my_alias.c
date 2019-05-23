@@ -16,7 +16,7 @@ char *read_my_file(char *file)
 
     while (getline(&buf, &size, fd) != -1)
         clean = my_strcat(clean, buf, FREE, KEEP);
-    if (clean[my_strlen(clean) - 1] == '\n')
+    if (clean[0] != '\0' && clean[my_strlen(clean) - 1] == '\n')
         clean[my_strlen(clean) - 1] = '\0';
     fclose(fd);
     return (clean);

@@ -66,7 +66,7 @@ char *init_new_cmd(char *alias, char *cmd)
     char *new_cmd = NULL;
     char **alias_tab = my_str_to_word_array(alias, '=', KEEP);
 
-    if (alias_tab[1] != NULL && my_strcmp(cmd, alias_tab[0]) == TRUE) {
+    if (alias_tab[1] != NULL && my_strcmp(cmd, alias_tab[0]) == TRU) {
         new_cmd = check_alias(alias_tab[1]);
         return (new_cmd);
     }
