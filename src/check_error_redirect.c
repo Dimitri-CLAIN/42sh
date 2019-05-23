@@ -10,8 +10,8 @@
 int is_char_redirect(char c)
 {
     if (c == '<' || c == '>')
-        return (TRUE);
-    return (FALSE);
+        return (TRU);
+    return (FALS);
 }
 
 int check_error_syntaxe_redirect(char *cmd)
@@ -19,11 +19,11 @@ int check_error_syntaxe_redirect(char *cmd)
     int i = 0;
 
     while (cmd[i] != '\0') {
-        if (is_char_redirect(cmd[i]) == TRUE && cmd[i + 1] == '\0') {
+        if (is_char_redirect(cmd[i]) == TRU && cmd[i + 1] == '\0') {
             my_putstr_error("Missing name for redirect.\n");
-            return (TRUE);
+            return (TRU);
         }
         i++;
     }
-    return (FALSE);
+    return (FALS);
 }
