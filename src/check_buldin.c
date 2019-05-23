@@ -9,7 +9,8 @@
 
 int is_buldin(char *cmd)
 {
-    char *tab[] = {"env", "setenv", "unsetenv", "cd", "/bin/cd", "exit",
+    char *tab[] = {"env", "setenv", "unsetenv",
+                    "cd", "/bin/cd", "exit", "alias",
                     "set", "unset", NULL};
     int i = 0;
 
@@ -43,7 +44,8 @@ int check_buldin(mysh_t *info, char *cmd)
     buldin_t tab[] = {{"env", &fct_env}, {"setenv", &fct_setenv},
                     {"unsetenv", &fct_unsetenv}, {"cd", &fct_cd},
                     {"/bin/cd", &fct_cd}, {"exit", &check_exit},
-                    {"set", &fct_set}, {"unset", &fct_unset}, {NULL, NULL}};
+                    {"alias", &my_alias}, {"set", &fct_set},
+                    {"unset", &fct_unset}, {NULL, NULL}};
 
     return (do_the_fct(tab, cmd, info));
 }

@@ -35,23 +35,33 @@ characters.\n"
 #define ER_UNSET ": Too few arguments.\n"
 #define ER_UNDEFINED_VAR ": Undefined variable.\n"
 
-int check_error_redirect(char **tmp);
-int arch(char *cmd);
-void check_exit(char *cmd, mysh_t *info);
+char *read_my_alias(char *, env_t *);
+char *add_char(char *, char);
+char **read_file(char *);
+env_t *init_my_alias(void);
+void put_in_alias(env_t **, char *);
+char *check_alias_or_not(char *, mysh_t *);
+void my_alias(char *, mysh_t *);
+void display_alias(env_t *);
+
+int check_error_redirect(char **);
+int arch(char *);
+void check_exit(char *, mysh_t *);
 void my_sigint(void);
-int *initialize_tab(int *tab, char **src);
-int *get_parents_nb(char **tab);
-int *put_in_tab(int *tab, int elem, int max_len);
-int check(mysh_t *info, char *cmd);
-char    *my_strstr(char *str, char *to_find, char **save);
+char **my_array_cat(char **, char **, int, int);
+int *initialize_tab(int *, char **);
+int *get_parents_nb(char **);
+int *put_in_tab(int *, int, int);
+int check(mysh_t *, char *);
+char    *my_strstr(char *, char *, char **);
 int my_check_sep(char *);
-int my_cond(mysh_t *info, btree_t *node);
-char    *my_str_str(char *str, char const *to_find);
-int    exec_btree(mysh_t *info, btree_t *node);
-int all_cmd(mysh_t *info, char *cmd);
+int my_cond(mysh_t *, btree_t *);
+char    *my_str_str(char *, char const *);
+int    exec_btree(mysh_t *, btree_t *);
+int all_cmd(mysh_t *, char *);
 env_t *cpy_env(char **);
-int my_strncmp(char *str1, char *str2, int n);
-void     my_destroy_tree(btree_t *btree);
+int my_strncmp(char *, char *, int);
+void     my_destroy_tree(btree_t *);
 void put_in_env(env_t **, char *);
 void free_env(env_t *);
 void free_cmd(cmd_t *);

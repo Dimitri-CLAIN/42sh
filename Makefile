@@ -32,6 +32,10 @@ SRC		=			src/cpy_env.c				\
 					src/tab_pid.c				\
 					src/destroy_tree.c			\
 					src/my_singint.c			\
+					src/alias/read_my_alias.c	\
+					src/alias/init_my_alias.c	\
+					src/alias/create_my_alias.c	\
+					src/alias/disp_alias.c		\
 					src/variables/manage_var_list.c	\
 					src/variables/check_variables.c	\
 					src/variables/set_variables.c	\

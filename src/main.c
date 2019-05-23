@@ -18,6 +18,7 @@ DESCRIPTION\n\
 void init_info(mysh_t *info, char **env)
 {
     info->env = cpy_env(env);
+    info->alias = init_my_alias();
     info->return_value = -1;
     info->cmd = NULL;
     info->pipe.pipefd = NULL;
@@ -37,6 +38,7 @@ int main(int ac, char **av, char **env)
     init_info(&info, env);
     mysh(&info);
     free_env(info.env);
+    free_env(info.alias);
     free_variables_list(info.var_list);
     return (0);
 }

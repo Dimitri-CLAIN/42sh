@@ -30,6 +30,28 @@ void put_in_env(env_t **env, char *all)
     }
 }
 
+void put_in_alias(env_t **env, char *all)
+{
+    env_t *elem = malloc(sizeof(env_t));
+    env_t *tmp = *env;
+    char **dest = my_str_to_word_array(all, '=', KEEP);
+
+    elem->all = clean_str(all, KEEP);
+    elem->name = my_strdup(dest[0], KEEP);
+    elem->def = (dest[1] == NULL) ? NULL : my_strdup(dest[1], KEEP);
+    free_array(dest);
+    elem->next = NULL;
+    elem->prev = NULL;
+    if (tmp == NULL)
+        *env = elem;
+    else {
+        while (tmp->next != NULL)
+            tmp = tmp->next;
+        elem->prev = tmp;
+        tmp->next = elem;
+    }
+}
+
 int env_len(env_t *env)
 {
     int i = 0;
