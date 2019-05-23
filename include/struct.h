@@ -20,8 +20,10 @@ typedef struct pipe_s {
 typedef struct mysh_s {
     int return_value;
     env_t *env;
+    env_t *alias;
     cmd_t *cmd;
     pipe_t pipe;
+    variables_t *var_list;
 }mysh_t;
 
 #endif

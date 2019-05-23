@@ -8,12 +8,22 @@
 #include "my.h"
 #include <signal.h>
 
-void display_seg(int pid)
+int arch(char *cmd)
 {
-    if (WIFSIGNALED(pid)) {
-        if (WTERMSIG(pid) == 11)
+    if (errno == ENOEXEC) {
+        my_putstr_error(cmd);
+        my_putstr_error(": Exec format error. Wrong Architecture.\n");
+        exit(-1);
+    }
+    return (0);
+}
+
+void display_seg(int status)
+{
+    if (WIFSIGNALED(status)) {
+        if (WTERMSIG(status) == 11)
             my_putstr_error("Segmentation fault\n");
-        else if (WTERMSIG(pid) == 8)
+        else if (WTERMSIG(status) == 8)
             my_putstr_error("Floating exception\n");
     }
 }

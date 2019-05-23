@@ -8,18 +8,21 @@
 #ifndef _MY_H_
 #define _MY_H_
 
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <sysexits.h>
+#include <errno.h>
+
 #include "link.h"
 #include "enum.h"
 #include "lib.h"
 #include "struct.h"
 #include "ptr.h"
 #include "btree.h"
-
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/stat.h>
+#include "key.h"
 
 #define SETENV_ER1 "setenv: Variable name must begin with a letter.\n"
 #define SETENV_ER2 "setenv: Variable name must contain alphanumeric \
@@ -27,20 +30,39 @@ characters.\n"
 #define UNSETENV_ER1 "unsetenv: Too few arguments.\n"
 #define FILE_ER ": No such file or directory.\n"
 
+#define ER_SET ": Variable name must begin with a letter.\n"
+#define ER_SET_2 "Illegal variable name.\n"
+#define ER_SET_3 ": Variable name must contain alphanumeric characters.\n"
+#define ER_UNSET ": Too few arguments.\n"
+#define ER_UNDEFINED_VAR ": Undefined variable.\n"
+
+char *read_my_alias(char *, env_t *);
+char *add_char(char *, char);
+char **read_file(char *);
+env_t *init_my_alias(void);
+void put_in_alias(env_t **, char *);
+char *check_alias_or_not(char *, mysh_t *);
+void my_alias(char *, mysh_t *);
+void display_alias(env_t *);
+
+int check_error_redirect(char **);
+int arch(char *);
+void check_exit(char *, mysh_t *);
 void my_sigint(void);
-int *initialize_tab(int *tab, char **src);
-int *get_parents_nb(char **tab);
-int *put_in_tab(int *tab, int elem, int max_len);
-int check(mysh_t *info, char *cmd);
-char    *my_strstr(char *str, char *to_find, char **save);
+char **my_array_cat(char **, char **, int, int);
+int *initialize_tab(int *, char **);
+int *get_parents_nb(char **);
+int *put_in_tab(int *, int, int);
+int check(mysh_t *, char *);
+char    *my_strstr(char *, char *, char **);
 int my_check_sep(char *);
-int my_cond(mysh_t *info, btree_t *node);
-char    *my_str_str(char *str, char const *to_find);
-int    exec_btree(mysh_t *info, btree_t *node);
-int all_cmd(mysh_t *info, char *cmd);
+int my_cond(mysh_t *, btree_t *);
+char    *my_str_str(char *, char const *);
+int    exec_btree(mysh_t *, btree_t *);
+int all_cmd(mysh_t *, char *);
 env_t *cpy_env(char **);
-int my_strncmp(char *str1, char *str2, int n);
-void     my_destroy_tree(btree_t *btree);
+int my_strncmp(char *, char *, int);
+void     my_destroy_tree(btree_t *);
 void put_in_env(env_t **, char *);
 void free_env(env_t *);
 void free_cmd(cmd_t *);
@@ -51,7 +73,6 @@ void check_input(char *, mysh_t *);
 void init_info(mysh_t *, char **);
 int check_parsing(char *);
 void parsing(char *, mysh_t *);
-int check_exit(char **, mysh_t *);
 int check_buldin(mysh_t *, char *);
 void fct_env(char *, mysh_t *);
 void display_env(env_t *);
@@ -100,5 +121,17 @@ int check_first_access(char *);
 int check_error_syntaxe_redirect(char *);
 int check_end(char *, char *);
 char *search_key_word(char *, char **);
+void put_in_variables_list(variables_t **, char *);
+void free_variables_list(variables_t *);
+char *replace_var(variables_t *, char *);
+void fct_set(char *, mysh_t *);
+int check_cmd_var(char *);
+int check_syntaxe_var(char *, char *);
+char *change_cmd(char *, mysh_t *);
+char *change_variables(char *, variables_t *);
+void display_error(char *, char *);
+void fct_unset(char *, mysh_t *);
+int is_var_exist(variables_t *, char *);
+void replace_variable(variables_t *, char *);
 
 #endif
