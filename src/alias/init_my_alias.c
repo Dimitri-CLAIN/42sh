@@ -57,8 +57,6 @@ char *array_to_str(char **arr, char c, int keep)
 
 char *check_alias_or_not(char *cm, mysh_t *info)
 {
-    int n = 0;
-    int x = 0;
     char **cmd = NULL;
     char *res = NULL;
     char *new_cmd = NULL;

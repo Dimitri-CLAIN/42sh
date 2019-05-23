@@ -46,10 +46,10 @@ SRC		=			src/cpy_env.c				\
 MAIN		=		src/main.c
 
 SRC_TEST	=		tests/test_tab_pid.c			\
-					tests/test_check_variables.c	\
-					tests/test_set_variables.c		\
-					tests/test_change_variables.c	\
-					tests/test_fct_unset.c
+				tests/test_check_variables.c	\
+				tests/test_set_variables.c		\
+				tests/test_change_variables.c	\
+				tests/test_fct_unset.c
 
 OBJ		=		$(SRC:.c=.o) $(MAIN:.c=.o)
 
@@ -59,7 +59,7 @@ BIN		=		unit_tests
 
 CC		=		gcc
 
-CFLAGS		=		-I./include -g -W -Wall -Wextra
+CFLAGS		=		-I./include -g -W -Wall -Wextra -Werror
 
 LIB		=		-L./lib -lmy
 

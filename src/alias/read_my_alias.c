@@ -63,7 +63,6 @@ char *check_alias(char *alias)
 
 char *init_new_cmd(char *alias, char *cmd)
 {
-    int n = 0;
     char *new_cmd = NULL;
     char **alias_tab = my_str_to_word_array(alias, '=', KEEP);
 
@@ -77,7 +76,6 @@ char *init_new_cmd(char *alias, char *cmd)
 char *read_my_alias(char *cmd, env_t *alias)
 {
     int n = 0;
-    int fd = 0;
     char *new_cmd = NULL;
     char **tab_cmd = NULL;
 

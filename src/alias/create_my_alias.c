@@ -12,7 +12,6 @@
 
 int check_my_alias(char *cmd, env_t *alias)
 {
-    int size = 0;
     char *def = NULL;
     char *str = NULL;
     char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
