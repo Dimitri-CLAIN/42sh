@@ -23,7 +23,7 @@ int check_my_alias(char *cmd, env_t *alias)
     str = my_strcat(tmp[0], tmp[1], KEEP, KEEP);
     while (tmp_alias != NULL && my_strcmp(str, tmp_alias->name) != TRU)
         tmp_alias = tmp_alias->next;
-    if (tmp != NULL) {
+    if (tmp_alias != NULL && tmp != NULL) {
         def = my_epurstr(tmp_alias->def, "'", KEEP);
         my_putstr(def);
         my_putchar('\n');
