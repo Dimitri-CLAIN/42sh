@@ -12,8 +12,6 @@
 
 char	*get_term(env_t *env)
 {
-	int	i = 0;
-
 	if (env == NULL)
 		return (NULL);
 	while (env != NULL) {
@@ -32,6 +30,7 @@ int verif_term(struct termios *term)
 	term->c_lflag &= ~(ECHO);
 	term->c_cc[VMIN] = 1;
 	term->c_cc[VTIME] = 0;
+	return (0);
 }
 
 int	init_term(env_t *env)

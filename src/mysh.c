@@ -21,11 +21,8 @@ void check_exit(char *cmd, mysh_t *info)
     }
 }
 
-int get_input(char **input, mysh_t *info)
+int get_input(char **input)
 {
-    char *line = NULL;
-    size_t size = 0;
-    
     if (*input == NULL ) {
             my_putstr("exit\n");
             return (-1);
@@ -65,7 +62,7 @@ void mysh(mysh_t *info)
             my_putstr("[42sh_siisii] $ ");
             input = getch_line(input , info->env);
         }
-        if (get_input(&input, info) == -1)
+        if (get_input(&input) == -1)
             return;
         if (input == NULL)
             continue;

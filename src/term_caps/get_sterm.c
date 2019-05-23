@@ -28,7 +28,7 @@ cursor_t    get_cursor(void)
     return (cursor);
 }
 
-int getch_it_detect(int c, cursor_t *cursor, char *str, int *i)
+int getch_it_detect(int c, cursor_t *cursor, int *i)
 {
     if (c == 10)
         return (1);
@@ -47,7 +47,7 @@ int getch_it_detect(int c, cursor_t *cursor, char *str, int *i)
     return (0);
 }
 
-char    *getch_it(char *str)
+char    *getch_it()
 {
     int c = 1;
     int size = 1;
@@ -62,7 +62,7 @@ char    *getch_it(char *str)
             size = size + 1;
             cursor.buf = realloc(cursor.buf, sizeof(char) * (256 * size));
         }
-        status = getch_it_detect(c, &cursor, str, &i);
+        status = getch_it_detect(c, &cursor, &i);
         if (status == 1)
             break;
         else if (status == 2)

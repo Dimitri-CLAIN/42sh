@@ -51,7 +51,7 @@ BIN		=		unit_tests
 
 CC		=		gcc
 
-CFLAGS		=		-I./include -g
+CFLAGS		=		-I./include -g -W -Wall -Wextra
 
 LIB		=		-L./lib -lmy -lcurses
 
