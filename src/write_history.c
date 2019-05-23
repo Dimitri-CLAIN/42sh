@@ -21,7 +21,7 @@ int write_history(char *str)
     if (fd == -1)
         return (84);
     if (fd > 0) {
-        write (fd, str, strlen(str));
+        write(fd, str, strlen(str));
         close(fd);
     }
     return (0);
