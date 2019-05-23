@@ -66,10 +66,11 @@ char *check_syntaxe(char *cmd, mysh_t *info)
 
 int exec(mysh_t *info, char *cmd)
 {
-    char **tmp = my_str_to_word_array(change_cmd(cmd, info), ' ', KEEP);
+    char **tmp = NULL;
     pid_t pid = 0;
 
-    if (tmp == NULL)
+    cmd = change_cmd(cmd, info);
+    if ((tmp = my_str_to_word_array(cmd, ' ', KEEP)) == NULL)
         return (84);
     if ((tmp[0] = check_syntaxe(tmp[0], info)) == NULL) {
         free_array(tmp);
