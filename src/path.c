@@ -36,13 +36,13 @@ void change_path_env(mysh_t *info)
     size_t size = 0;
 
     if (my_strcmp(cpy_str_env("PWD", info->env),
-        getcwd(buffer, size)) == FALSE) {
+        getcwd(buffer, size)) == FALS) {
         oldpwd = my_strdup("setenv OLDPWD ", KEEP);
         pwd = my_strdup("setenv PWD ", KEEP);
-        if (find_str_env("PWD", info->env) == TRUE &&
+        if (find_str_env("PWD", info->env) == TRU &&
             cpy_str_env("PWD", info->env) != NULL) {
             oldpwd = my_strcat(oldpwd, cpy_str_env("PWD",
-            info->env), FREE, FREE);
+            info->env), FREE, KEEP);
             do_the_fct_setenv(clean_str(oldpwd, FREE), info);
         }
         pwd = my_strcat(pwd, getcwd(buffer, size), FREE, FREE);
