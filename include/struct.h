@@ -23,6 +23,7 @@ typedef struct mysh_s {
     env_t *alias;
     cmd_t *cmd;
     pipe_t pipe;
+    variables_t *var_list;
 }mysh_t;
 
 #endif

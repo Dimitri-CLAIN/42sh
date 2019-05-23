@@ -22,4 +22,11 @@ typedef struct cmd_s {
     struct cmd_s *prev;
 }cmd_t;
 
+typedef struct s_variables {
+    char *var;
+    char *def;
+    struct s_variables *next;
+    struct s_variables *prev;
+}variables_t;
+
 #endif

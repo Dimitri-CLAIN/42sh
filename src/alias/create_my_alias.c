@@ -72,7 +72,6 @@ void check_replace_alias(char *cmd, env_t *alias)
         n++;
     }
     str = my_strcat(tmp[0], str, KEEP, FREE);
-    printf("{%s} _ [%s]\n", str, alias->name);
     if (find_str_env(str, alias) == TRUE)
         remove_str_env(str, alias);
     free(str);
@@ -81,13 +80,21 @@ void check_replace_alias(char *cmd, env_t *alias)
 
 void add_alias(char *cmd, env_t *alias)
 {
+    char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
     char *cmd_n = NULL;
 
-    if (check_my_alias(cmd, alias) == TRUE)
+    if (check_my_alias(cmd, alias) == TRUE) {
+        free_array(tmp);
         return;
+    }
+    if (array_len(tmp) <= 2) {
+        free_array(tmp);
+        return;
+    }
     cmd_n = cmd_to_alias(cmd);
     check_replace_alias(cmd_n, alias);
     put_in_env(&alias, cmd_n);
+    free_array(tmp);
     free(cmd_n);
 }
 

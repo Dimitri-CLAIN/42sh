@@ -1,6 +1,0 @@
-alias ls='tree'
-zsrdftgyhuij
-alias mkdir='ls'
-alias ne='emacs'
-mkdir toto hahalol
-alias ll='ls -l'

@@ -1,8 +1,8 @@
 /*
-** EPITECH PROJECT, 2018
+** EPITECH PROJECT, 2019
 ** my_strncmp
 ** File description:
-** comp n string
+** do_the_strncmp
 */
 
 #include <stdlib.h>
