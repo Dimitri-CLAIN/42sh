@@ -7,6 +7,20 @@
 
 #include "my.h"
 
+void replace_variable(variables_t *var_list, char *setup)
+{
+    char **tmp = NULL;
+
+    if (var_list == NULL)
+        return;
+    tmp = word_array(setup, '=');
+    while (var_list != NULL && my_strcmp(var_list->var, tmp[0]) != 0)
+        var_list = var_list->next;
+    free(var_list->def);
+    var_list->def = my_strdup(tmp[1], KEEP);
+    free_array(tmp);
+}
+
 void set_variables(char **setup, mysh_t *info)
 {
     int i = 1;
@@ -14,7 +28,11 @@ void set_variables(char **setup, mysh_t *info)
     while (setup[i] != NULL) {
         if (check_syntaxe_var(setup[i], setup[0]) == FALSE)
             return;
-        put_in_variables_list(&info->var_list, setup[i++]);
+        if (is_var_exist(info->var_list, setup[i]) == FALSE)
+            put_in_variables_list(&info->var_list, setup[i]);
+        else
+            replace_variable(info->var_list, setup[i]);
+        i++;
     }
 }
 

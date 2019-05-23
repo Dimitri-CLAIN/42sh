@@ -69,6 +69,8 @@ int exec(mysh_t *info, char *cmd)
     char **tmp = my_str_to_word_array(change_cmd(cmd, info), ' ', KEEP);
     pid_t pid = 0;
 
+    if (tmp == NULL)
+        return (84);
     if ((tmp[0] = check_syntaxe(tmp[0], info)) == NULL) {
         free_array(tmp);
         return (84);

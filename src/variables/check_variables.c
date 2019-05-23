@@ -23,12 +23,12 @@ int check_name_var(char *cmd, char *set)
         return (FALSE);
     }
     if (tmp[0][0] >= '0' && tmp[0][0] <= '9') {
-        display_error(ER_SET_3, set);
+        display_error(ER_SET, set);
         free_array(tmp);
         return (FALSE);
     }
     if (str_is_alphanum(tmp[0]) == 0) {
-        display_error(ER_SET_4, set);
+        display_error(ER_SET_3, set);
         free_array(tmp);
         return (FALSE);
     }

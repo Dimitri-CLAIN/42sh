@@ -26,19 +26,29 @@ char *modify_cmd(char *cmd, int i, char *var, char *def)
     return (dest);
 }
 
+char *check_variable(char *tmp, char *cmd, int i, variables_t *var_list)
+{
+    if (tmp[my_strlen(var_list->var)] == ' ' ||
+        tmp[my_strlen(var_list->var)] == '\0')
+        return (modify_cmd(cmd, i, var_list->var, var_list->def));
+    for (int i = 0; tmp[i] != '\0' && tmp[i] != ' '; i++)
+        write(2, &tmp[i], 1);
+    my_putstr_error(ER_UNDEFINED_VAR);
+    return (NULL);
+}
+
 char *is_variables(char *cmd, int i, variables_t *var_list)
 {
     char *tmp = my_strdup(cmd, KEEP);
 
-    for (int j = 0; tmp[0] != '\0' && j != i; tmp++, j++);
+    for (int j = 0; tmp[0] != '\0' && j != i + 1; tmp++, j++);
+    if (my_strcmp(var_list->var, "first") == 0)
+        var_list = var_list->next;
     while (var_list != NULL) {
-        if (my_strncmp(tmp + 1, var_list->var, my_strlen(var_list->var)) == 0) {
-            free(tmp);
-            return (modify_cmd(cmd, i, var_list->var, var_list->def));
-        }
+        if (my_strncmp(tmp, var_list->var, my_strlen(var_list->var)) == 1)
+            return (check_variable(tmp, cmd, i, var_list));
         var_list = var_list->next;
     }
-    free(tmp);
     return (cmd);
 }
 
@@ -49,10 +59,10 @@ char *change_variables(char *cmd, variables_t *var_list)
     if (var_list == NULL)
         return (cmd);
     while (cmd[i] != '\0') {
-        if (cmd[i] == '$') {
+        if (cmd[i] == '$')
             cmd = is_variables(cmd, i, var_list);
-            i = 0;
-        }
+        if (cmd == NULL)
+            return (NULL);
         i++;
     }
     return (cmd);

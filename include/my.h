@@ -31,9 +31,9 @@ characters.\n"
 
 #define ER_SET ": Variable name must begin with a letter.\n"
 #define ER_SET_2 "Illegal variable name.\n"
-#define ER_SET_3 ": Variable name must begin with a letter.\n"
-#define ER_SET_4 ": Variable name must contain alphanumeric characters.\n"
+#define ER_SET_3 ": Variable name must contain alphanumeric characters.\n"
 #define ER_UNSET ": Too few arguments.\n"
+#define ER_UNDEFINED_VAR ": Undefined variable.\n"
 
 int check_error_redirect(char **tmp);
 int arch(char *cmd);
@@ -120,5 +120,7 @@ char *change_cmd(char *, mysh_t *);
 char *change_variables(char *, variables_t *);
 void display_error(char *, char *);
 void fct_unset(char *, mysh_t *);
+int is_var_exist(variables_t *, char *);
+void replace_variable(variables_t *, char *);
 
 #endif

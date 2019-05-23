@@ -14,7 +14,7 @@ void put_in_variables_list(variables_t **var_list, char *cmd)
     char **tab = word_array(cmd, '=');
 
     elem->var = my_strdup(tab[0], KEEP);
-    elem->def = my_strdup((tab[1] == NULL) ? "=" : tab[1], KEEP);
+    elem->def = my_strdup(tab[1], KEEP);
     elem->next = NULL;
     elem->prev = NULL;
     free_array(tab);
@@ -42,4 +42,22 @@ void free_variables_list(variables_t *var_list)
     free(var_list->var);
     free(var_list->def);
     free(var_list);
+}
+
+int is_var_exist(variables_t *var_list, char *cmd)
+{
+    char **tmp = NULL;
+
+    if (var_list == NULL)
+        return (FALSE);
+    tmp = word_array(cmd, '=');
+    while (var_list != NULL) {
+        if (my_strcmp(var_list->var, tmp[0]) == 0) {
+            free_array(tmp);
+            return (TRUE);
+        }
+        var_list = var_list->next;
+    }
+    free_array(tmp);
+    return (FALSE);
 }
