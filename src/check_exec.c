@@ -26,6 +26,8 @@ char *check_access(char **tmp, char *cmd)
 {
     int i = 0;
 
+    if (tmp == NULL)
+        return (NULL);
     while (tmp[i] != NULL) {
         if (access(my_strcat(my_strcat(tmp[i], "/", KEEP, KEEP),
             cmd, FREE, KEEP), X_OK) == TRUE) {

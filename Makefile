@@ -31,7 +31,9 @@ SRC		=			src/cpy_env.c				\
 					src/my_create_btree.c		\
 					src/tab_pid.c				\
 					src/destroy_tree.c			\
-					src/my_singint.c
+					src/my_singint.c			\
+					src/fct_echo.c				\
+					src/parser_echo.c
 
 MAIN		=		src/main.c
 

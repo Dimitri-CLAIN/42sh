@@ -29,6 +29,8 @@ characters.\n"
 #define UNSETENV_ER1 "unsetenv: Too few arguments.\n"
 #define FILE_ER ": No such file or directory.\n"
 
+char    **parser_echo(char *str, char c, char s, int fre);
+void fct_echo(char *cmd, mysh_t *info);
 int check_error_redirect(char **tmp);
 int arch(char *cmd);
 void check_exit(char *cmd, mysh_t *info);
