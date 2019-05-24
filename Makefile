@@ -40,13 +40,16 @@ SRC		=			src/cpy_env.c				\
 					src/variables/check_variables.c	\
 					src/variables/set_variables.c	\
 					src/change_cmd.c				\
-					src/variables/change_variables.c\
+					src/variables/change_variables_var_list.c\
+					src/variables/change_variables_env.c\
 					src/variables/unset.c		\
 					src/term_caps/arrow.c 		\
 					src/term_caps/get_sterm.c 	\
 					src/term_caps/init_my_term.c\
 					src/term_caps/cmd_caps.c 	\
 					src/term_caps/write_it.c 	\
+					src/inhibitors/inhibitors.c	\
+					src/inhibitors/do_inhibitors.c
 
 
 MAIN		=		src/main.c

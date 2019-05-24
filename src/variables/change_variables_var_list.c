@@ -31,9 +31,9 @@ char *check_variable(char *tmp, char *cmd, int i, variables_t *var_list)
     if (tmp[my_strlen(var_list->var)] == ' ' ||
         tmp[my_strlen(var_list->var)] == '\0')
         return (modify_cmd(cmd, i, var_list->var, var_list->def));
-    for (int i = 0; tmp[i] != '\0' && tmp[i] != ' '; i++)
-        write(2, &tmp[i], 1);
-    my_putstr_error(ER_UNDEFINED_VAR);
+    // for (int i = 0; tmp[i] != '\0' && tmp[i] != ' '; i++)
+    //     write(2, &tmp[i], 1);
+    // my_putstr_error(ER_UNDEFINED_VAR);
     return (NULL);
 }
 
@@ -52,7 +52,7 @@ char *is_variables(char *cmd, int i, variables_t *var_list)
     return (cmd);
 }
 
-char *change_variables(char *cmd, variables_t *var_list)
+char *change_variables_var_list(char *cmd, variables_t *var_list)
 {
     int i = 0;
 
