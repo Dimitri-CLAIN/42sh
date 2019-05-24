@@ -47,6 +47,8 @@ SRC		=			src/cpy_env.c				\
 					src/term_caps/init_my_term.c\
 					src/term_caps/cmd_caps.c 	\
 					src/term_caps/write_it.c 	\
+					src/inhibitors/inhibitors.c	\
+					src/inhibitors/do_inhibitors.c
 
 
 MAIN		=		src/main.c
