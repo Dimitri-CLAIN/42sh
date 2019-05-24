@@ -68,7 +68,7 @@ int simple_redirect_left(char *cmd, mysh_t *info)
     int state = 0;
     char **tab = NULL;
 
-    if (check_error_redirect(tmp) == TRUE)
+    if (check_error_redirect(tmp) == TRU)
         return (-1);
     tab = word_array(tmp[1], '|');
     if ((fd = get_file(clean_str(tab[0], KEEP))) == -1) {

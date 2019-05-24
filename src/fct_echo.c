@@ -65,7 +65,6 @@ char *replace_space(char *cmd, int *i)
 char *set_cmd(char *cmd)
 {
     int i = 0;
-    int state = 0;
 
     while (cmd[i] != '\0') {
         if (cmd[i] == '\"')
@@ -83,6 +82,8 @@ void fct_echo(char *cmd, mysh_t *info)
     int i = 0;
     char **tab = NULL;
 
+    (void)info;
+    (void)echo;
     cmd = set_cmd(cmd);
     if (cmd == NULL) {
         my_putstr_error("Unmatched '\"'.\n");

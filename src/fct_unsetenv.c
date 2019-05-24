@@ -15,7 +15,7 @@ void fct_unsetenv(char *cmd, mysh_t *info)
     if (array_len(tmp) == 1)
         my_putstr_error(UNSETENV_ER1);
     while (tmp[i] != NULL) {
-        if (find_str_env(tmp[i], info->env) == TRUE)
+        if (find_str_env(tmp[i], info->env) == TRU)
             remove_str_env(tmp[i], info->env);
         i++;
     }
