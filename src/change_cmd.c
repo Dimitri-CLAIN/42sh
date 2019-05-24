@@ -11,5 +11,6 @@ char *change_cmd(char *cmd, mysh_t *info)
 {
     cmd = check_alias_or_not(cmd, info);
     cmd = change_variables(cmd, info->var_list);
+    cmd = magic_maker(cmd, info);
     return (cmd);
 }

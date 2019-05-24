@@ -36,15 +36,32 @@ SRC		=			src/magic_quote/magic_maker.c	\
 					src/my_create_btree.c			\
 					src/tab_pid.c					\
 					src/destroy_tree.c				\
-					src/my_singint.c
+					src/my_singint.c				\
+					src/alias/read_my_alias.c		\
+					src/alias/init_my_alias.c		\
+					src/alias/create_my_alias.c		\
+					src/alias/disp_alias.c			\
+					src/variables/manage_var_list.c	\
+					src/variables/check_variables.c	\
+					src/variables/set_variables.c	\
+					src/change_cmd.c				\
+					src/variables/change_variables.c\
+					src/variables/unset.c			\
+					src/term_caps/arrow.c 			\
+					src/term_caps/get_sterm.c 		\
+					src/term_caps/init_my_term.c	\
+					src/term_caps/cmd_caps.c 		\
+					src/term_caps/write_it.c 		\
+
 
 MAIN		=		src/main.c
 
 SRC_TEST	=		tests/test_tab_pid.c			\
-				tests/test_check_variables.c	\
-				tests/test_set_variables.c		\
-				tests/test_change_variables.c	\
-				tests/test_fct_unset.c
+				tests/test_check_variables.c		\
+				tests/test_set_variables.c			\
+				tests/test_change_variables.c		\
+				tests/test_fct_unset.c				\
+				tests/test_magic_maker.c
 
 OBJ		=		$(SRC:.c=.o) $(MAIN:.c=.o)
 

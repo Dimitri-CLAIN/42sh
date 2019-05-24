@@ -135,6 +135,7 @@ int is_var_exist(variables_t *, char *);
 void replace_variable(variables_t *, char *);
 
 FILE *get_pipe_fd(int);
+int magic_checker(char *);
 char *magic_maker(char *, mysh_t *);
 char *tab_to_str(char **);
 char *get_command(char *);

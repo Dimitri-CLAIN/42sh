@@ -63,7 +63,8 @@ int magic_checker(char *cmd)
     else if (i == 0)
         return (1);
     else
-        return (TRUE);
+        return (TRU);
+    return (0);
 }
 
 char *magic_maker(char *cmd, mysh_t *info)
@@ -77,7 +78,7 @@ char *magic_maker(char *cmd, mysh_t *info)
         return (NULL);
     }
     while (command_tab[i] != NULL) {
-        if (magic_checker(command_tab[i]) == TRUE)
+        if (magic_checker(command_tab[i]) == TRU)
             command_tab[i] = magic_exec(command_tab[i], info);
         i++;
     }

@@ -10,10 +10,10 @@
 char *tab_to_str(char **tab)
 {
     int i = 0;
-    int x = 0;
-    int i_b = 0;
     char *res = NULL;
 
+    if (my_strcmp(tab[i], "") == TRU)
+        return (NULL);
     while (tab[i] != NULL) {
         if (tab[i][0] != 0) {
             res = my_strcat(res, tab[i], FREE, KEEP);
