@@ -42,7 +42,7 @@ void do_the_fct_cd(char **tmp, mysh_t *info)
 
 void check_cd(char *cmd, mysh_t *info)
 {
-    char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
+    char **tmp = parser_echo(cmd, ' ', '\"', KEEP);
 
     if (tmp[1][0] == '~') {
         if (find_str_env("HOME", info->env) == TRUE)
@@ -66,7 +66,7 @@ void check_cd(char *cmd, mysh_t *info)
 
 void fct_cd(char *cmd, mysh_t *info)
 {
-    char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
+    char **tmp = parser_echo(cmd, ' ', '\"', KEEP);
 
     if (array_len(tmp) > 2)
         my_putstr_error("cd: Too many arguments.\n");

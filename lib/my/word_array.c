@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** my_str_to_word_array
+** parser_echo
 ** File description:
 ** str to word array
 */

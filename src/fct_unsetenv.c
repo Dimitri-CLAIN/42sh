@@ -9,7 +9,7 @@
 
 void fct_unsetenv(char *cmd, mysh_t *info)
 {
-    char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
+    char **tmp = parser_echo(cmd, ' ', '\"', KEEP);
     int i = 1;
 
     if (array_len(tmp) == 1)

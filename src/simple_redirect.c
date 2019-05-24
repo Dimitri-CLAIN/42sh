@@ -63,7 +63,7 @@ int exec_simple_redirect_left(int fd, char **tmp, mysh_t *info)
 
 int simple_redirect_left(char *cmd, mysh_t *info)
 {
-    char **tmp = my_str_to_word_array(cmd, '<', KEEP);
+    char **tmp = parser_echo(cmd, '<', '\"', KEEP);
     int fd = 0;
     int state = 0;
     char **tab = NULL;

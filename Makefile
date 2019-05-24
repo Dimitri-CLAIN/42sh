@@ -33,7 +33,8 @@ SRC		=			src/cpy_env.c				\
 					src/destroy_tree.c			\
 					src/my_singint.c			\
 					src/fct_echo.c				\
-					src/parser_echo.c
+					src/parser_echo.c			\
+					src/under_fct_echo.c
 
 MAIN		=		src/main.c
 

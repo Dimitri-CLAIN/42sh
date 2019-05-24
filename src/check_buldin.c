@@ -23,7 +23,7 @@ int is_buldin(char *cmd)
 
 int do_the_fct(buldin_t *tab, char *cmd, mysh_t *info)
 {
-    char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
+    char **tmp = parser_echo(cmd, ' ', '\"', KEEP);
     int i = 0;
 
     while (tab[i].name != NULL) {

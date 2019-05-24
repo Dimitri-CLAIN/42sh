@@ -27,7 +27,6 @@ char    **array_array(char **array, char *str, char c, char s)
     int    x = 0;
     int    ctr = 0;
     int state = 0;
-    int v = 0;
 
     for (i = 0; str[i] != '\0'; i++) {
         state = the_state(str, &i, s, state);

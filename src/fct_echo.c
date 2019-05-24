@@ -7,65 +7,9 @@
 
 #include "my.h"
 
-echo_t reset_echo(echo_t echo)
-{
-    echo.e = 0;
-    echo.n = 0;
-    echo.ee = 0;
-    return (echo);
-}
-
-echo_t set_flag(char *str, echo_t echo)
-{
-    int i = 1;
-
-    while (str[i] != '\0') {
-        if (str[i] == 'n')
-            echo.n = 1;
-        if (str[i] == 'e' && str[i + 1] == 'e')
-            echo.ee = 1;
-        if (str[i] == 'e')
-            echo.e = 1;
-        if (str[i] != 'n' && (str[i] != 'e' && str[i + 1] != 'e') && str[i] != 'e') {
-            echo = reset_echo(echo);
-            return (echo);
-        }
-        i++;
-    }
-    return (echo);
-}
-
-echo_t set_echo(char *cmd)
-{
-    char **tab = my_str_to_word_array(cmd, ' ', KEEP);
-    echo_t echo = {0, 0, 0};
-    int i = 0;
-    int state = 0;
-
-    while (tab[i] != NULL) {
-        if (state == 0 && tab[i][0] == '-') {
-            echo = set_flag(tab[i], echo);
-        } else if (tab[i][0] == '\"')
-            state = 1;
-        i++;
-    }
-    return (echo);
-}
-
-char *replace_space(char *cmd, int *i)
-{
-    (*i)++;
-    while (cmd[(*i)] != '\0' && cmd[(*i)] != '\"')
-        (*i)++;
-    if (cmd[(*i)] == '\0')
-        return (NULL);
-    return (cmd);
-}
-
 char *set_cmd(char *cmd)
 {
     int i = 0;
-    int state = 0;
 
     while (cmd[i] != '\0') {
         if (cmd[i] == '\"')
@@ -77,21 +21,69 @@ char *set_cmd(char *cmd)
     return (cmd);
 }
 
+int print_sp_char(char *str, int i)
+{
+    i++;
+    while (str[i] != '\0' && str[i] != '\"') {
+        if (str[i] == '\\') {
+            i++;
+            print_char(str[i]);
+            i++;
+        } else {
+            my_putchar(str[i]);
+            i++;
+        }
+    }
+    i++;
+    return (i);
+}
+
+int jummp(char *str, int i)
+{
+    while (str[i] != '\0' && str[i] == ' ')
+        i++;
+    if (str[i] == '\0')
+        return (i);
+    my_putchar(' ');
+    return (i);
+}
+
+void print_cmd(char *str, echo_t echo)
+{
+    int i = 0;
+
+    while (str[i] != '\0') {
+        if (str[i] == ' ')
+            i = jummp(str, i);
+        if (str[i] == '\"')
+            i = print_sp_char(str, i);
+        else if (str[i] == '\\') {
+            i++;
+            my_putchar(str[i]);
+            i++;
+        } else {
+            my_putchar(str[i]);
+            i++;
+        }
+    }
+    if (echo.n == 0)
+        my_putchar('\n');
+}
+
 void fct_echo(char *cmd, mysh_t *info)
 {
     echo_t echo = set_echo(cmd);
-    int i = 0;
-    char **tab = NULL;
 
+    (void)info;
     cmd = set_cmd(cmd);
     if (cmd == NULL) {
         my_putstr_error("Unmatched '\"'.\n");
         return;
     }
-    printf("%s\n", cmd);
-    tab = parser_echo(cmd, ' ', '\"', FREE);
-    while (tab[i] != NULL) {
-        printf("%s\n", tab[i]);
-        i++;
-    }
+    cmd += 5;
+    if (cmd[0] == '-')
+        for (; cmd[0] != '\0' && cmd[0] != ' '; cmd++);
+    if (cmd[0] == ' ')
+        cmd++;
+    print_cmd(cmd, echo);
 }

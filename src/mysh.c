@@ -9,7 +9,7 @@
 
 void check_exit(char *cmd, mysh_t *info)
 {
-    char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
+    char **tmp = parser_echo(cmd, ' ', '\"', KEEP);
 
     if (my_strcmp(tmp[0], "exit") == TRUE) {
         if (array_len(tmp) == 1)
@@ -25,6 +25,7 @@ int get_input(char **input, mysh_t *info)
 {
     char *line = NULL;
     size_t size = 0;
+    int i = 0;
 
     (void)info;
     if (getline(&line, &size, stdin) == -1) {
@@ -32,6 +33,7 @@ int get_input(char **input, mysh_t *info)
         return (-1);
     }
     line[my_strlen(line) - 1] = '\0';
+    //for (i = 0; line[i] != '\0' && line[i] != '\"'; i++);
     *input = my_epurstr(my_strdup(line, FREE), " \n\t", FREE);
     if (*input == NULL || *input[0] == '\0')
         *input = NULL;

@@ -55,11 +55,16 @@ char    *my_epurstr(char *str, char *format, int fre)
     char *clean = NULL;
     char tmp[] = {'\0', '\0'};
     int i = 0;
+    int state = 0;
 
     str = cleanstr(str, format);
     i = jump_space(str, i);
     while (str[i] != '\0') {
-        if (str[i] == ' ') {
+        if (state == 0 && str[i] == '\"')
+            state = 1;
+        else if (state == 1 && str[i] == '\"')
+            state = 0;
+        if (state == 0 && str[i] == ' ') {
             clean = my_strcat(clean, " ", FREE, KEEP);
             i = jump_space(str, i);
         } else {

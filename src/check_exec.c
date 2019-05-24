@@ -1,3 +1,4 @@
+
 /*
 ** EPITECH PROJECT, 2019
 ** check_exec
@@ -49,7 +50,7 @@ char *check_syntaxe(char *cmd, mysh_t *info)
     if (check_first_access(cmd) == TRUE)
         return (cmd);
     if (find_str_env("PATH", info->env) == TRUE) {
-        tmp = my_str_to_word_array(cpy_str_env("PATH", info->env), ':', KEEP);
+        tmp = parser_echo(cpy_str_env("PATH", info->env), ':', '\"', KEEP);
         new_cmd = check_access(tmp, cmd);
         if (my_strcmp(cmd, new_cmd) == FALSE)
             return (new_cmd);
@@ -66,7 +67,7 @@ char *check_syntaxe(char *cmd, mysh_t *info)
 
 int exec(mysh_t *info, char *cmd)
 {
-    char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
+    char **tmp = parser_echo(cmd, ' ', '\"', KEEP);
     pid_t pid = 0;
 
     if ((tmp[0] = check_syntaxe(tmp[0], info)) == NULL) {

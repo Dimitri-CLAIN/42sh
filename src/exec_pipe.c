@@ -73,7 +73,7 @@ int exec_pipe(mysh_t *info, char *cmd)
 
     if (check_error_pipe(clean_str(cmd, KEEP)) == TRUE)
         return (-1);
-    tab = my_str_to_word_array(cmd, '|', KEEP);
+    tab = parser_echo(cmd, '|', '\"', KEEP);
     info->pipe.pipefd = pipefd;
     info->pipe.save = 0;
     info->pipe.tab_pid = get_parents_nb(tab);

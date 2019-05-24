@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** my_str_to_word_array
+** parser_echo
 ** File description:
 ** array_to_double_array
 */
@@ -38,8 +38,7 @@ char    **my_first_array(char **array, char *str, char c)
         if (c != str[i]) {
             x++;
             i++;
-        }
-        else
+        } else
             i++;
     }
     x++;
