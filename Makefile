@@ -40,7 +40,8 @@ SRC		=			src/cpy_env.c				\
 					src/variables/check_variables.c	\
 					src/variables/set_variables.c	\
 					src/change_cmd.c				\
-					src/variables/change_variables.c\
+					src/variables/change_variables_var_list.c\
+					src/variables/change_variables_env.c\
 					src/variables/unset.c		\
 					src/term_caps/arrow.c 		\
 					src/term_caps/get_sterm.c 	\
