@@ -20,29 +20,29 @@ int check_name_var(char *cmd, char *set)
     if (my_strcmp(tmp[0], "$") == 0) {
         my_putstr_error(ER_SET_2);
         free_array(tmp);
-        return (FALSE);
+        return (FALS);
     }
     if (tmp[0][0] >= '0' && tmp[0][0] <= '9') {
         display_error(ER_SET, set);
         free_array(tmp);
-        return (FALSE);
+        return (FALS);
     }
     if (str_is_alphanum(tmp[0]) == 0) {
         display_error(ER_SET_3, set);
         free_array(tmp);
-        return (FALSE);
+        return (FALS);
     }
     free_array(tmp);
-    return (TRUE);
+    return (TRU);
 }
 
 int check_syntaxe_var(char *cmd, char *set)
 {
     if (cmd[0] == '=') {
         display_error(ER_SET, set);
-        return (FALSE);
+        return (FALS);
     }
-    if (check_name_var(cmd, set) == FALSE)
-        return (FALSE);
-    return (TRUE);
+    if (check_name_var(cmd, set) == FALS)
+        return (FALS);
+    return (TRU);
 }

@@ -11,7 +11,7 @@
 
 Test(check_syntaxe_var, name_of_var_null, .init = cr_redirect_stderr)
 {
-    int expected = FALSE;
+    int expected = FALS;
     int got = check_syntaxe_var("=ls", "set");
 
     cr_assert_eq(got, expected);
@@ -20,7 +20,7 @@ Test(check_syntaxe_var, name_of_var_null, .init = cr_redirect_stderr)
 
 Test(check_syntaxe_var, name_of_illegal, .init = cr_redirect_stderr)
 {
-    int expected = FALSE;
+    int expected = FALS;
     int got = check_syntaxe_var("$=ls", "set");
 
     cr_assert_eq(got, expected);
@@ -29,7 +29,7 @@ Test(check_syntaxe_var, name_of_illegal, .init = cr_redirect_stderr)
 
 Test(check_syntaxe_var, name_var_begin_with_number, .init = cr_redirect_stderr)
 {
-    int expected = FALSE;
+    int expected = FALS;
     int got = check_syntaxe_var("42a=ls", "set");
 
     cr_assert_eq(got, expected);
@@ -38,7 +38,7 @@ Test(check_syntaxe_var, name_var_begin_with_number, .init = cr_redirect_stderr)
 
 Test(check_syntaxe_var, name_var_begin_alphanum, .init = cr_redirect_stderr)
 {
-    int expected = FALSE;
+    int expected = FALS;
     int got = check_syntaxe_var("a!=ls", "set");
 
     cr_assert_eq(got, expected);
@@ -47,7 +47,7 @@ Test(check_syntaxe_var, name_var_begin_alphanum, .init = cr_redirect_stderr)
 
 Test(check_syntaxe_var, correct_name)
 {
-    int expected = TRUE;
+    int expected = TRU;
     int got = check_syntaxe_var("a=ls", "set");
 
     cr_assert_eq(got, expected);

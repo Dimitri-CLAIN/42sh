@@ -26,9 +26,9 @@ void set_variables(char **setup, mysh_t *info)
     int i = 1;
 
     while (setup[i] != NULL) {
-        if (check_syntaxe_var(setup[i], setup[0]) == FALSE)
+        if (check_syntaxe_var(setup[i], setup[0]) == FALS)
             return;
-        if (is_var_exist(info->var_list, setup[i]) == FALSE)
+        if (is_var_exist(info->var_list, setup[i]) == FALS)
             put_in_variables_list(&info->var_list, setup[i]);
         else
             replace_variable(info->var_list, setup[i]);

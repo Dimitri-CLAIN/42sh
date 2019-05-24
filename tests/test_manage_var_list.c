@@ -34,7 +34,7 @@ Test(free_variables_list, list_null)
 Test(is_var_exist, var_list_null)
 {
     variables_t *var_list = NULL;
-    int expected = FALSE;
+    int expected = FALS;
     int got = is_var_exist(var_list, "a=ls");
 
     cr_assert_eq(got, expected);
@@ -43,7 +43,7 @@ Test(is_var_exist, var_list_null)
 Test(is_var_exist, var_dont_exist)
 {
     variables_t *var_list = NULL;
-    int expected = FALSE;
+    int expected = FALS;
     int got = 0;
 
     put_in_variables_list(&var_list, "a=ls");
@@ -55,7 +55,7 @@ Test(is_var_exist, var_dont_exist)
 Test(is_var_exist, var_exist)
 {
     variables_t *var_list = NULL;
-    int expected = TRUE;
+    int expected = TRU;
     int got = 0;
 
     put_in_variables_list(&var_list, "a=ls");

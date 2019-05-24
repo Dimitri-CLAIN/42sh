@@ -19,7 +19,7 @@ void cd_home(mysh_t *info)
 
 void check_error_cd(struct stat sb, char *path)
 {
-    if (S_ISDIR(sb.st_mode) != 1 && access(path, R_OK) == TRUE) {
+    if (S_ISDIR(sb.st_mode) != 1 && access(path, R_OK) == TRU) {
         my_putstr_error(path);
         my_putstr_error(": Not a directory.\n");
     } else {
@@ -45,10 +45,10 @@ void check_cd(char *cmd, mysh_t *info)
     char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
 
     if (tmp[1][0] == '~') {
-        if (find_str_env("HOME", info->env) == TRUE)
+        if (find_str_env("HOME", info->env) == TRU)
             tmp[1] = my_strdup(get_path_home(tmp[1], info->env), FREE);
-    } else if (my_strcmp(tmp[1], "-") == TRUE) {
-        if (find_str_env("OLDPWD", info->env) == TRUE &&
+    } else if (my_strcmp(tmp[1], "-") == TRU) {
+        if (find_str_env("OLDPWD", info->env) == TRU &&
             cpy_str_env("OLDPWD", info->env) != NULL) {
             tmp[1] = my_strdup(cpy_str_env("OLDPWD", info->env), FREE);
             chdir(tmp[1]);
