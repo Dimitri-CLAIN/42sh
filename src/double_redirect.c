@@ -33,9 +33,9 @@ int double_redirect_right(char *cmd, mysh_t *info)
 int check_end(char *line, char *tmp)
 {
     line[my_strlen(line) - 1] = '\0';
-    if (my_strcmp(my_strdup(line, KEEP), tmp) == TRUE)
-        return (TRUE);
-    return (FALSE);
+    if (my_strcmp(my_strdup(line, KEEP), tmp) == TRU)
+        return (TRU);
+    return (FALS);
 }
 
 char *get_input_double_redirect_left(char *tmp)
@@ -46,9 +46,9 @@ char *get_input_double_redirect_left(char *tmp)
 
     while (42) {
         my_putstr("? ");
-        if (getline(&line, &size, stdin) == -1 || check_end(line, tmp) == TRUE)
+        if (getline(&line, &size, stdin) == -1 || check_end(line, tmp) == TRU)
             return (dest);
-        dest = my_strcat(my_strcat(dest, line, KEEP, FREE), "\n", KEEP, KEEP);
+        dest = my_strcat(my_strcat(dest, line, KEEP, KEEP), "\n", KEEP, KEEP);
     }
 }
 
@@ -83,7 +83,7 @@ int double_redirect_left(char *cmd, mysh_t *info)
     input = search_key_word(input, word_array(clean_str(tmp[0], KEEP), ' '));
     if (input != NULL) {
         status = exec_double_redirect_left(input, info,
-        clean_str(tmp[0], KEEP));
+                clean_str(tmp[0], KEEP));
         free(input);
     }
     free_array(tmp);

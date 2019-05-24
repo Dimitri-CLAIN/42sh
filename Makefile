@@ -40,7 +40,11 @@ SRC		=			src/magic_quote/magic_maker.c	\
 
 MAIN		=		src/main.c
 
-SRC_TEST	=
+SRC_TEST	=		tests/test_tab_pid.c			\
+				tests/test_check_variables.c	\
+				tests/test_set_variables.c		\
+				tests/test_change_variables.c	\
+				tests/test_fct_unset.c
 
 OBJ		=		$(SRC:.c=.o) $(MAIN:.c=.o)
 
@@ -50,9 +54,9 @@ BIN		=		unit_tests
 
 CC		=		gcc
 
-CFLAGS		=		-I./include -g
+CFLAGS		=		-I./include -g -W -Wall -Wextra -Werror
 
-LIB		=		-L./lib -lmy
+LIB		=		-L./lib -lmy -lcurses
 
 LDFLAGS		=		-lcriterion --coverage
 
@@ -71,6 +75,9 @@ clean:
 			make -sC lib/my clean
 			rm -f $(OBJ)
 			rm -f *.gc*
+			rm -f *~
+			rm -f *#
+			rm -f vgcore.*
 
 fclean:			clean
 			make -sC lib/my fclean

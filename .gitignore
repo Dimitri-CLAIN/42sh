@@ -7,3 +7,7 @@ vgcore*
 unit_tests
 .gdb_history
 *#
+42sh
+test
+tester.sh
+.42shrc
