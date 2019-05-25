@@ -36,6 +36,9 @@ characters.\n"
 #define ER_UNSET ": Too few arguments.\n"
 #define ER_UNDEFINED_VAR ": Undefined variable.\n"
 
+int search_inhibitors(char *);
+char *do_inhibitors(char *);
+char *check_inhibitors(char *);
 char *read_my_alias(char *, env_t *);
 char *add_char(char *, char);
 char **read_file(char *);
@@ -44,7 +47,6 @@ void put_in_alias(env_t **, char *);
 char *check_alias_or_not(char *, mysh_t *);
 void my_alias(char *, mysh_t *);
 void display_alias(env_t *);
-
 int check_error_redirect(char **);
 int arch(char *);
 void check_exit(char *, mysh_t *);
@@ -128,10 +130,18 @@ void fct_set(char *, mysh_t *);
 int check_cmd_var(char *);
 int check_syntaxe_var(char *, char *);
 char *change_cmd(char *, mysh_t *);
-char *change_variables(char *, variables_t *);
+char *change_variables_var_list(char *, variables_t *);
+char *change_variables_env(char *, env_t *);
 void display_error(char *, char *);
 void fct_unset(char *, mysh_t *);
 int is_var_exist(variables_t *, char *);
 void replace_variable(variables_t *, char *);
+
+FILE *get_pipe_fd(int);
+int magic_checker(char *);
+char *magic_maker(char *, mysh_t *);
+char *tab_to_str(char **);
+char *get_command(char *);
+char *get_str(int, int);
 
 #endif
