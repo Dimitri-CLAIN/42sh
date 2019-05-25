@@ -29,7 +29,6 @@
 characters.\n"
 #define UNSETENV_ER1 "unsetenv: Too few arguments.\n"
 #define FILE_ER ": No such file or directory.\n"
-
 #define ER_SET ": Variable name must begin with a letter.\n"
 #define ER_SET_2 "Illegal variable name.\n"
 #define ER_SET_3 ": Variable name must contain alphanumeric characters.\n"
@@ -39,6 +38,20 @@ characters.\n"
 int search_inhibitors(char *);
 char *do_inhibitors(char *);
 char *check_inhibitors(char *);
+echo_t reset_echo(echo_t echo);
+echo_t set_flag(char *str, echo_t echo);
+echo_t set_echo(char *cmd);
+char *replace_space(char *cmd, int *i);
+void print_char(char c);
+char    **parser_echo(char *str, char *c, int fre);
+void fct_echo(char *cmd, mysh_t *info);
+int check_error_redirect(char **tmp);
+int arch(char *cmd);
+void check_exit(char *cmd, mysh_t *info);
+int the_state(char *str, int *i, int state);
+char **my_cut(char *str, char *sep);
+int my_strlen(char *);
+int write_history(char *str);
 char *read_my_alias(char *, env_t *);
 char *add_char(char *, char);
 char **read_file(char *);

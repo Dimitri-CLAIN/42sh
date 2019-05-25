@@ -11,7 +11,7 @@
 
 int double_redirect_right(char *cmd, mysh_t *info)
 {
-    char **tmp = word_array(cmd, '>');
+    char **tmp = my_cut(cmd, ">>");
     int fd = 0;
     int pid = 0;
 
@@ -75,7 +75,7 @@ int exec_double_redirect_left(char *input, mysh_t *info, char *cmd)
 
 int double_redirect_left(char *cmd, mysh_t *info)
 {
-    char **tmp = word_array(cmd, '<');
+    char **tmp = my_cut(cmd, ">>");
     char *input = NULL;
     int status = 0;
 

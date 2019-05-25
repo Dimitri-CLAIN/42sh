@@ -9,7 +9,7 @@
 
 int check_error_setenv(char *cmd)
 {
-    char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
+    char **tmp = parser_echo(cmd, " ", KEEP);
 
     if ((tmp[1][0] < 'A' || tmp[1][0] > 'Z') &&
         (tmp[1][0] < 'a' || tmp[1][0] > 'z') && tmp[1][0] != '_') {
@@ -28,11 +28,19 @@ int check_error_setenv(char *cmd)
 
 void check_replace_setenv(char *cmd, mysh_t *info)
 {
-    char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
+    char **tmp = parser_echo(cmd, " ", KEEP);
 
     if (find_str_env(tmp[1], info->env) == TRU)
         remove_str_env(tmp[1], info->env);
     free_array(tmp);
+}
+
+int jump_cote(char *str)
+{
+    int i = 0;
+
+    for (i = 0; str[i + 1] != '\0'; i++);
+    return (i);
 }
 
 void do_the_fct_setenv(char *cmd, mysh_t *info)
@@ -43,11 +51,11 @@ void do_the_fct_setenv(char *cmd, mysh_t *info)
     if (check_error_setenv(cmd) == TRU)
         return;
     check_replace_setenv(cmd, info);
-    tmp = my_str_to_word_array(cmd, ' ', KEEP);
+    tmp = parser_echo(cmd, " ", KEEP);
     dest = my_strcat(tmp[1], "=", KEEP, KEEP);
-    if (tmp[2] != NULL)
+    if (tmp[2] != NULL) {
         dest = my_strcat(dest, tmp[2], FREE, KEEP);
-    else
+    } else
         dest = my_strcat(dest, " ", FREE, KEEP);
     put_in_env(&info->env, dest);
     free_array(tmp);
@@ -55,7 +63,7 @@ void do_the_fct_setenv(char *cmd, mysh_t *info)
 
 void fct_setenv(char *cmd, mysh_t *info)
 {
-    char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
+    char **tmp = parser_echo(cmd, " ", KEEP);
 
     if (array_len(tmp) == 1)
         display_env(info->env);

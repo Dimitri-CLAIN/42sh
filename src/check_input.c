@@ -21,7 +21,7 @@ int check_parsing(char *input)
 
 void parsing(char *input, mysh_t *info)
 {
-    char **tmp = my_str_to_word_array(input, ';', KEEP);
+    char **tmp = parser_echo(input, ";", KEEP);
     int i = 0;
 
     while (tmp[i] != NULL)

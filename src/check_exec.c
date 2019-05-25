@@ -1,3 +1,4 @@
+
 /*
 ** EPITECH PROJECT, 2019
 ** check_exec
@@ -29,11 +30,10 @@ char *check_access(char **tmp, char *cmd)
     if (tmp == NULL)
         return (NULL);
     while (tmp[i] != NULL) {
-        if (access(my_strcat(my_strcat(tmp[i], "/", KEEP, KEEP),
+        if (tmp[i] != NULL && access(my_strcat(my_strcat(tmp[i], "/", KEEP, KEEP),
             cmd, FREE, KEEP), X_OK) == TRU) {
             cmd = my_strcat(my_strcat(tmp[i], "/", KEEP, KEEP),
             cmd, FREE, KEEP);
-            free_array(tmp);
             return (cmd);
         }
         i++;
@@ -49,7 +49,7 @@ char *check_syntaxe(char *cmd, mysh_t *info)
     if (check_first_access(cmd) == TRU)
         return (cmd);
     if (find_str_env("PATH", info->env) == TRU) {
-        tmp = my_str_to_word_array(cpy_str_env("PATH", info->env), ':', KEEP);
+        tmp = parser_echo(cpy_str_env("PATH", info->env), ":", KEEP);
         new_cmd = check_access(tmp, cmd);
         if (my_strcmp(cmd, new_cmd) == FALS)
             return (new_cmd);
@@ -66,21 +66,19 @@ char *check_syntaxe(char *cmd, mysh_t *info)
 
 int exec(mysh_t *info, char *cmd)
 {
-    char **tmp = NULL;
+    char **tmp = parser_echo(cmd, " ",  KEEP);
     pid_t pid = 0;
 
     cmd = change_cmd(cmd, info);
-    if ((tmp = my_str_to_word_array(cmd, ' ', KEEP)) == NULL)
+    if ((tmp = parser_echo(cmd, " ", KEEP)) == NULL)
         return (84);
     if ((tmp[0] = check_syntaxe(tmp[0], info)) == NULL) {
         free_array(tmp);
         return (84);
     }
     tmp = check_home(tmp, info);
-    if (check_buldin(info, cmd) == TRU) {
-        free_array(tmp);
+    if (check_buldin(info, cmd) == TRU)
         return (0);
-    }
     if ((pid = fork()) == 0)
         execve(tmp[0], tmp, get_env(info->env));
     if (arch(cmd) == 1)

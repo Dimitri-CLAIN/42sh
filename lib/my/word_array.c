@@ -1,6 +1,6 @@
 /*
-** EPITECH PROJECT, 2019
-** word_array
+** EPITECH PROJECT, 2018
+** parser_echo
 ** File description:
 ** str to word array
 */

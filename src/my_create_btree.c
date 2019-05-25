@@ -22,14 +22,14 @@ char **my_cut(char *str, char *sep)
     rest = my_strstr(str, sep, &save);
     if (rest == NULL)
         return (NULL);
-    if (sep[0] == '&' || sep[0] == '|')
+    if (rest[0] != 0 && (sep[0] == '&' || (sep[0] == '|' && sep[1] == '|') || (sep[0] == '>' && sep[1] == '>') || (sep[0] == '<' && sep[1] == '<')))
         rest += 2;
-    else if (rest[0] == ';')
-        rest++;
+    /* else if (rest[0] != 0 && sep[1] == '\0') */
+    /*     rest++; */
     save = clean_str(save, FREE);
-    rest = clean_str(rest, FREE);
+    rest = (rest[0] == 0) ? NULL : clean_str(rest, FREE);
     tab[0] = my_strdup(save, KEEP);
-    tab[1] = my_strdup(rest, KEEP);
+    tab[1] = (rest == NULL) ? NULL : my_strdup(rest, KEEP);
     return (tab);
 }
 

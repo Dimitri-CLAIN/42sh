@@ -24,13 +24,12 @@ int is_buldin(char *cmd)
 
 int do_the_fct(buldin_t *tab, char *cmd, mysh_t *info)
 {
-    char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
+    char **tmp = parser_echo(cmd, " ", KEEP);
     int i = 0;
 
     while (tab[i].name != NULL) {
         if (my_strcmp(tab[i].name, tmp[0]) == TRU) {
             tab[i].ptr(cmd, info);
-            free_array(tmp);
             return (TRU);
         }
         i++;
@@ -44,8 +43,9 @@ int check_buldin(mysh_t *info, char *cmd)
     buldin_t tab[] = {{"env", &fct_env}, {"setenv", &fct_setenv},
                     {"unsetenv", &fct_unsetenv}, {"cd", &fct_cd},
                     {"/bin/cd", &fct_cd}, {"exit", &check_exit},
-                    {"alias", &my_alias}, {"set", &fct_set},
-                    {"unset", &fct_unset}, {NULL, NULL}};
+                    {"echo", &fct_echo}, {"alias", &my_alias}, 
+                    {"set", &fct_set}, {"unset", &fct_unset}, 
+                    {NULL, NULL}};
 
     return (do_the_fct(tab, cmd, info));
 }

@@ -30,7 +30,7 @@ int get_file(char *file)
 
 int simple_redirect_right(char *cmd, mysh_t *info)
 {
-    char **tmp = word_array(cmd, '>');
+    char **tmp = my_cut(cmd, ">");
     int fd = 0;
     int pid = 0;
 
@@ -63,14 +63,14 @@ int exec_simple_redirect_left(int fd, char **tmp, mysh_t *info)
 
 int simple_redirect_left(char *cmd, mysh_t *info)
 {
-    char **tmp = my_str_to_word_array(cmd, '<', KEEP);
+    char **tmp = parser_echo(cmd, "<", KEEP);
     int fd = 0;
     int state = 0;
     char **tab = NULL;
 
     if (check_error_redirect(tmp) == TRU)
         return (-1);
-    tab = word_array(tmp[1], '|');
+    tab = my_cut(tmp[1], "|");
     if ((fd = get_file(clean_str(tab[0], KEEP))) == -1) {
         my_putstr_error(tmp[1]);
         my_putstr_error(FILE_ER);

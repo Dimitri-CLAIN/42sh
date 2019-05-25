@@ -10,7 +10,7 @@
 
 Test(get_parents_nb, initialize_tab_of_pid)
 {
-    char **tab = my_str_to_word_array("ls less", ' ', KEEP);
+    char **tab = parser_echo("ls less", " ", KEEP);
     int *got = get_parents_nb(tab);
     int i = 0;
 
@@ -32,7 +32,7 @@ Test(get_parents_nb, tab_null)
 
 Test(put_in_tab, put_elem_in_tab_pid)
 {
-    char **tab = my_str_to_word_array("ls less", ' ', KEEP);
+    char **tab = parser_echo("ls less", " ", KEEP);
     int *got = get_parents_nb(tab);
 
     got = put_in_tab(got, 42, array_len(tab));
@@ -43,7 +43,7 @@ Test(put_in_tab, put_elem_in_tab_pid)
 
 Test(put_in_tab, max_lenght)
 {
-    char **tab = my_str_to_word_array("ls less", ' ', KEEP);
+    char **tab = parser_echo("ls less", " ", KEEP);
     int *got = get_parents_nb(tab);
 
     got = put_in_tab(got, 42, array_len(tab));

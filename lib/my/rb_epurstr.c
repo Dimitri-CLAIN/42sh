@@ -6,6 +6,8 @@
 */
 
 #include "my.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 int my_format(char c, char *format)
 {
@@ -22,10 +24,15 @@ int my_format(char c, char *format)
 char *cleanstr(char *str, char *format)
 {
     int i = 0;
+    int state = 0;
 
     while (str[i] != '\0') {
-        if (my_format(str[i], format) == REPLACE)
-            str[i] = ' ';
+        if (str[i] == '\"' && state == 0)
+            state = 1;
+        else if (str[i] == '\"' && state == 1)
+            state = 0;
+        if (state == 0 && my_format(str[i], format) == REPLACE)
+            str[i] = -1;
         i++;
     }
     return (str);
@@ -33,7 +40,7 @@ char *cleanstr(char *str, char *format)
 
 int jump_space(char *str, int i)
 {
-    while (str[i] != '\0' && str[i] == ' ')
+    while (str[i] != '\0' && str[i] == -1)
         i++;
     return (i);
 }
@@ -44,7 +51,7 @@ char *specific_case(char *clean, char *str, int fre)
 
     for (i = 0; clean != NULL  && clean[i + 1] != 0; i++);
     if (clean != NULL)
-        (clean[i] == ' ') ? clean[i] = '\0' : 0;
+        (clean[i] == -1) ? clean[i] = '\0' : 0;
     if (fre == FREE)
         free(str);
     return (clean);
@@ -59,7 +66,7 @@ char    *my_epurstr(char *str, char *format, int fre)
     str = cleanstr(str, format);
     i = jump_space(str, i);
     while (str[i] != '\0') {
-        if (str[i] == ' ') {
+        if (str[i] == -1) {
             clean = my_strcat(clean, " ", FREE, KEEP);
             i = jump_space(str, i);
         } else {
