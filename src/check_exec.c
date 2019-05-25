@@ -30,7 +30,8 @@ char *check_access(char **tmp, char *cmd)
     if (tmp == NULL)
         return (NULL);
     while (tmp[i] != NULL) {
-        if (tmp[i] != NULL && access(my_strcat(my_strcat(tmp[i], "/", KEEP, KEEP),
+        if (tmp[i] != NULL && access(my_strcat(
+            my_strcat(tmp[i], "/", KEEP, KEEP),
             cmd, FREE, KEEP), X_OK) == TRU) {
             cmd = my_strcat(my_strcat(tmp[i], "/", KEEP, KEEP),
             cmd, FREE, KEEP);
@@ -69,6 +70,8 @@ int exec(mysh_t *info, char *cmd)
     char **tmp = parser_echo(cmd, " ",  KEEP);
     pid_t pid = 0;
 
+    if (check_buldin(info, cmd) == TRU)
+        return (0);
     cmd = change_cmd(cmd, info);
     if ((tmp = parser_echo(cmd, " ", KEEP)) == NULL)
         return (84);
@@ -77,8 +80,6 @@ int exec(mysh_t *info, char *cmd)
         return (84);
     }
     tmp = check_home(tmp, info);
-    if (check_buldin(info, cmd) == TRU)
-        return (0);
     if ((pid = fork()) == 0)
         execve(tmp[0], tmp, get_env(info->env));
     if (arch(cmd) == 1)

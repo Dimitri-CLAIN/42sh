@@ -20,7 +20,7 @@ void    delete_char(cursor_t *cursor, int *i)
 
     exec_term("le");
     exec_term("dc");
-        
+
     *i = *i - 1;
     cursor->x = *i;
     while (k != cursor->x) {

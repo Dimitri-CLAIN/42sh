@@ -32,7 +32,7 @@ int my_cond(mysh_t *info, btree_t *node)
             exec_btree(info, node->right);
     } else {
         if (node->cmd != NULL)
-            n =  all_cmd(info, node->cmd);
+            n =  check_exec(info, node->cmd);
         return (n);
     }
     return (0);

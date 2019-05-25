@@ -40,26 +40,52 @@ SRC		=			src/cpy_env.c				\
 					src/alias/init_my_alias.c	\
 					src/alias/create_my_alias.c	\
 					src/alias/disp_alias.c		\
+					src/magic_quote/magic_maker.c	\
+					src/magic_quote/get_str.c		\
+					src/magic_quote/get_command.c	\
+					src/magic_quote/get_pipe_fd.c	\
+					src/magic_quote/tab_to_str.c	\
 					src/variables/manage_var_list.c	\
 					src/variables/check_variables.c	\
 					src/variables/set_variables.c	\
 					src/change_cmd.c				\
-					src/variables/change_variables.c\
+					src/variables/change_variables_var_list.c\
+					src/variables/change_variables_env.c\
 					src/variables/unset.c		\
 					src/term_caps/arrow.c 		\
 					src/term_caps/get_sterm.c 	\
 					src/term_caps/init_my_term.c\
 					src/term_caps/cmd_caps.c 	\
-					src/term_caps/write_it.c	\
-					src/write_history.c
+					src/write_history.c			\
+					src/term_caps/write_it.c 	\
+					src/inhibitors/inhibitors.c	\
+					src/inhibitors/do_inhibitors.c	\
+					src/get_input.c
+
 
 MAIN		=		src/main.c
 
 SRC_TEST	=		tests/test_tab_pid.c			\
-				tests/test_check_variables.c	\
-				tests/test_set_variables.c		\
-				tests/test_change_variables.c	\
-				tests/test_fct_unset.c
+				tests/test_check_variables.c		\
+				tests/test_set_variables.c			\
+				tests/test_change_variables.c		\
+				tests/test_fct_unset.c				\
+				tests/test_magic_maker.c			\
+				tests/test_inhibitors.c				\
+				tests/mini/test_check_exec.c		\
+				tests/mini/test_check_input.c		\
+				tests/mini/test_cpy_env.c			\
+				tests/mini/test_fct_cd.c			\
+				tests/mini/test_fct_env.c			\
+				tests/mini/test_fct_setenv.c		\
+				tests/mini/test_fct_unsetenv.c		\
+				tests/mini/test_find_str.c			\
+				tests/mini/test_free_list.c			\
+				tests/mini/test_manage_list.c		\
+				tests/mini/test_mysh.c				\
+				tests/mini/test_pipe.c				\
+				tests/mini/test_redirect.c			\
+				tests/mini/test_signals.c
 
 OBJ		=		$(SRC:.c=.o) $(MAIN:.c=.o)
 
