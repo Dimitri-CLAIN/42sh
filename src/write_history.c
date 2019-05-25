@@ -15,13 +15,13 @@
 int write_history(char *str)
 {
     int fd;
-    int i = 0;
 
     fd = open(".history", O_CREAT | O_WRONLY | O_APPEND, 0664);
     if (fd == -1)
         return (84);
     if (fd > 0) {
-        write (fd, str, strlen(str));
+        write(fd, str, strlen(str));
+        write(fd, "\n", 1);
         close(fd);
     }
     return (0);

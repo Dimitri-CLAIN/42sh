@@ -75,6 +75,7 @@ void fct_echo(char *cmd, mysh_t *info)
     echo_t echo = set_echo(cmd);
 
     (void)info;
+    (void)echo;
     cmd = set_cmd(cmd);
     if (cmd == NULL) {
         my_putstr_error("Unmatched '\"'.\n");

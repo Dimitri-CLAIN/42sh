@@ -5,99 +5,82 @@
 ** parse
 */
 
+#include <stdlib.h>
+#include <stdio.h>
 #include "my.h"
 
-int the_state(char *str, int *i, char s, int state)
+int the_state(char *str, int *i, int state)
 {
-    if (state == 0 && str[(*i)] == s) {
+    static char s = 0;
+    static int x = 0;
+
+    if (x == 0 && (str[0] == '\"' || str[0] == '\'')) {
+        s = (str[0] == '\"') ? '\"' : '\'';
+        x = 1;
         state = 1;
-        (*i)++;
-    }
-    if (state == 1 && str[(*i)] == s) {
+    } else if (state == 1 && str[(*i)] == s) {
         state = 0;
-        if (str[(*i) + 1] != '\0')
-            (*i)++;
+        (*i)++;
+        x = 0;
     }
     return (state);
 }
 
-char    **array_array(char **array, char *str, char c, char s)
-{
-    int    i = 0;
-    int    x = 0;
-    int    ctr = 0;
-    int state = 0;
-
-    for (i = 0; str[i] != '\0'; i++) {
-        state = the_state(str, &i, s, state);
-        if (state == 0 && str[i] != c)
-            ctr++;
-        else if (str[i] != '\0' && state == 1)
-            ctr++;
-        else {
-            array[x] = malloc(sizeof(char) * (ctr + 1));
-            x++;
-            ctr = 0;
-        }
-    }
-    array[x] = malloc(sizeof(char) * (ctr + 1));
-    return (array);
-}
-
-char    **first_array(char **array, char *str, char c, char s)
+int count_sep(char *str, char *c)
 {
     int i = 0;
+    int state = 0;
     int ctr = 0;
-    int state = 0;
 
-    for (i = 0; str[i] != '\0'; i++) {
-        state = the_state(str, &i, s, state);
-        if (state == 0 && str[i] == c)
+    while (str[i] != '\0') {
+        state = the_state(str, &i, state);
+        if (state == 0 && str[i] != '\0' && (str[i] == c[0] && str[i + 1] == c[1]))
             ctr++;
-        i++;
+        else if (state == 0 && str[i] != '\0' && str[i] == c[0])
+            ctr++;
+        if (str[i] != '\0')
+            i++;
     }
-    ctr += 2;
-    array = malloc(sizeof(char *) * (ctr + 1));
-    return (array);
+    ctr++;
+    return (ctr);
 }
 
-char    **insert_array(char **array, char *str, char c, char s)
+int find_c(char *str, char *c)
 {
-    int    i = 0;
-    int    x = 0;
-    int    ctr = 0;
+    int i = 0;
     int state = 0;
-
-    for (i = 0; str[i] != '\0'; i++) {
-        state = the_state(str, &i, s, state);
-        if (state == 0 && str[i] != c) {
-            array[x][ctr] = str[i];
-            ctr++;
-        } else if (state == 1) {
-            array[x][ctr] = str[i];
-            ctr++;
-        } else {
-            array[x][ctr] = '\0';
-            x++;
-            ctr = 0;
-        }
-    }
-    array[x][ctr] = '\0';
-    x++;
-    array[x] = NULL;
-    return (array);
-}
-
-char    **parser_echo(char *str, char c, char s, int fre)
-{
-    char    **array = NULL;
 
     if (str == NULL)
-        return (NULL);
-    array = first_array(array, str, c, s);
-    array = array_array(array, str, c, s);
-    array = insert_array(array, str, c, s);
-    if (fre == FREE)
-        free(str);
-    return (array);
+        return (FALS);
+    while (str[i] != '\0') {
+        state = the_state(str, &i, state);
+        if (state == 0 && str[i] != '\0' && (str[i] == c[0] && str[i + 1] == c[1]))
+            return (TRU);
+        else if (state == 0 && str[i] != '\0' && str[i] == c[0])
+            return (TRU);
+        if (str[i] != '\0')
+            i++;
+    }
+    return (FALS);
 }
+
+char    **parser_echo(char *str, char *c, int fre)
+{
+    int size = count_sep(str, c);
+    char **tmp = NULL;
+    char **tab = malloc(sizeof(char *) * (size + 1));
+    int i = 0;
+
+    (void)fre;
+    tmp = my_cut(str, c);
+    tab[i++] = my_strdup(tmp[0], KEEP);
+    tab[i] = my_strdup(tmp[1], KEEP);
+    while (find_c(tab[i], c) == TRU) {
+        tmp = my_cut(tab[i], c);
+        tab[i++] = my_strdup(tmp[0], KEEP);
+        tab[i] = my_strdup(tmp[1], KEEP);
+    }
+    tab[++i] = NULL;
+    return (tab);
+}
+

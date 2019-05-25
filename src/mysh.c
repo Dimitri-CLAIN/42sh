@@ -9,34 +9,33 @@
 
 void check_exit(char *cmd, mysh_t *info)
 {
-    char **tmp = parser_echo(cmd, ' ', '\"', KEEP);
+    char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
 
-    if (my_strcmp(tmp[0], "exit") == TRUE) {
+    if (my_strcmp(tmp[0], "exit") == TRU) {
         if (array_len(tmp) == 1)
             info->return_value = 0;
-        else if (array_len(tmp) == 2 && isnum(tmp[1]) == FALSE)
+        else if (array_len(tmp) == 2 && isnum(tmp[1]) == FALS)
             info->return_value = my_getnbr(tmp[1]);
         else
             my_putstr_error("exit: Expression Syntax.\n");
     }
 }
 
-int get_input(char **input, mysh_t *info)
+int get_input_term(char **input, char ***tab)
 {
-    char *line = NULL;
-    size_t size = 0;
-    int i = 0;
-
-    (void)info;
-    if (getline(&line, &size, stdin) == -1) {
+    if (*input == NULL ) {
         my_putstr("exit\n");
         return (-1);
     }
-    line[my_strlen(line) - 1] = '\0';
-    //for (i = 0; line[i] != '\0' && line[i] != '\"'; i++);
-    *input = my_epurstr(my_strdup(line, FREE), " \n\t", FREE);
+    *input = my_epurstr(my_strdup(*input, FREE), " \n\t", FREE);
     if (*input == NULL || *input[0] == '\0')
         *input = NULL;
+    if (*input != NULL) {
+        write_history(*input);
+        if ((*tab) != NULL)
+            free_array((*tab));
+        (*tab) = read_file(".history");
+    }
     return (0);
 }
 
@@ -59,19 +58,54 @@ int check(mysh_t *info, char *cmd)
     return (status);
 }
 
+int get_input(char **input)
+{
+    char *line = NULL;
+    size_t size = 0;
+
+    if (getline(&line, &size, stdin) == -1) {
+        my_putstr("exit\n");
+        return (-1);
+    }
+    line[my_strlen(line) - 1] = '\0';
+    *input = my_epurstr(my_strdup(line, FREE), " \n\t", FREE);
+    if (*input == NULL || *input[0] == '\0')
+        *input = NULL;
+    return (0);
+}
+
+int my_tty(char **input, mysh_t *info, char ***tab)
+{
+    if (isatty(0) == 1) {
+        my_putstr("[42sh_siisii] $ ");
+        (*input) = getch_line(*input , info->env);
+        if (get_input_term(input, tab) == -1)
+            return (84);
+    } else
+        if (get_input(input) == -1)
+            return (84);
+    return (0);
+}
+
 void mysh(mysh_t *info)
 {
     char *input = NULL;
+    char **tab = NULL;
+    /* char **tmp = NULL; */
+    /* int i = 0; */
 
     my_sigint();
     while (42) {
-        if (isatty(0) == 1)
-            my_putstr("[42sh_siisii] $ ");
-        if (get_input(&input, info) == -1)
+        if (my_tty(&input, info, &tab) == 84)
             return;
         if (input == NULL)
             continue;
+        /* tmp = parser_echo(input, " ", KEEP); */
+        /* for (i = 0; tmp[i] != NULL; i++) { */
+        /*     printf("[%s]\n", tmp[i]); */
+        /* } */
         check(info, input);
         info->cmd = NULL;
+        (void)tab;
     }
 }

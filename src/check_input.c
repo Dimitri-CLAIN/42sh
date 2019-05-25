@@ -13,15 +13,15 @@ int check_parsing(char *input)
 
     while (input[i] != '\0') {
         if (input[i] == ';')
-            return (TRUE);
+            return (TRU);
         i++;
     }
-    return (FALSE);
+    return (FALS);
 }
 
 void parsing(char *input, mysh_t *info)
 {
-    char **tmp = parser_echo(input, ';', '\"', KEEP);
+    char **tmp = parser_echo(input, ";", KEEP);
     int i = 0;
 
     while (tmp[i] != NULL)
@@ -31,7 +31,7 @@ void parsing(char *input, mysh_t *info)
 
 void check_input(char *input, mysh_t *info)
 {
-    if (check_parsing(input) == TRUE)
+    if (check_parsing(input) == TRU)
         parsing(input, info);
     else
         put_in_cmd(&info->cmd, input);

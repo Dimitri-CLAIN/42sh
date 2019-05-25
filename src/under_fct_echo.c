@@ -41,7 +41,7 @@ echo_t set_flag(char *str, echo_t echo)
 
 echo_t set_echo(char *cmd)
 {
-    char **tab = parser_echo(cmd, ' ', '\"', KEEP);
+    char **tab = parser_echo(cmd, " ", KEEP);
     echo_t echo = {0, 0, 0};
     int i = 0;
     int state = 0;
@@ -74,8 +74,6 @@ void print_char(char c)
         my_putchar('\a');
     if (c == 'b')
         my_putchar('\b');
-    if (c == 'c')
-        my_putchar('\c');
     if (c == 'e')
         my_putchar('\e');
     if (c == 'f')

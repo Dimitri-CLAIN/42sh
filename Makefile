@@ -5,6 +5,7 @@
 ## Makefile
 ##
 
+
 SRC		=			src/cpy_env.c				\
 					src/manage_list.c			\
 					src/free_list.c				\
@@ -34,11 +35,31 @@ SRC		=			src/cpy_env.c				\
 					src/my_singint.c			\
 					src/fct_echo.c				\
 					src/parser_echo.c			\
-					src/under_fct_echo.c
+					src/under_fct_echo.c		\
+					src/alias/read_my_alias.c	\
+					src/alias/init_my_alias.c	\
+					src/alias/create_my_alias.c	\
+					src/alias/disp_alias.c		\
+					src/variables/manage_var_list.c	\
+					src/variables/check_variables.c	\
+					src/variables/set_variables.c	\
+					src/change_cmd.c				\
+					src/variables/change_variables.c\
+					src/variables/unset.c		\
+					src/term_caps/arrow.c 		\
+					src/term_caps/get_sterm.c 	\
+					src/term_caps/init_my_term.c\
+					src/term_caps/cmd_caps.c 	\
+					src/term_caps/write_it.c	\
+					src/write_history.c
 
 MAIN		=		src/main.c
 
-SRC_TEST	=		tests/test_tab_pid.c
+SRC_TEST	=		tests/test_tab_pid.c			\
+				tests/test_check_variables.c	\
+				tests/test_set_variables.c		\
+				tests/test_change_variables.c	\
+				tests/test_fct_unset.c
 
 OBJ		=		$(SRC:.c=.o) $(MAIN:.c=.o)
 
@@ -48,9 +69,9 @@ BIN		=		unit_tests
 
 CC		=		gcc
 
-CFLAGS		=		-I./include -g -W -Wall -Wextra
+CFLAGS		=		-I./include -g -W -Wall -Wextra -Werror -fdiagnostics-color=always
 
-LIB		=		-L./lib -lmy
+LIB		=		-L./lib -lmy -lcurses
 
 LDFLAGS		=		-lcriterion --coverage
 

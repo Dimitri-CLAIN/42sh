@@ -9,8 +9,8 @@
 #define ENUM_H_
 
 enum {
-    TRUE = 0,
-    FALSE
+    TRU = 0,
+    FALS
 };
 
 enum clean {
