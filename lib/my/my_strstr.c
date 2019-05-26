@@ -42,7 +42,8 @@ int thestate(char *str, int state)
     static char s = 0;
     static int i = 0;
 
-    if (i == 0 && (str[0] == '\"' || str[0] == '\'')) {
+    if (i == 0 && (str[0] == '\"' || str[0] == '\'' || str[0] == '`')) {
+        str[0] = (str[0] == '`') ? '\'' : str[0];
         s = (str[0] == '\"') ? '\"' : '\'';
         i = 1;
         state = 1;

@@ -30,10 +30,11 @@ char *check_access(char **tmp, char *cmd)
     if (tmp == NULL)
         return (NULL);
     while (tmp[i] != NULL) {
-        if (tmp[i] != NULL && access(my_strcat(my_strcat(tmp[i], "/", KEEP, KEEP),
+        if (tmp[i] != NULL && access(my_strcat(
+            my_strcat(tmp[i], "/", KEEP, KEEP), 
             cmd, FREE, KEEP), X_OK) == TRU) {
-            cmd = my_strcat(my_strcat(tmp[i], "/", KEEP, KEEP),
-            cmd, FREE, KEEP);
+            cmd = my_strcat(my_strcat(tmp[i], "/", 
+            KEEP, KEEP), cmd, FREE, KEEP);
             return (cmd);
         }
         i++;
@@ -49,13 +50,12 @@ char *check_syntaxe(char *cmd, mysh_t *info)
     if (check_first_access(cmd) == TRU)
         return (cmd);
     if (find_str_env("PATH", info->env) == TRU) {
-        tmp = parser_echo(cpy_str_env("PATH", info->env), ":", KEEP);
+        tmp = my_str_to_word_array(cpy_str_env("PATH", info->env), ':', KEEP);
         new_cmd = check_access(tmp, cmd);
-        if (my_strcmp(cmd, new_cmd) == FALS)
+        if (new_cmd != NULL && my_strcmp(cmd, new_cmd) == FALS)
             return (new_cmd);
-        else if (new_cmd == NULL)
-            return (NULL);
-        free_array(tmp);
+        if (new_cmd != NULL)
+            free_array(tmp);
     }
     if (check_dir(cmd) == TRU)
         return (NULL);
@@ -69,6 +69,8 @@ int exec(mysh_t *info, char *cmd)
     char **tmp = parser_echo(cmd, " ",  KEEP);
     pid_t pid = 0;
 
+    if (check_buldin(info, cmd) == TRU)
+        return (0);
     cmd = change_cmd(cmd, info);
     if ((tmp = parser_echo(cmd, " ", KEEP)) == NULL)
         return (84);
@@ -76,9 +78,7 @@ int exec(mysh_t *info, char *cmd)
         free_array(tmp);
         return (84);
     }
-    tmp = check_home(tmp, info);
-    if (check_buldin(info, cmd) == TRU)
-        return (0);
+    tmp = clean_tmp(check_home(tmp, info));
     if ((pid = fork()) == 0)
         execve(tmp[0], tmp, get_env(info->env));
     if (arch(cmd) == 1)

@@ -22,9 +22,11 @@ int check_redirect(char *cmd)
     int i = 0;
 
     while (cmd[i] != '\0') {
+        i = set_state(cmd, i);
         if (cmd[i] == '>' || cmd[i] == '<')
             return (TRU);
-        i++;
+        if (cmd[i] != '\0')
+            i++;
     }
     return (FALS);
 }

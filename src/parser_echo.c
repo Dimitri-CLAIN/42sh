@@ -34,7 +34,8 @@ int count_sep(char *str, char *c)
 
     while (str[i] != '\0') {
         state = the_state(str, &i, state);
-        if (state == 0 && str[i] != '\0' && (str[i] == c[0] && str[i + 1] == c[1]))
+        if (state == 0 && str[i] != '\0' &&
+        (str[i] == c[0] && str[i + 1] == c[1]))
             ctr++;
         else if (state == 0 && str[i] != '\0' && str[i] == c[0])
             ctr++;
@@ -54,7 +55,8 @@ int find_c(char *str, char *c)
         return (FALS);
     while (str[i] != '\0') {
         state = the_state(str, &i, state);
-        if (state == 0 && str[i] != '\0' && (str[i] == c[0] && str[i + 1] == c[1]))
+        if (state == 0 && str[i] != '\0' &&
+        (str[i] == c[0] && str[i + 1] == c[1]))
             return (TRU);
         else if (state == 0 && str[i] != '\0' && str[i] == c[0])
             return (TRU);
@@ -68,7 +70,7 @@ char    **parser_echo(char *str, char *c, int fre)
 {
     int size = count_sep(str, c);
     char **tmp = NULL;
-    char **tab = malloc(sizeof(char *) * (size + 1));
+    char **tab = malloc(sizeof(char *) * (size + 2));
     int i = 0;
 
     (void)fre;
@@ -83,4 +85,3 @@ char    **parser_echo(char *str, char *c, int fre)
     tab[++i] = NULL;
     return (tab);
 }
-

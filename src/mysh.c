@@ -39,11 +39,6 @@ int get_input_term(char **input, char ***tab)
     return (0);
 }
 
-int all_cmd(mysh_t *info, char *cmd)
-{
-    return (check_exec(info, cmd));
-}
-
 int check(mysh_t *info, char *cmd)
 {
     btree_t *node = NULL;
@@ -54,24 +49,8 @@ int check(mysh_t *info, char *cmd)
         exec_btree(info, node);
         my_destroy_tree(node);
     } else
-        status = all_cmd(info, cmd);
+        status = check_exec(info, cmd);
     return (status);
-}
-
-int get_input(char **input)
-{
-    char *line = NULL;
-    size_t size = 0;
-
-    if (getline(&line, &size, stdin) == -1) {
-        my_putstr("exit\n");
-        return (-1);
-    }
-    line[my_strlen(line) - 1] = '\0';
-    *input = my_epurstr(my_strdup(line, FREE), " \n\t", FREE);
-    if (*input == NULL || *input[0] == '\0')
-        *input = NULL;
-    return (0);
 }
 
 int my_tty(char **input, mysh_t *info, char ***tab)
@@ -91,8 +70,6 @@ void mysh(mysh_t *info)
 {
     char *input = NULL;
     char **tab = NULL;
-    /* char **tmp = NULL; */
-    /* int i = 0; */
 
     my_sigint();
     while (42) {
@@ -100,10 +77,6 @@ void mysh(mysh_t *info)
             return;
         if (input == NULL)
             continue;
-        /* tmp = parser_echo(input, " ", KEEP); */
-        /* for (i = 0; tmp[i] != NULL; i++) { */
-        /*     printf("[%s]\n", tmp[i]); */
-        /* } */
         check(info, input);
         info->cmd = NULL;
         (void)tab;

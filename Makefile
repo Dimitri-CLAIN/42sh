@@ -59,7 +59,9 @@ SRC		=			src/cpy_env.c				\
 					src/magic_quote/get_str.c		\
 					src/magic_quote/get_command.c	\
 					src/magic_quote/get_pipe_fd.c	\
-					src/magic_quote/tab_to_str.c
+					src/magic_quote/tab_to_str.c	\
+					src/get_input.c			\
+					src/clean_tmp.c
 
 
 MAIN		=		src/main.c

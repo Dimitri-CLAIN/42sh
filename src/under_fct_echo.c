@@ -22,15 +22,8 @@ echo_t set_flag(char *str, echo_t echo)
     while (str[i] != '\0') {
         if (str[i] == 'n')
             echo.n = 1;
-        if (str[i] == 'e' && str[i + 1] == 'e') {
-            echo.ee = 1;
-            echo.e = 0;
-        }
-        if (str[i] == 'e') {
-            echo.e = 1;
-            echo.ee = 0;
-        }
-        if (str[i] != 'n' && (str[i] != 'e' && str[i + 1] != 'e') && str[i] != 'e') {
+        if (str[i] != 'n' && (str[i] != 'e' &&
+        str[i + 1] != 'e') && str[i] != 'e') {
             echo = reset_echo(echo);
             return (echo);
         }

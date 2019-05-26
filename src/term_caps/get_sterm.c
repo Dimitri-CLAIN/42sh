@@ -10,11 +10,11 @@
 
 void	exec_term(char *cmd)
 {
-	char	*a = NULL;
+    char    *a = NULL;
 
-	a = tgetstr(cmd, NULL);
-	write(1, a, my_strlen(a));
-	return;
+    a = tgetstr(cmd, NULL);
+    write(1, a, my_strlen(a));
+    return;
 }
 
 cursor_t    get_cursor(void)

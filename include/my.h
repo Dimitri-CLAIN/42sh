@@ -38,6 +38,12 @@ characters.\n"
 int search_inhibitors(char *);
 char *do_inhibitors(char *);
 char *check_inhibitors(char *);
+char *clean_path(char *path);
+char **clean_tmp(char **tmp);
+int get_input(char **input);
+int set_state(char *str, int i);
+int my_check_sep(char *cmd);
+int thestate(char *str, int state);
 echo_t reset_echo(echo_t echo);
 echo_t set_flag(char *str, echo_t echo);
 echo_t set_echo(char *cmd);
