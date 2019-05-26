@@ -70,7 +70,7 @@ char    **parser_echo(char *str, char *c, int fre)
 {
     int size = count_sep(str, c);
     char **tmp = NULL;
-    char **tab = malloc(sizeof(char *) * (size + 1));
+    char **tab = malloc(sizeof(char *) * (size + 2));
     int i = 0;
 
     (void)fre;
