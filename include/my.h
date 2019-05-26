@@ -35,6 +35,7 @@ characters.\n"
 #define ER_UNSET ": Too few arguments.\n"
 #define ER_UNDEFINED_VAR ": Undefined variable.\n"
 
+void fct_history(char *, mysh_t *);
 int search_inhibitors(char *);
 char *do_inhibitors(char *);
 char *check_inhibitors(char *);

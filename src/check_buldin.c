@@ -45,7 +45,7 @@ int check_buldin(mysh_t *info, char *cmd)
                     {"/bin/cd", &fct_cd}, {"exit", &check_exit},
                     {"echo", &fct_echo}, {"alias", &my_alias},
                     {"set", &fct_set}, {"unset", &fct_unset},
-                    {NULL, NULL}};
+                    {"history", &fct_history}, {NULL, NULL}};
 
     return (do_the_fct(tab, cmd, info));
 }
