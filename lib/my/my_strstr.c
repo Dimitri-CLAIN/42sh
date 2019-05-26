@@ -43,13 +43,13 @@ int thestate(char *str, int state)
     static int i = 0;
 
     if (i == 0 && (str[0] == '\"' || str[0] == '\'' || str[0] == '`')) {
-        str[0] = (str[0] == '`') ? '\'' : str[0];
+        str[0] = (str[0] == '`') ? '`' : str[0];
         s = (str[0] == '\"') ? '\"' : '\'';
         i = 1;
         state = 1;
     }
     else if (state == 1 && str[0] == s) {
-	state = 0;
+	    state = 0;
         i = 0;
     }
     return (state);
