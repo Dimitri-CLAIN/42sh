@@ -46,6 +46,7 @@ void my_alias(char *, mysh_t *);
 void display_alias(env_t *);
 
 int check_error_redirect(char **);
+void free_arr_str(char **, char *);
 int arch(char *);
 void check_exit(char *, mysh_t *);
 void my_sigint(void);

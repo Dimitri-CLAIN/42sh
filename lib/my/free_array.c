@@ -17,3 +17,11 @@ void free_array(char **tab)
     }
     free(tab);
 }
+
+void free_arr_str(char **tab, char *str)
+{
+    if (tab != NULL)
+        free_array(tab);
+    if (str != NULL)
+        free(str);
+}
