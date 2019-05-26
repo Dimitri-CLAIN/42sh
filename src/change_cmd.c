@@ -15,6 +15,6 @@ char *change_cmd(char *cmd, mysh_t *info)
     cmd = change_variables_env(cmd, info->env);
     if (cmd == NULL)
         return (NULL);
-    cmd = magic_maker(cmd, info);
+//    cmd = magic_maker(cmd, info);
     return (cmd);
 }

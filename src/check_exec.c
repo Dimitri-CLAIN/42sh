@@ -66,13 +66,14 @@ char *check_syntaxe(char *cmd, mysh_t *info)
 
 int exec(mysh_t *info, char *cmd)
 {
-    char **tmp = parser_echo(cmd, " ",  KEEP);
+    char **tmp = NULL;
     pid_t pid = 0;
 
+    if ((cmd = change_cmd(cmd, info)) == NULL)
+        return (84);
     if (check_buldin(info, cmd) == TRU)
         return (0);
-    cmd = change_cmd(cmd, info);
-    if ((tmp = parser_echo(cmd, " ", KEEP)) == NULL)
+    if ((tmp = clean_tmp(parser_echo(cmd, " ",  KEEP))) == NULL)
         return (84);
     if ((tmp[0] = check_syntaxe(tmp[0], info)) == NULL) {
         free_array(tmp);

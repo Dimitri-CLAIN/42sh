@@ -59,7 +59,7 @@ char *change_variables_env(char *cmd, env_t *env)
 {
     int i = 0;
 
-    if (env == NULL)
+    if (env == NULL || cmd == NULL)
         return (cmd);
     while (cmd[i] != '\0') {
         if (cmd[i] == '$')
