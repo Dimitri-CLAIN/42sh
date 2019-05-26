@@ -68,12 +68,16 @@ int find_c(char *str, char *c)
 
 char    **parser_echo(char *str, char *c, int fre)
 {
-    int size = count_sep(str, c);
     char **tmp = NULL;
-    char **tab = malloc(sizeof(char *) * (size + 2));
+    int size = 0;
+    char **tab = NULL;
     int i = 0;
 
     (void)fre;
+    if (str == NULL)
+        return (NULL);
+    size = count_sep(str, c);
+    tab = malloc(sizeof(char *) * (size + 2));
     tmp = my_cut(str, c);
     tab[i++] = my_strdup(tmp[0], KEEP);
     tab[i] = my_strdup(tmp[1], KEEP);

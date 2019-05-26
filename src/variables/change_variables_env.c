@@ -13,8 +13,6 @@ char *modify_cmd_env(char *cmd, int i, char *name, char *def)
     int j = 0;
     int k = 0;
 
-    if (def == NULL)
-        def = my_strdup("\0", KEEP);
     dest = malloc(sizeof(char) * (my_strlen(cmd) - my_strlen(name) - 1 +
                                 my_strlen(def) + 1));
     while (cmd[j] != '\0' && j != i) {
@@ -32,12 +30,10 @@ char *modify_cmd_env(char *cmd, int i, char *name, char *def)
 
 char *check_variable_env(char *tmp, char *cmd, int i, env_t *env)
 {
-    if (tmp[my_strlen(env->name)] == ' ' ||
-        tmp[my_strlen(env->name)] == '\0')
+    if ((tmp[my_strlen(env->name)] == ' ' ||
+        tmp[my_strlen(env->name)] == '\0') &&
+        (env->def != NULL && env->def[0] != '\0'))
         return (modify_cmd_env(cmd, i, env->name, env->def));
-    for (int i = 0; tmp[i] != '\0' && tmp[i] != ' '; i++)
-        write(2, &tmp[i], 1);
-    my_putstr_error(ER_UNDEFINED_VAR);
     return (NULL);
 }
 
@@ -53,7 +49,10 @@ char *is_variables_env(char *cmd, int i, env_t *env)
             return (check_variable_env(tmp, cmd, i, env));
         env = env->next;
     }
-    return (cmd);
+    for (int i = 0; tmp[i] != '\0' && tmp[i] != ' '; i++)
+        write(2, &tmp[i], 1);
+    my_putstr_error(ER_UNDEFINED_VAR);
+    return (NULL);
 }
 
 char *change_variables_env(char *cmd, env_t *env)

@@ -1,1 +1,50 @@
 clear
+set l="ls"
+set
+$l
+echo $l
+$l
+set l=ls
+$l
+set a=
+$a
+clear
+set l=ls
+setl=
+set l=
+$l
+set l=
+$l
+clear
+set l=
+set
+$l
+set l=
+$l
+set l=
+$l
+set l=
+$l
+set l
+set
+$l
+set l
+$l
+set l
+set
+$l
+set l
+$l
+set l
+$l
+set l
+$a
+set l
+$a
+$a
+set l
+$a
+$a
+ls
+set a=ls
+$a

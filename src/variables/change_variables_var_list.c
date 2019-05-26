@@ -13,8 +13,6 @@ char *modify_cmd(char *cmd, int i, char *var, char *def)
     int j = 0;
     int k = 0;
 
-    if (def == NULL)
-        def = my_strdup("\0", KEEP);
     dest = malloc(sizeof(char) * (my_strlen(cmd) - my_strlen(var) - 1 +
                                 my_strlen(def) + 1));
     while (cmd[j] != '\0' && j != i) {
@@ -32,8 +30,9 @@ char *modify_cmd(char *cmd, int i, char *var, char *def)
 
 char *check_variable(char *tmp, char *cmd, int i, variables_t *var_list)
 {
-    if (tmp[my_strlen(var_list->var)] == ' ' ||
-        tmp[my_strlen(var_list->var)] == '\0')
+    if ((tmp[my_strlen(var_list->var)] == ' ' ||
+        tmp[my_strlen(var_list->var)] == '\0') &&
+        (var_list->def != NULL && var_list->def[0] != '\0'))
         return (modify_cmd(cmd, i, var_list->var, var_list->def));
     return (NULL);
 }
