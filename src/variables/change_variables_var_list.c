@@ -15,8 +15,8 @@ char *modify_cmd(char *cmd, int i, char *var, char *def)
 
     if (def == NULL)
         def = my_strdup("\0", KEEP);
-    dest = malloc(sizeof(char) * (my_strlen(cmd) - my_strlen(var) - 1) +
-                                my_strlen(def) + 1);
+    dest = malloc(sizeof(char) * (my_strlen(cmd) - my_strlen(var) - 1 +
+                                my_strlen(def) + 1));
     while (cmd[j] != '\0' && j != i) {
         dest[j] = cmd[j];
         j++;
