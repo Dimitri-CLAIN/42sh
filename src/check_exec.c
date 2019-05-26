@@ -31,10 +31,10 @@ char *check_access(char **tmp, char *cmd)
         return (NULL);
     while (tmp[i] != NULL) {
         if (tmp[i] != NULL && access(my_strcat(
-            my_strcat(tmp[i], "/", KEEP, KEEP),
+            my_strcat(tmp[i], "/", KEEP, KEEP), 
             cmd, FREE, KEEP), X_OK) == TRU) {
-            cmd = my_strcat(my_strcat(tmp[i], "/", KEEP, KEEP),
-            cmd, FREE, KEEP);
+            cmd = my_strcat(my_strcat(tmp[i], "/", 
+            KEEP, KEEP), cmd, FREE, KEEP);
             return (cmd);
         }
         i++;
@@ -78,7 +78,7 @@ int exec(mysh_t *info, char *cmd)
         free_array(tmp);
         return (84);
     }
-    tmp = check_home(tmp, info);
+    tmp = clean_tmp(check_home(tmp, info));
     if ((pid = fork()) == 0)
         execve(tmp[0], tmp, get_env(info->env));
     if (arch(cmd) == 1)

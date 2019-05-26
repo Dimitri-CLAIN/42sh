@@ -54,6 +54,7 @@ void do_the_fct_setenv(char *cmd, mysh_t *info)
     tmp = parser_echo(cmd, " ", KEEP);
     dest = my_strcat(tmp[1], "=", KEEP, KEEP);
     if (tmp[2] != NULL) {
+        tmp = clean_tmp(tmp);
         dest = my_strcat(dest, tmp[2], FREE, KEEP);
     } else
         dest = my_strcat(dest, " ", FREE, KEEP);

@@ -35,6 +35,8 @@ characters.\n"
 #define ER_UNSET ": Too few arguments.\n"
 #define ER_UNDEFINED_VAR ": Undefined variable.\n"
 
+char *clean_path(char *path);
+char **clean_tmp(char **tmp);
 int get_input(char **input);
 int set_state(char *str, int i);
 int my_check_sep(char *cmd);

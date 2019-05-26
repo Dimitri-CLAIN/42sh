@@ -7,15 +7,31 @@
 
 #include "my.h"
 
+int scan_cmd(char *cmd)
+{
+    int i = 0;
+
+    while (cmd[i] != '\0') {
+        i = set_state(cmd, i);
+        if (cmd[i] == ';' ||
+        (cmd[i] == '&' && cmd[i + 1] == '&') ||
+        (cmd[i] == '|' && cmd[i + 1] == '|'))
+            return (TRU);
+        if (cmd[i] != '\0')
+            i++;
+    }
+    return (FALS);
+}
+
 int my_check_sep(char *cmd)
 {
     int i = 0;
 
-    if (my_str_str(cmd, ";") != NULL)
+    if (scan_cmd(cmd) == TRU)
         i++;
-    if (my_str_str(cmd, "&&") != NULL)
+    if (scan_cmd(cmd) == TRU)
         i++;
-    if (my_str_str(cmd, "||") != NULL)
+    if (scan_cmd(cmd) == TRU)
         i++;
     if (i != 0)
         return (1);

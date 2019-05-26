@@ -16,7 +16,8 @@ int check_exec_pipe(char *cmd)
         i = set_state(cmd, i);
         if (cmd[i] == '|')
             return (TRU);
-        i++;
+        if (cmd[i] != '\0')
+            i++;
     }
     return (FALS);
 }

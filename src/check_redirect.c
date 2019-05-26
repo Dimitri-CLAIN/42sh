@@ -25,7 +25,8 @@ int check_redirect(char *cmd)
         i = set_state(cmd, i);
         if (cmd[i] == '>' || cmd[i] == '<')
             return (TRU);
-        i++;
+        if (cmd[i] != '\0')
+            i++;
     }
     return (FALS);
 }

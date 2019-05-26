@@ -60,7 +60,8 @@ SRC		=			src/cpy_env.c				\
 					src/term_caps/write_it.c 	\
 					src/inhibitors/inhibitors.c	\
 					src/inhibitors/do_inhibitors.c	\
-					src/get_input.c
+					src/get_input.c			\
+					src/clean_tmp.c
 
 
 MAIN		=		src/main.c
