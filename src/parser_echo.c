@@ -32,6 +32,8 @@ int count_sep(char *str, char *c)
     int state = 0;
     int ctr = 0;
 
+    /* if (str == NULL) */
+    /*     return (1); */
     while (str[i] != '\0') {
         state = the_state(str, &i, state);
         if (state == 0 && str[i] != '\0' &&

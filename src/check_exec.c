@@ -50,13 +50,12 @@ char *check_syntaxe(char *cmd, mysh_t *info)
     if (check_first_access(cmd) == TRU)
         return (cmd);
     if (find_str_env("PATH", info->env) == TRU) {
-        tmp = parser_echo(cpy_str_env("PATH", info->env), ":", KEEP);
+        tmp = my_str_to_word_array(cpy_str_env("PATH", info->env), ':', KEEP);
         new_cmd = check_access(tmp, cmd);
-        if (my_strcmp(cmd, new_cmd) == FALS)
+        if (new_cmd != NULL && my_strcmp(cmd, new_cmd) == FALS)
             return (new_cmd);
-        else if (new_cmd == NULL)
-            return (NULL);
-        free_array(tmp);
+        if (new_cmd != NULL)
+            free_array(tmp);
     }
     if (check_dir(cmd) == TRU)
         return (NULL);
