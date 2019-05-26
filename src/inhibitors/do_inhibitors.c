@@ -14,7 +14,7 @@ char *do_inhibitors(char *cmd)
     size_t size = 0;
 
     my_putstr("? ");
-    if (getline(&line, &size, stdin) == -1) {
+    if (getline(&line, &size, stdin) == -1 || line == NULL) {
         cmd[my_strlen(cmd) - 1] = '\0';
         return (cmd);
     }

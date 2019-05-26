@@ -11,6 +11,8 @@ int search_inhibitors(char *cmd)
 {
     int i = 0;
 
+    if (my_strcmp(cmd, "\\") == 0)
+        return (FALS);
     while (cmd[i] != '\0') {
         if (cmd[i] == '\\' && cmd[i + 1] == '\0')
             return (TRU);

@@ -13,8 +13,10 @@ char *modify_cmd_env(char *cmd, int i, char *name, char *def)
     int j = 0;
     int k = 0;
 
-    dest = malloc(sizeof(char) * (my_strlen(cmd) - my_strlen(name) - 1) +
-    my_strlen(def) + 1);
+    if (def == NULL)
+        def = my_strdup("\0", KEEP);
+    dest = malloc(sizeof(char) * (my_strlen(cmd) - my_strlen(name) - 1 +
+                                my_strlen(def) + 1));
     while (cmd[j] != '\0' && j != i) {
         dest[j] = cmd[j];
         j++;
