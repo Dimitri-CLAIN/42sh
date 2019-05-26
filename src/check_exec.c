@@ -70,12 +70,8 @@ int exec(mysh_t *info, char *cmd)
     pid_t pid = 0;
 
     cmd = change_cmd(cmd, info);
-    if ((tmp = my_str_to_word_array(cmd, ' ', KEEP)) == NULL)
+    if (check_err_exec(&tmp, cmd, info) == 84)
         return (84);
-    if ((tmp[0] = check_syntaxe(tmp[0], info)) == NULL) {
-        free_array(tmp);
-        return (84);
-    }
     tmp = check_home(tmp, info);
     if (check_buldin(info, cmd) == TRU) {
         free_array(tmp);

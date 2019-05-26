@@ -14,6 +14,7 @@ SRC		=			src/magic_quote/magic_maker.c	\
 					src/manage_list.c				\
 					src/free_list.c					\
 					src/mysh.c						\
+					src/mysh_term.c					\
 					src/check_input.c				\
 					src/check_buldin.c				\
 					src/fct_env.c					\
@@ -37,6 +38,7 @@ SRC		=			src/magic_quote/magic_maker.c	\
 					src/tab_pid.c					\
 					src/destroy_tree.c				\
 					src/my_singint.c				\
+					src/check_error_exec.c			\
 					src/alias/read_my_alias.c		\
 					src/alias/init_my_alias.c		\
 					src/alias/create_my_alias.c		\
@@ -66,6 +68,7 @@ SRC_TEST	=		tests/test_tab_pid.c			\
 				tests/test_fct_unset.c				\
 				tests/test_magic_maker.c			\
 				tests/test_inhibitors.c				\
+				tests/mini/test_check_exec.c		\
 				tests/mini/test_check_input.c		\
 				tests/mini/test_cpy_env.c			\
 				tests/mini/test_fct_env.c			\

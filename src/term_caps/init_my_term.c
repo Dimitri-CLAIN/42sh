@@ -10,7 +10,7 @@
 #include "my.h"
 #include "my.h"
 
-char	*get_term(env_t *env)
+char *get_term(env_t *env)
 {
     if (env == NULL)
         return (NULL);

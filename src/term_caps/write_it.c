@@ -13,14 +13,13 @@
 #include <string.h>
 #include "my.h"
 
-void    delete_char(cursor_t *cursor, int *i)
+void delete_char(cursor_t *cursor, int *i)
 {
     int k = 0;
-    char    *tmp = malloc(sizeof(char) * my_strlen(cursor->buf));
+    char *tmp = malloc(sizeof(char) * my_strlen(cursor->buf));
 
     exec_term("le");
     exec_term("dc");
-        
     *i = *i - 1;
     cursor->x = *i;
     while (k != cursor->x) {
@@ -29,18 +28,17 @@ void    delete_char(cursor_t *cursor, int *i)
     }
     if (cursor->buf[k] != '\0') {
         k = k + 1;
-        for (int g = k - 1; cursor->buf[k] != '\0'; k ++, g ++)
+        for (int g = k - 1; cursor->buf[k] != '\0'; k++, g++)
             tmp[g] = cursor->buf[k];
         tmp[k - 1] = '\0';
-    }
-    else
+    } else
         tmp[k] = '\0';
     cursor->buf = strcpy(cursor->buf, tmp);
     free(tmp);
     return;
 }
 
-void    write_key(cursor_t *cursor, int *i)
+void write_key(cursor_t *cursor, int *i)
 {
     int b = my_strlen(cursor->buf);
 
@@ -55,7 +53,7 @@ void    write_key(cursor_t *cursor, int *i)
     return;
 }
 
-void    write_it(cursor_t *cursor, int *i, int c, char *tmp)
+void write_it(cursor_t *cursor, int *i, int c, char *tmp)
 {
     if (tmp != NULL)
         free(tmp);
@@ -66,15 +64,15 @@ void    write_it(cursor_t *cursor, int *i, int c, char *tmp)
     return;
 }
 
-void    getch_write(cursor_t *cursor, int *i, int c)
+void getch_write(cursor_t *cursor, int *i, int c)
 {
     int k = 0;
-    char    *tmp = malloc(sizeof(char) * (my_strlen(cursor->buf) + 2));
+    char *tmp = malloc(sizeof(char) * (my_strlen(cursor->buf) + 2));
 
     if (*i != my_strlen(cursor->buf)) {
         cursor->x = *i;
         write_key(cursor, i);
-        for (k = 0; k != cursor->x; k ++)
+        for (k = 0; k != cursor->x; k++)
             tmp[k] = cursor->buf[k];
         tmp[k] = c;
         for (int g = k + 1; cursor->buf[k] != '\0'; k++, g++)

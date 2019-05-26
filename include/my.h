@@ -36,8 +36,11 @@ characters.\n"
 #define ER_UNSET ": Too few arguments.\n"
 #define ER_UNDEFINED_VAR ": Undefined variable.\n"
 
+int check_err_exec(char ***, char *, mysh_t *);
 int check_my_alias(char *, env_t *);
 char *array_to_str(char **, char, int);
+int get_input_term(char **);
+void check_exit(char *, mysh_t *);
 void add_alias(char *, env_t *);
 int search_inhibitors(char *);
 char *do_inhibitors(char *);
