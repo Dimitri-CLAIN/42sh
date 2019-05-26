@@ -10,6 +10,7 @@
 char *change_cmd(char *cmd, mysh_t *info)
 {
     cmd = check_inhibitors(cmd);
+    printf("cmd = [%s]\n", cmd);
     cmd = check_alias_or_not(cmd, info);
     cmd = change_variables_var_list(cmd, info->var_list);
     cmd = change_variables_env(cmd, info->env);
