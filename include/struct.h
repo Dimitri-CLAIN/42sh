@@ -10,6 +10,12 @@
 
 #include "link.h"
 
+typedef struct echo_s {
+    int n;
+    int e;
+    int ee;
+}echo_t;
+
 typedef struct pipe_s {
     int *pipefd;
     int save;
@@ -20,8 +26,10 @@ typedef struct pipe_s {
 typedef struct mysh_s {
     int return_value;
     env_t *env;
+    env_t *alias;
     cmd_t *cmd;
     pipe_t pipe;
+    variables_t *var_list;
 }mysh_t;
 
 #endif

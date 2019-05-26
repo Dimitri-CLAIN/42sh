@@ -12,9 +12,9 @@ int check_error_redirect(char **tmp)
     if (array_len(tmp) > 2) {
         free_array(tmp);
         my_putstr_error("Ambiguous output redirect.\n");
-        return (TRUE);
+        return (TRU);
     }
-    return (FALSE);
+    return (FALS);
 }
 
 int check_redirect(char *cmd)
@@ -22,11 +22,13 @@ int check_redirect(char *cmd)
     int i = 0;
 
     while (cmd[i] != '\0') {
+        i = set_state(cmd, i);
         if (cmd[i] == '>' || cmd[i] == '<')
-            return (TRUE);
-        i++;
+            return (TRU);
+        if (cmd[i] != '\0')
+            i++;
     }
-    return (FALSE);
+    return (FALS);
 }
 
 int check_syntaxe_redirect(char *cmd)
@@ -46,9 +48,9 @@ int check_syntaxe_redirect(char *cmd)
             (count_left > 0 && count_right > 0) ||
             (count_left > 2 || count_right > 2)) {
         my_putstr_error("Ambiguous output redirect.\n");
-        return (TRUE);
+        return (TRU);
     }
-    return (FALSE);
+    return (FALS);
 }
 
 int which_redirect(char *cmd)
@@ -80,8 +82,8 @@ int redirect(mysh_t *info, char *cmd)
     int i = 0;
     int state = 0;
 
-    if (check_syntaxe_redirect(cmd) == TRUE ||
-        check_error_syntaxe_redirect(cmd) == TRUE)
+    if (check_syntaxe_redirect(cmd) == TRU ||
+        check_error_syntaxe_redirect(cmd) == TRU)
         return (-1);
     got_redi = which_redirect(cmd);
     while (redi[i].nb != -1) {

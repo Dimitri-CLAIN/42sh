@@ -13,11 +13,13 @@ int check_exec_pipe(char *cmd)
     int i = 0;
 
     while (cmd[i] != '\0') {
+        i = set_state(cmd, i);
         if (cmd[i] == '|')
-            return (TRUE);
-        i++;
+            return (TRU);
+        if (cmd[i] != '\0')
+            i++;
     }
-    return (FALSE);
+    return (FALS);
 }
 
 int wait_process(int *tab, int max_len)
@@ -44,11 +46,11 @@ int check_error_pipe(char *cmd)
     while (cmd[i] != '\0') {
         if (cmd[i] == '|' && cmd[i + 1] == '\0') {
             my_putstr_error("Invalid null command.\n");
-            return (TRUE);
+            return (TRU);
         }
         i++;
     }
-    return (FALSE);
+    return (FALS);
 }
 
 void do_the_exec_pipe(char *cmd, int index, int max_index, mysh_t *info)
@@ -71,9 +73,9 @@ int exec_pipe(mysh_t *info, char *cmd)
     int pipefd[2];
     int i = 0;
 
-    if (check_error_pipe(clean_str(cmd, KEEP)) == TRUE)
+    if (check_error_pipe(clean_str(cmd, KEEP)) == TRU)
         return (-1);
-    tab = my_str_to_word_array(cmd, '|', KEEP);
+    tab = parser_echo(cmd, "|", KEEP);
     info->pipe.pipefd = pipefd;
     info->pipe.save = 0;
     info->pipe.tab_pid = get_parents_nb(tab);

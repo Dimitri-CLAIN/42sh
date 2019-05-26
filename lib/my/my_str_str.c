@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "my.h"
 
 int    my_checkstring(char *str, char const *ptr, int i)
 {
@@ -34,6 +35,7 @@ char    *my_str_str(char *str, char const *to_find)
     if (str == NULL || to_find == NULL)
         return (NULL);
     while (str[i] != '\0') {
+        i = set_state(str, i);
         if (str[i] == to_find[0])
             pos = my_checkstring(str, to_find, i);
         if (pos == 1)

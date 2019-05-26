@@ -9,14 +9,15 @@
 
 void remove_str_env(char *str, env_t *env)
 {
-    env_t *tmp = NULL;
+    env_t *tmp = env;
 
     if (env == NULL)
         return;
-    while (env != NULL && my_strcmp(env->next->name, str) != TRUE)
+    while (env != NULL && my_strcmp(env->next->name, str) != TRU)
         env = env->next;
     tmp = env->next;
     env->next = env->next->next;
+    (void)tmp;
 }
 
 int find_str_env(char *str, env_t *env)
@@ -24,13 +25,13 @@ int find_str_env(char *str, env_t *env)
     env_t *tmp = env;
 
     if (tmp == NULL)
-        return (FALSE);
-    while (tmp != NULL && my_strcmp(str, tmp->name) != TRUE)
+        return (FALS);
+    while (tmp != NULL && my_strcmp(str, tmp->name) != TRU)
         tmp = tmp->next;
     if (tmp == NULL)
-        return (FALSE);
+        return (FALS);
     else
-        return (TRUE);
+        return (TRU);
 }
 
 char *cpy_str_env(char *str, env_t *env)
@@ -39,7 +40,7 @@ char *cpy_str_env(char *str, env_t *env)
 
     if (tmp == NULL)
         return (NULL);
-    while (tmp != NULL && my_strcmp(str, tmp->name) != TRUE)
+    while (tmp != NULL && my_strcmp(str, tmp->name) != TRU)
         tmp = tmp->next;
     if (tmp == NULL)
         return (NULL);

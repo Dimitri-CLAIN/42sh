@@ -9,7 +9,7 @@
 
 void display_env(env_t *env)
 {
-    if (my_strcmp(env->all, "first=first") == TRUE)
+    if (my_strcmp(env->all, "first=first") == TRU)
         env = env->next;
     while (env != NULL) {
         my_putstr(env->all);
@@ -21,7 +21,7 @@ void display_env(env_t *env)
 void fct_env(char *cmd, mysh_t *info)
 {
     env_t *tmp = info->env;
-    char **tab = my_str_to_word_array(cmd, ' ', KEEP);
+    char **tab = parser_echo(cmd, " ", KEEP);
 
     if (array_len(tab) != 1) {
         my_putstr_error("env : '");

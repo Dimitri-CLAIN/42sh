@@ -26,9 +26,14 @@ char *remove_start_end_space(char *str)
 char *remove_tab(char *str)
 {
     int i = 0;
+    int state = 0;
 
     while (str[i] != '\0') {
-        if (str[i] == '\t')
+        if (state == 0 && str[i] == '\"')
+            state = 1;
+        else if (state == 1 && str[i] == '\"')
+            state = 0;
+        if (state == 0 && str[i] == '\t')
             str[i] = ' ';
         i++;
     }
@@ -41,17 +46,28 @@ void free_str(char *str, int fre)
         free(str);
 }
 
+int type_of_char(char c, int state)
+{
+    if (state == 0 && c == '\"')
+        state = 1;
+    else if (state == 1 && c == '\"')
+        state = 0;
+    return (state);
+}
+
 char *clean_str(char *str, int fre)
 {
     int i = 0;
     int j = 0;
     int count = 0;
     char *dest = NULL;
+    int state = 0;
 
     str = remove_tab(str);
     dest = malloc(sizeof(char) * (my_strlen(str) + 1));
     while (str[i] != '\0') {
-        if (str[i] == ' ')
+        state = type_of_char(str[i], state);
+        if (state == 0 && str[i] == ' ')
             count++;
         else
             count = 0;

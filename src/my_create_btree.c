@@ -22,37 +22,60 @@ char **my_cut(char *str, char *sep)
     rest = my_strstr(str, sep, &save);
     if (rest == NULL)
         return (NULL);
-    if (sep[0] == '&' || sep[0] == '|')
+    if (rest[0] != 0 && (sep[0] == '&' || (sep[0] == '|' && sep[1] == '|')
+    || (sep[0] == '>' && sep[1] == '>') || (sep[0] == '<' && sep[1] == '<')))
         rest += 2;
-    else if (rest[0] == ';')
-        rest++;
     save = clean_str(save, FREE);
-    rest = clean_str(rest, FREE);
+    rest = (rest[0] == 0) ? NULL : clean_str(rest, FREE);
     tab[0] = my_strdup(save, KEEP);
-    tab[1] = my_strdup(rest, KEEP);
+    tab[1] = (rest == NULL) ? NULL : my_strdup(rest, KEEP);
     return (tab);
+}
+
+int set_state(char *str, int i)
+{
+    char s = 0;
+
+    if (str[i] == '\"' || str[i] == '\'' || str[i] == '`') {
+        s = str[i];
+        i++;
+        while (str[i] != s)
+            i++;
+        i++;
+    }
+    return (i);
+}
+
+char *operator(char *str, char **tab, int x)
+{
+    int i = 0;
+
+    for (i = 0; str[i] != '\0'; i++) {
+        i = set_state(str, i);
+        if (str[i] == tab[x][0] && tab[x][1] == str[i + 1])
+            return (tab[x]);
+    }
+    return (NULL);
 }
 
 char *my_find_sep(char *str)
 {
     int i = 0;
+    char *ptr = NULL;
     char *tab[] = {my_strdup(";", KEEP), my_strdup("&&", KEEP),
                     my_strdup("||", KEEP), NULL};
 
     if (str == NULL)
         return (NULL);
     for (i = 0; str[i] != '\0'; i++) {
+        i = set_state(str, i);
         if (str[i] == tab[0][0])
             return (tab[0]);
     }
-    for (i = 0; str[i] != '\0'; i++) {
-        if (str[i] == tab[1][0] && tab[1][1] == str[i + 1])
-            return (tab[1]);
-    }
-    for (i = 0; str[i] != '\0'; i++) {
-        if (str[i] == tab[2][0] && tab[2][1] == str[i + 1])
-            return (tab[2]);
-    }
+    if ((ptr = operator(str, tab, 1)) != NULL)
+        return (ptr);
+    else if ((ptr = operator(str, tab, 2)) != NULL)
+        return (ptr);
     return (NULL);
 }
 
