@@ -43,7 +43,8 @@ void display_var_list(variables_t *var_list)
     while (var_list != NULL) {
         my_putstr(var_list->var);
         my_putchar('\t');
-        my_putstr(var_list->def);
+        if (var_list->def != NULL)
+            my_putstr(var_list->def);
         my_putchar('\n');
         var_list = var_list->next;
     }
