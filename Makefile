@@ -66,12 +66,9 @@ SRC_TEST	=		tests/test_tab_pid.c			\
 				tests/test_fct_unset.c				\
 				tests/test_magic_maker.c			\
 				tests/test_inhibitors.c				\
-				tests/mini/test_check_exec.c		\
 				tests/mini/test_check_input.c		\
 				tests/mini/test_cpy_env.c			\
-				tests/mini/test_fct_cd.c			\
 				tests/mini/test_fct_env.c			\
-				tests/mini/test_fct_setenv.c		\
 				tests/mini/test_fct_unsetenv.c		\
 				tests/mini/test_find_str.c			\
 				tests/mini/test_free_list.c			\
@@ -79,7 +76,8 @@ SRC_TEST	=		tests/test_tab_pid.c			\
 				tests/mini/test_mysh.c				\
 				tests/mini/test_pipe.c				\
 				tests/mini/test_redirect.c			\
-				tests/mini/test_signals.c
+				tests/mini/test_signals.c			\
+				tests/test_alias.c
 
 OBJ		=		$(SRC:.c=.o) $(MAIN:.c=.o)
 
