@@ -11,7 +11,7 @@ int is_buldin(char *cmd)
 {
     char *tab[] = {"env", "setenv", "unsetenv",
                     "cd", "/bin/cd", "exit", "alias",
-                    "set", "unset", NULL};
+                    "set", "unset", "history", NULL};
     int i = 0;
 
     while (tab[i] != NULL) {

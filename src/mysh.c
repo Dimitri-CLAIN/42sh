@@ -7,36 +7,9 @@
 
 #include "my.h"
 
-void check_exit(char *cmd, mysh_t *info)
+int all_cmd(mysh_t *info, char *cmd)
 {
-    char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
-
-    if (my_strcmp(tmp[0], "exit") == TRU) {
-        if (array_len(tmp) == 1)
-            info->return_value = 0;
-        else if (array_len(tmp) == 2 && isnum(tmp[1]) == FALS)
-            info->return_value = my_getnbr(tmp[1]);
-        else
-            my_putstr_error("exit: Expression Syntax.\n");
-    }
-}
-
-int get_input_term(char **input, char ***tab)
-{
-    if (*input == NULL ) {
-        my_putstr("exit\n");
-        return (-1);
-    }
-    *input = my_epurstr(my_strdup(*input, FREE), " \n\t", FREE);
-    if (*input == NULL || *input[0] == '\0')
-        *input = NULL;
-    if (*input != NULL) {
-        write_history(*input);
-        if ((*tab) != NULL)
-            free_array((*tab));
-        (*tab) = read_file(".history");
-    }
-    return (0);
+    return (check_exec(info, cmd));
 }
 
 int check(mysh_t *info, char *cmd)
@@ -53,12 +26,14 @@ int check(mysh_t *info, char *cmd)
     return (status);
 }
 
-int my_tty(char **input, mysh_t *info, char ***tab)
+int my_tty(char **input, mysh_t *info)
 {
+    char **tab = NULL;
+
     if (isatty(0) == 1) {
-        my_putstr("[42sh_siisii] $ ");
+        my_putstr("[42sh] > ");
         (*input) = getch_line(*input , info->env);
-        if (get_input_term(input, tab) == -1)
+        if (get_input_term(input, &tab) == -1)
             return (84);
     } else
         if (get_input(input) == -1)
@@ -69,16 +44,14 @@ int my_tty(char **input, mysh_t *info, char ***tab)
 void mysh(mysh_t *info)
 {
     char *input = NULL;
-    char **tab = NULL;
 
     my_sigint();
     while (42) {
-        if (my_tty(&input, info, &tab) == 84)
+        if (my_tty(&input, info) == 84)
             return;
         if (input == NULL)
             continue;
         check(info, input);
         info->cmd = NULL;
-        (void)tab;
     }
 }

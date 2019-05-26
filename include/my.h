@@ -36,6 +36,12 @@ characters.\n"
 #define ER_UNDEFINED_VAR ": Undefined variable.\n"
 
 void fct_history(char *, mysh_t *);
+int check_err_exec(char ***, char *, mysh_t *);
+int check_my_alias(char *, env_t *);
+char *array_to_str(char **, char, int);
+int get_input_term(char **, char ***);
+void check_exit(char *, mysh_t *);
+void add_alias(char *, env_t *);
 int search_inhibitors(char *);
 char *do_inhibitors(char *);
 char *check_inhibitors(char *);
@@ -68,6 +74,7 @@ char *check_alias_or_not(char *, mysh_t *);
 void my_alias(char *, mysh_t *);
 void display_alias(env_t *);
 int check_error_redirect(char **);
+void free_arr_str(char **, char *);
 int arch(char *);
 void check_exit(char *, mysh_t *);
 void my_sigint(void);

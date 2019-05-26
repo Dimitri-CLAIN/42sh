@@ -8,18 +8,18 @@
 #include <term.h>
 #include "my.h"
 
-void	exec_term(char *cmd)
+void exec_term(char *cmd)
 {
-    char    *a = NULL;
+    char *a = NULL;
 
     a = tgetstr(cmd, NULL);
     write(1, a, my_strlen(a));
     return;
 }
 
-cursor_t    get_cursor(void)
+cursor_t get_cursor(void)
 {
-    cursor_t    cursor;
+    cursor_t cursor;
 
     cursor.x = -1;
     cursor.y = 0;
@@ -47,13 +47,13 @@ int getch_it_detect(int c, cursor_t *cursor, int *i)
     return (0);
 }
 
-char    *getch_it()
+char *getch_it(void)
 {
     int c = 1;
     int size = 1;
     int i = 0;
-    int status  = 0;
-    cursor_t    cursor;
+    int status = 0;
+    cursor_t cursor;
 
     cursor = get_cursor();
     while (1) {
@@ -71,15 +71,16 @@ char    *getch_it()
     return (cursor.buf);
 }
 
-char  *getch_line(char *str , env_t *env)
+char *getch_line(char *str , env_t *env)
 {
-    char    *tmp = NULL;
+    char *tmp = NULL;
 
+    (void)str;
     if (init_term(env) == -1)
         return (NULL);
     if (setupterm(NULL, 0, NULL) < 0)
         return (NULL);
-    tmp = getch_it(str);
+    tmp = getch_it();
     my_putchar('\n');
     if (reset_term(env) == -1)
         return (NULL);

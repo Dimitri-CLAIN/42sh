@@ -17,7 +17,7 @@ int check_my_alias(char *cmd, env_t *alias)
     env_t *tmp_alias = alias;
     char **tmp = my_str_to_word_array(cmd, ' ', KEEP);
 
-    if (array_len(tmp) != 2)
+    if (array_len(tmp) != 2 || alias == NULL)
         return (FALS);
     tmp[0] = add_char(tmp[0], ' ');
     str = my_strcat(tmp[0], tmp[1], KEEP, KEEP);
@@ -28,12 +28,10 @@ int check_my_alias(char *cmd, env_t *alias)
         my_putstr(def);
         my_putchar('\n');
         free(str);
-        free_array(tmp);
-        free(def);
+        free_arr_str(tmp, def);
         return (TRU);
     }
-    free(str);
-    free_array(tmp);
+    free_arr_str(tmp, str);
     return (FALS);
 }
 

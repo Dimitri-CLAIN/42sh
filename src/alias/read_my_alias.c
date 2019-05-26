@@ -81,10 +81,10 @@ char *read_my_alias(char *cmd, env_t *alias)
 
     tab_cmd = good_cmd(get_env(alias));
     while (tab_cmd[n] != NULL) {
-            if ((new_cmd = init_new_cmd(tab_cmd[n], cmd)) != NULL) {
-                free_array(tab_cmd);
-                return (new_cmd);
-            }
+        if ((new_cmd = init_new_cmd(tab_cmd[n], cmd)) != NULL) {
+            free_array(tab_cmd);
+            return (new_cmd);
+        }
         n++;
     }
     if (tab_cmd != NULL)

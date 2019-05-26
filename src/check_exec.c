@@ -71,15 +71,13 @@ int exec(mysh_t *info, char *cmd)
 
     if ((cmd = change_cmd(cmd, info)) == NULL)
         return (84);
-    if (check_buldin(info, cmd) == TRU)
-        return (0);
-    if ((tmp = clean_tmp(parser_echo(cmd, " ",  KEEP))) == NULL)
+    if (check_err_exec(&tmp, cmd, info) == 84)
         return (84);
-    if ((tmp[0] = check_syntaxe(tmp[0], info)) == NULL) {
+    tmp = check_home(tmp, info);
+    if (check_buldin(info, cmd) == TRU) {
         free_array(tmp);
-        return (84);
+        return (0);
     }
-    tmp = clean_tmp(check_home(tmp, info));
     if ((pid = fork()) == 0)
         execve(tmp[0], tmp, get_env(info->env));
     if (arch(cmd) == 1)
