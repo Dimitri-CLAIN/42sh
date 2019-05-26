@@ -27,13 +27,11 @@ int get_input_term(char **input, char ***tab)
         my_putstr("exit\n");
         return (-1);
     }
-    *input = my_epurstr(my_strdup(*input, FREE), " \n \"\t", FREE);
+    *input = my_epurstr(my_strdup(*input, FREE), " \n\t", FREE);
     if (*input == NULL || *input[0] == '\0')
         *input = NULL;
     if (*input != NULL) {
         write_history(*input);
-        if (*tab != NULL)
-            free_array(*tab);
         *tab = read_file(".history");
     }
     return (0);

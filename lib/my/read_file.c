@@ -46,7 +46,7 @@ char **read_file(char *path)
     fd =  fopen(path, "r");
     tab = malloc(sizeof(char *) * (cpt + 1));
     while (getline(&line, &len, fd) != -1) {
-        tab[x] = my_strdup(line, FREE);
+        tab[x] = my_strdup(line, KEEP);
         line = NULL;
         x++;
     }

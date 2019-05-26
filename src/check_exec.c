@@ -1,4 +1,3 @@
-
 /*
 ** EPITECH PROJECT, 2019
 ** check_exec
@@ -31,9 +30,9 @@ char *check_access(char **tmp, char *cmd)
         return (NULL);
     while (tmp[i] != NULL) {
         if (tmp[i] != NULL && access(my_strcat(
-            my_strcat(tmp[i], "/", KEEP, KEEP), 
+            my_strcat(tmp[i], "/", KEEP, KEEP),
             cmd, FREE, KEEP), X_OK) == TRU) {
-            cmd = my_strcat(my_strcat(tmp[i], "/", 
+            cmd = my_strcat(my_strcat(tmp[i], "/",
             KEEP, KEEP), cmd, FREE, KEEP);
             return (cmd);
         }

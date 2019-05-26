@@ -39,7 +39,7 @@ int set_state(char *str, int i)
     if (str[i] == '\"' || str[i] == '\'' || str[i] == '`') {
         s = str[i];
         i++;
-        while (str[i] != s)
+        while (str[i] != s && str[i] != '\0')
             i++;
         i++;
     }

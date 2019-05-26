@@ -67,12 +67,26 @@ int magic_checker(char *cmd)
     return (0);
 }
 
+int check_magic(char *cmd)
+{
+    int i = 0;
+
+    while (cmd[i] != '\0') {
+        if (cmd[i] == '`')
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
 char *magic_maker(char *cmd, mysh_t *info)
 {
     char *ret = NULL;
     int i = 0;
-    char **command_tab = my_str_to_word_array(cmd, ' ', KEEP);
+    char **command_tab = parser_echo(cmd, " ", KEEP);
 
+    if (check_magic(cmd) == 1)
+        return (cmd);
     if (magic_checker(cmd) == 84) {
         my_putstr_error("Unmatched '`'.\n");
         return (NULL);
