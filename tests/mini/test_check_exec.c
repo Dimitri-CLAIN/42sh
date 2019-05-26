@@ -74,17 +74,6 @@ Test(check_syntaxe, command_not_found)
     free_env(info.env);
 }
 
-Test(check_exec, normal_exec)
-{
-    mysh_t info;
-
-    info.env = NULL;
-    put_in_env(&info.env, "PATH=/bin:/usr/bin");
-    put_in_env(&info.env, "HOME=/home/Fabien");
-    check_exec(&info, my_strdup("ls", KEEP));
-    free_env(info.env);
-}
-
 Test(check_exec, not_normal_exec)
 {
     mysh_t info;
